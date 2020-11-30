@@ -27,7 +27,12 @@
 }
 
 #LearningRecomend .row:first-of-type {
-  padding-top: 30px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+#LearningRecomend .row:nth-of-type(2) {
   padding-bottom: 15px;
   padding-left: 15px;
 }
@@ -61,4 +66,20 @@
 #LearningRecomend .row:last-of-type:hover {
   background-color: #0983fd38;
   cursor: pointer;
+}
+#LearningRecomend .learningLogo {
+  background-color: #0a66c2;
+  color: white;
+}
+#LearningRecomend .learningLogo {
+  background-color: #0a66c2;
+  color: white;
+  width: 14px;
+  height: 17px;
+  text-align: center;
+  border-radius: 1px;
+}
+#LearningRecomend .wideLearning {
+  font-size: 11px;
+  letter-spacing: 2px;
 }

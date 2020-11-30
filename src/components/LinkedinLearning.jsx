@@ -8,6 +8,10 @@ class LinkedinLearning extends React.Component {
     return (
       <Container id="LearningRecomend">
         <Row>
+          <span className="learningLogo mr-1">in</span>
+          <span className="wideLearning">LEARNING</span>
+        </Row>
+        <Row>
           <h6>Add new skills with these courses</h6>
         </Row>
         <Row className="RecomendItem">
