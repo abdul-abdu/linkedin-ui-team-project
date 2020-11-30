@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { AiOutlinePlus } from "react-icons/ai"
+import { AiOutlinePlus } from "react-icons/ai";
 
 import DropdownProfileMenu from "./DropdownProfileMenu";
 
@@ -34,9 +34,8 @@ class ProfileLeft extends React.Component {
             </div>
             <div className="profile-info">
               <div className="buttons-row">
-
                 <DropdownProfileMenu />
-        
+
                 <Button id="moreBtn">More...</Button>
                 <BiPencil className="biPencil" />
               </div>
@@ -73,10 +72,10 @@ class ProfileLeft extends React.Component {
             </Container>
           </div>
         </div>
-        
+
         <div
           className="profile-card mt-3 profile-profile-section"
-          style={{ padding: "10px" }}
+          style={{ padding: "15px" }}
         >
           <h4>
             Profile Strength: <strong>Intermediate</strong>
@@ -85,7 +84,10 @@ class ProfileLeft extends React.Component {
         </div>
 
         <div className="profile-card mt-3">
-          <div className="profile-profile-section mb-2" style={{ padding: "10px" }}>
+          <div
+            className="profile-profile-section mb-2"
+            style={{ padding: "10px" }}
+          >
             <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
               Featured
             </h4>
@@ -157,7 +159,7 @@ class ProfileLeft extends React.Component {
           style={{ padding: "20px" }}
         >
           <Row>
-            <Col className='mb-2'>
+            <Col className="mb-2">
               <h4>Activity</h4>
             </Col>
             <Col>
@@ -194,42 +196,83 @@ class ProfileLeft extends React.Component {
           </Row>
         </div>
 
-        <div className='profile-card mt-3 profile-profile-section ' style={{padding: '20px', maxHeight: '515px !important'}}>
+        <div
+          className="profile-card mt-3 profile-profile-section "
+          style={{ padding: "20px", maxHeight: "515px !important" }}
+        >
           <Row>
-            <Col className='mb-2'><h4>Education: </h4></Col>
-            <Col style={{float: 'right'}}><AiOutlinePlus style={{fontSize: '1.6rem', float: 'right', color: '#0A66C2' }}/></Col>
+            <Col className="mb-2">
+              <h4>Education: </h4>
+            </Col>
+            <Col style={{ float: "right" }}>
+              <AiOutlinePlus
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              />
+            </Col>
           </Row>
           <Row>
-            <Col xs={1}><img src="https://placehold.it/60x60" /></Col>
-            <Col xs={10} className='pl-4'>
-              <h6>University of Something</h6>
-              <p style={{fontSize: '0.9rem'}}>Bachelor of Computer Science, Computer Software Engineering</p>
-              <p style={{fontSize: '0.7rem', marginTop: '-15px'}}>2015-2019</p>
+            <Col xs={1}>
+              <img src="https://placehold.it/60x60" />
             </Col>
-            <Col xs={1} style={{float: 'right'}}><BiPencil style={{color: '#0A66C2', fontSize: '1.6rem'}} /></Col>
+            <Col xs={10} className="pl-4">
+              <h6>University of Something</h6>
+              <p style={{ fontSize: "0.9rem" }}>
+                Bachelor of Computer Science, Computer Software Engineering
+              </p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                2015-2019
+              </p>
+            </Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
           </Row>
           <hr />
           <Row>
-            <Col className='mb-2'><h4>Licenses & certifications: </h4></Col>
-            <Col style={{float: 'right'}}><AiOutlinePlus style={{fontSize: '1.6rem', float: 'right', color: '#0A66C2' }}/></Col>
-          </Row>
-          <Row>
-            <Col xs={1}><img src="/assets/images/logo.png" style={{height: '60px', width: '60px'}} /></Col>
-            <Col xs={10} className='pl-4'>
-              <h6>Learning ECMAScript 6+ (EX6+)</h6>
-              <p style={{fontSize: '0.9rem'}}>LinkedIn</p>
-              <p style={{fontSize: '0.7rem', marginTop: '-15px'}}>Issued Novermber 2020 • No expiration date</p>
+            <Col className="mb-2">
+              <h4>Licenses & certifications: </h4>
             </Col>
-            <Col xs={1} style={{float: 'right'}}><BiPencil style={{color: '#0A66C2', fontSize: '1.6rem'}} /></Col>
+            <Col style={{ float: "right" }}>
+              <AiOutlinePlus
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              />
+            </Col>
           </Row>
           <Row>
-            <Col xs={1}><img src="/assets/images/logo.png" style={{height: '60px', width: '60px'}} /></Col>
-            <Col xs={10} className='pl-4'>
+            <Col xs={1}>
+              <img
+                src="/assets/images/logo.png"
+                style={{ height: "60px", width: "60px" }}
+              />
+            </Col>
+            <Col xs={10} className="pl-4">
+              <h6>Learning ECMAScript 6+ (ES6+)</h6>
+              <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                Issued Novermber 2020 • No expiration date
+              </p>
+            </Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={1}>
+              <img
+                src="/assets/images/logo.png"
+                style={{ height: "60px", width: "60px" }}
+              />
+            </Col>
+            <Col xs={10} className="pl-4">
               <h6>CSS: Selectors</h6>
-              <p style={{fontSize: '0.9rem'}}>LinkedIn</p>
-              <p style={{fontSize: '0.7rem', marginTop: '-15px'}}>Issued Novermber 2020 • No expiration date</p>
+              <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                Issued Novermber 2020 • No expiration date
+              </p>
             </Col>
-            <Col xs={1} style={{float: 'right'}}><BiPencil style={{color: '#0A66C2', fontSize: '1.6rem'}} /></Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
           </Row>
         </div>
       </div>
