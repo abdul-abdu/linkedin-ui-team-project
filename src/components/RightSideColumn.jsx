@@ -6,7 +6,7 @@ import PeopleRelated from "./PeopleRelated";
 class RightSideColumn extends React.Component {
   render() {
     return (
-      <div style={{ minWidth: "312px" }}>
+      <div className="col col-lg-4" style={{ minWidth: "312px" }}>
         <PeopleRelated />
         <LinkedinLearning />
       </div>

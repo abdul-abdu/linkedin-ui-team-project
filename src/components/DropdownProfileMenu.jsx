@@ -6,7 +6,7 @@ class DropdownProfileMenu extends React.Component {
   render() {
     return (
       <Dropdown>
-        <Dropdown.Toggle variant="info" id="profileSectionDropdown">
+        <Dropdown.Toggle id="dropdown-basic-button" title="Add profile section">
           Add profile section
         </Dropdown.Toggle>
 
