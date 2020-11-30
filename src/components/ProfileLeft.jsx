@@ -7,9 +7,9 @@ import { BiPencil } from 'react-icons/bi';
 class ProfileLeft extends React.Component{
     render(){
         return(
-            <>
+            <div className='col-12 col-lg-8 mt-3'>
 
-              <div className='profile-card col-12 col-lg-8'>
+              <div className='profile-card'>
             
                 <div class='profile-profile-section'>
                     <div className='coverImgHolder'>
@@ -54,7 +54,7 @@ class ProfileLeft extends React.Component{
               </div>
 
               
-              <div className='profile-card col-12 col-lg-8 mt-3'>
+              <div className='profile-card mt-3'>
                 <div className='profile-profile-section' style={{padding: '10px'}}>
                     <h4 style={{texAlign: 'left !important'}}>Featured</h4>
                     <div className='profile-info-box' style={{ margin: '0 auto'}}>
@@ -64,7 +64,7 @@ class ProfileLeft extends React.Component{
                     </div>
                 </div>
               </div>
-            </>
+            </div>
         );
     }
 }

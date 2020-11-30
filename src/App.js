@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import RightSideColumn from "./components/RightSideColumn";
@@ -11,7 +10,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container style={{ backgroundColor: "white" }}>
+      {/*<Container style={{ backgroundColor: "white" }}>
         <Row>
           <Col xs={8}></Col>
           <Col xs={4}>
@@ -19,7 +18,7 @@ function App() {
           </Col>
         </Row>
         <hr />
-      </Container>
+  </Container>*/}
     
        <ProfilePage />
 
