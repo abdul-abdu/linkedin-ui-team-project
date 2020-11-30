@@ -1,7 +1,8 @@
 import React from 'react';
 import '../styles/ProfileLeft.css';
-import {Dropdown, DropdownButton, Button, Container, Row, Col, ProgressBar} from 'react-bootstrap';
+import {Dropdown, DropdownButton, Button, Container, Row, Col, ProgressBar, Table} from 'react-bootstrap';
 import { BiPencil } from 'react-icons/bi';
+import {BsFillBookmarkFill} from 'react-icons/bs';
 
 
 class ProfileLeft extends React.Component{
@@ -68,6 +69,61 @@ class ProfileLeft extends React.Component{
                     </div>
                 </div>
               </div>
+
+              <div className='profile-card mt-3 profile-profile-section ' style={{padding: '20px', backgroundColor: '#DCE6F1'}}>
+                <h4>Your Dashboard</h4>
+                <p><em>Private to you</em></p>
+                <div className='dashboardHolder'>
+                <Table>
+                  <tbody>
+                    <tr>
+                      <td><h2>2</h2><p>Who viewed your profile</p></td>
+                      <td><h2>0</h2><p>Article views</p></td>
+                      <td><h2>4</h2><p>Search appearances</p></td>
+                    </tr>
+                  </tbody>
+                </Table>
+                </div>
+                <div className='dashboardHolder'>
+                  <Row style={{lineHeight: '0.7rem'}}>
+                    <Col xs={1} className='mt-2 ml-1'>
+                      <BsFillBookmarkFill style={{fontSize: '1.6rem', margin: '4px', marginLeft: '10px'}}/>
+                    </Col>
+                    <Col xs={10} className='mt-1'>
+                      <h6>My items</h6>
+                      <p>Keep track of your jobs, courses and articles</p>
+                    </Col>
+                  </Row>
+                </div>
+              </div>
+
+              <div className='profile-card mt-3 profile-profile-section ' style={{padding: '20px'}}>
+                <Row>
+                  <Col><h3>Activity</h3></Col>
+                  <Col><p style={{color: '#0A66C2', float: 'right'}}>See more</p></Col>
+                </Row>
+                <Row>
+                    <Col xs={12} lg={6}>
+                        <div className='acivity-course'>
+                        <Row>
+                            <Col xs={1}><img src='https://placehold.it/60x60' /></Col>
+                            <Col xs={7} className='ml-5'><h6>Learning ECMAScript 6+ (ES6+)</h6>
+                            <p style={{fontSize: '0.8rem'}}>shared by Name</p></Col>
+                        </Row>
+                        </div>
+                    </Col>
+                    <Col xs={12} lg={6}>
+                        <div className='acivity-course'>
+                        <Row>
+                            <Col xs={1}><img src='https://placehold.it/60x60' /></Col>
+                            <Col xs={7} className='ml-5'><h6>Learning ECMAScript 6+ (ES6+)</h6>
+                            <p style={{fontSize: '0.8rem'}}>shared by Name</p></Col>
+                        </Row>
+                        </div>
+                    </Col>
+                </Row>
+              </div>
+              
             </div>
         );
     }
