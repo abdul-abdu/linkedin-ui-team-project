@@ -2,6 +2,9 @@ import { Row, Col, Container } from "react-bootstrap";
 import React from 'react'
 
 import { FaLinkedin } from 'react-icons/fa';
+import { AiOutlineSetting, AiFillQuestionCircle } from 'react-icons/ai';
+
+
 
 const LinkedIn = () => {
   return (
@@ -76,11 +79,13 @@ const Footer = () => {
               </Col>
               <Col>
                 <div>
-                  <a href="#Questions?">Questions?</a>
+
+                  <a href="#Questions?"><span style={{ fontSize: '24px' }}><AiFillQuestionCircle /></span> Questions?</a>
                   <div><small className='m-0 p-0'>Visit our Help Center.</small></div>
                 </div>
                 <div>
-                  <a href="#privacy">
+
+                  <a href="#privacy"> <span style={{ fontSize: '24px' }}><AiOutlineSetting /></span>
                     Manage your account and privacy</a>
                   <div><small>Go to your Settings</small></div>
                 </div>
