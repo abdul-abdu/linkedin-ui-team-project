@@ -17,7 +17,9 @@ function App() {
             <RightSideColumn />
           </Col>
         </Row>
+        <hr />
       </Container>
+
       <Footer />
     </>
   );

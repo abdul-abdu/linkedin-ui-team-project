@@ -1,22 +1,24 @@
 import { Row, Col } from "react-bootstrap";
-import React from 'react'
+import React from "react";
 
-import { FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin } from "react-icons/fa";
 
 const LinkedIn = () => {
   return (
-    <div className='d-flex align-items-center' style={{ color: 'blue', fontSize: '25px' }}>
-      <b>Linked</b><FaLinkedin />
-    </div >
-  )
-}
-
-
+    <div
+      className="d-flex align-items-center"
+      style={{ color: "blue", fontSize: "25px" }}
+    >
+      <b>Linked</b>
+      <FaLinkedin />
+    </div>
+  );
+};
 
 const Footer = () => {
   return (
-    <footer className="py-4">
-      <Row className='mt-2'>
+    <footer className="py-4 container">
+      <Row className="mt-2">
         <Col md={{ span: 10, offset: 1 }}>
           <Row>
             <Col>
@@ -43,7 +45,9 @@ const Footer = () => {
               <div>
                 <a href="#ffffffff">Safety Center</a>
               </div>
-              <div><small>LinkedIn Corporation © 2020</small></div>
+              <div>
+                <small>LinkedIn Corporation © 2020</small>
+              </div>
             </Col>
             <Col>
               <div>
@@ -76,11 +80,15 @@ const Footer = () => {
             <Col>
               <div>
                 <a href="#Questions?">Questions?</a>
-                <div><small className='m-0 p-0'>Visit our Help Center.</small></div>
+                <div>
+                  <small className="m-0 p-0">Visit our Help Center.</small>
+                </div>
               </div>
               <div>
                 <a href="#privacy">Manage your account and privacy</a>
-                <div><small>Go to your Settings</small></div>
+                <div>
+                  <small>Go to your Settings</small>
+                </div>
               </div>
               <div>
                 <a href="#fffffffffff">Contact Us</a>
@@ -88,7 +96,9 @@ const Footer = () => {
             </Col>
             <Col>
               <div>
-                <label for="cars"><small>Select Language</small></label>
+                <label for="cars">
+                  <small>Select Language</small>
+                </label>
                 <select id="cars" name="cars">
                   <option value="volvo">English (English)</option>
                 </select>
@@ -97,7 +107,7 @@ const Footer = () => {
           </Row>
         </Col>
       </Row>
-    </footer >
+    </footer>
   );
 };
 
