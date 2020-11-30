@@ -4,8 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import RightSideColumn from "./components/RightSideColumn";
 import { Container, Row, Col } from "react-bootstrap";
 import Footer from "./components/Footer";
-import Navbar from "./components/NavBar";
-import Profile from "./components/Profile";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
