@@ -56,7 +56,9 @@
 }
 #LearningRecomend .pl-4:hover > span:first-of-type {
   text-decoration: underline;
+  cursor: pointer;
 }
 #LearningRecomend .row:last-of-type:hover {
   background-color: #0983fd38;
+  cursor: pointer;
 }

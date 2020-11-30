@@ -66,7 +66,14 @@ class LinkedinLearning extends React.Component {
             <span className="text-muted">2,570 viewers</span>
           </Col>
         </Row>
-        <Row className="d-flex justify-content-center">
+        <Row
+          className="d-flex justify-content-center"
+          onClick={() =>
+            window.location.assign(
+              "https://www.linkedin.com/learning/me?trk=profileSelf_d_flagship3_profile_view_base_learningFeedsp204b%3A1%2Bsp204b%3A1_seeRecommendations_learning"
+            )
+          }
+        >
           <h6>Show more on LinkedIn Learning</h6>
         </Row>
       </Container>
