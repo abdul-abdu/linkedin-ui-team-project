@@ -1,12 +1,10 @@
 import React from "react";
-
 import { AiFillLinkedin } from "react-icons/ai";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
 import { CgMenuGridR } from "react-icons/cg";
 import { GrSchedulePlay } from "react-icons/gr";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -30,7 +28,7 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-right">
-            <div className="navbar-home mx-3">
+            <div className="navbar-home mx-3 text-center">
               <AiFillHome className="icon" />
               <h5
                 style={{
@@ -43,7 +41,7 @@ class Navbar extends React.Component {
                 Home
               </h5>
             </div>
-            <div className="navbar-network mx-3">
+            <div className="navbar-network mx-3 text-center">
               <BsFillPeopleFill className="icon" />
               <h5
                 style={{
@@ -56,7 +54,7 @@ class Navbar extends React.Component {
                 Network
               </h5>
             </div>
-            <div className="navbar-work mx-3">
+            <div className="navbar-work mx-3 text-center">
               <IoBagRemove className="icon" />
               <h5
                 style={{
@@ -69,7 +67,7 @@ class Navbar extends React.Component {
                 Work
               </h5>
             </div>
-            <div className="navbar-msg mx-3">
+            <div className="navbar-msg mx-3 text-center">
               <AiFillMessage className="icon" />
               <h5
                 style={{
@@ -82,7 +80,7 @@ class Navbar extends React.Component {
                 Messagges
               </h5>
             </div>
-            <div className="navbar-notifications mx-3">
+            <div className="navbar-notifications mx-3 text-center">
               <IoMdNotifications className="icon" />
               <h5
                 style={{
@@ -95,7 +93,7 @@ class Navbar extends React.Component {
                 Notifications
               </h5>
             </div>
-            <div className="navbar-profile-menu mx-3">
+            <div className="navbar-profile-menu mx-3 text-center">
               {/* <CgProfile className="icon" /> */}
               <img src={abdul} alt="" />
               <h5
@@ -110,7 +108,7 @@ class Navbar extends React.Component {
               </h5>
             </div>
             <div className="side-menu mx-4">
-              <div className="products-menu">
+              <div className="products-menu text-center">
                 <CgMenuGridR className="icon mx-4" />
                 <h5
                   style={{
@@ -123,7 +121,7 @@ class Navbar extends React.Component {
                   Products
                 </h5>
               </div>
-              <div className="courses-menu mx-2">
+              <div className="courses-menu text-center">
                 <GrSchedulePlay className="icon" />
                 <h5
                   style={{
@@ -141,7 +139,6 @@ class Navbar extends React.Component {
         </div>
       </Container>
     );
-
   }
 }
 
