@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 
-class Navbar extends React.Component {
+class NavBar extends React.Component {
   render() {
     return (
       <div className="navbar">
@@ -13,4 +13,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default NavBar;
