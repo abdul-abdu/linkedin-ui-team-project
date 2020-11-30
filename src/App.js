@@ -10,15 +10,7 @@ function App() {
   return (
     <>
       <Navbar />
-      {/*<Container style={{ backgroundColor: "white" }}>
-        <Row>
-          <Col xs={8}></Col>
-          <Col xs={4}>
-            <RightSideColumn />
-          </Col>
-        </Row>
-        <hr />
-  </Container>*/}
+
       <ProfilePage />
 
       <Footer />

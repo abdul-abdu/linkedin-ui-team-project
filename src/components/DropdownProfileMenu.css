@@ -25,3 +25,12 @@
 #profileDrop .list-group {
   padding: 0px 16px;
 }
+#profileDrop span {
+  font-weight: 600;
+}
+.btn:focus {
+  box-shadow: none;
+}
+body {
+  background-color: #f3f2ef;
+}
