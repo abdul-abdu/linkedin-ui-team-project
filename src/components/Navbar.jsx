@@ -17,11 +17,10 @@ class Navbar extends React.Component {
   render() {
     return (
       <div className="header">
-        <div className="navbar-search">
-          <div className="navbar-left">
-            <AiFillLinkedin className="Linkedin-icon" />
-          </div>
-          <div className="search-bar">
+        <div className="navbar-left">
+          <AiFillLinkedin className="Linkedin-icon" />
+
+          <div className="search-input">
             <AiOutlineSearch />
             <input type="text" placeholder="search" />
           </div>
