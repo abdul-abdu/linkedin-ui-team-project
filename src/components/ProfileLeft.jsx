@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/ProfileLeft.css';
-import {Dropdown, DropdownButton, Button, Container,Row,  Col} from 'react-bootstrap';
+import {Dropdown, DropdownButton, Button, Container, Row, Col, ProgressBar} from 'react-bootstrap';
 import { BiPencil } from 'react-icons/bi';
 
 
@@ -53,11 +53,15 @@ class ProfileLeft extends React.Component{
                 </div>
               </div>
 
+              <div className='profile-card mt-3 profile-profile-section' style={{padding: '10px'}}>
+                <h4>Profile Strength: <strong>Intermediate</strong></h4>
+                <ProgressBar animated now={75} className='mt-4' />
+              </div>
               
               <div className='profile-card mt-3'>
                 <div className='profile-profile-section' style={{padding: '10px'}}>
-                    <h4 style={{texAlign: 'left !important'}}>Featured</h4>
-                    <div className='profile-info-box' style={{ margin: '0 auto'}}>
+                    <h4 style={{texAlign: 'left !important', paddingLeft: '10px'}}>Featured</h4>
+                    <div className='profile-info-box' style={{ margin: '0 auto', width: '98%'}}>
                         <p style={{textAlign: 'left'}}>
                         <strong>Showcase your work</strong> by featuring your best posts, documents, media and websites.
                         <a style={{color: '#0A66C2'}}><br />Add Featured</a></p>
