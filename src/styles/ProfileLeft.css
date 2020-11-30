@@ -114,3 +114,11 @@ body{
     background-color: white;
     margin: 3px;
 }
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;               
+    background-color:#757575;
+    height: 1px;
+  }
