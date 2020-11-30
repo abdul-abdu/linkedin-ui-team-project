@@ -1,6 +1,5 @@
 import React from "react";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
-
 class Navbar extends React.Component {
   render() {
     return (
