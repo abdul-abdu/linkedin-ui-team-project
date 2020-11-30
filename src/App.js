@@ -1,11 +1,11 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import RightSideColumn from "./components/RightSideColumn";
+
 import { Container, Row, Col } from "react-bootstrap";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import ProfilePage from './components/ProfilePage';
-    
+import ProfilePage from "./components/ProfilePage";
+
 function App() {
   return (
     <>
@@ -19,8 +19,7 @@ function App() {
         </Row>
         <hr />
   </Container>*/}
-    
-       <ProfilePage />
+      <ProfilePage />
 
       <Footer />
     </>
