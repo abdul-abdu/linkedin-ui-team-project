@@ -1,4 +1,5 @@
 import React from "react";
+
 import { AiFillLinkedin } from "react-icons/ai";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -140,6 +141,7 @@ class Navbar extends React.Component {
         </div>
       </Container>
     );
+
   }
 }
 
