@@ -6,14 +6,10 @@ import PeopleRelated from "./PeopleRelated";
 class RightSideColumn extends React.Component {
   render() {
     return (
-      <Container>
-        <Row>
-          <Col xs={12}>
-            <PeopleRelated />
-            <LinkedinLearning />
-          </Col>
-        </Row>
-      </Container>
+      <div style={{ minWidth: "312px" }}>
+        <PeopleRelated />
+        <LinkedinLearning />
+      </div>
     );
   }
 }
