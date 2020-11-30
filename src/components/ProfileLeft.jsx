@@ -35,18 +35,6 @@ class ProfileLeft extends React.Component {
             <div className="profile-info">
               <div className="buttons-row">
 
-                <DropdownButton
-                  id="dropdown-basic-button"
-                  title="Add profile section"
-                >
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Another action
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Something else
-                  </Dropdown.Item>
-                </DropdownButton>
                 <DropdownProfileMenu />
         
                 <Button id="moreBtn">More...</Button>
