@@ -1,13 +1,15 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 
 class Navbar extends React.Component {
   render() {
     return (
       <div className="navbar">
-        <Navbar>
-          <Nav></Nav>
-        </Navbar>
+        <div className="navbar-left">
+          <LinkedInIcon />
+        </div>
+
+        <div className="navbar-right"></div>
       </div>
     );
   }
