@@ -1,11 +1,12 @@
 .header {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
-  padding-top: 0.6rem;
   position: sticky;
   top: 0;
   z-index: 100;
+}
+.main-container {
   box-shadow: 0px 5px 8px -9px grey;
 }
 
@@ -22,29 +23,29 @@
 
 .navbar-right {
   display: flex;
-  justify-content: center;
-  /* width: 1200px; */
+  position: relative;
+  left: 13%;
+
+  flex: 0.4;
 }
 
 .navbar-left {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex: 0.3;
 }
 
 .Linkedin-icon {
-  width: 2.3rem;
-  height: 2.9rem;
+  width: 20%;
+  height: 20%;
   color: #0073b1;
 }
 
-.navbar-profile-menu {
-  height: 2.8rem;
-}
-
 .navbar-profile-menu > img {
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 1.4rem;
+  margin: 3px 0;
+  height: 1.4rem;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s;
@@ -56,6 +57,7 @@
 .search-input {
   display: flex;
   align-items: center;
+  width: 80%;
   background-color: #84bddb31;
   padding: 10px;
   margin-left: 0.1rem;
@@ -72,7 +74,15 @@
 .side-menu {
   border-left: 1px solid grey;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+  flex: 0.3;
+}
+
+@media screen and (max-width: 1100px) {
+  .navbar-right > div > h5 {
+    display: none;
+  }
+
+  .side-menu > div > h5 {
+    display: none;
+  }
 }
