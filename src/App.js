@@ -7,13 +7,16 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import ProfilePage from './components/ProfilePage';
     
+
 function App() {
   return (
     <>
       <Navbar />
       <Container style={{ backgroundColor: "white" }}>
         <Row>
-          <Col xs={8}></Col>
+          <Col xs={8}>
+            <DropdownProfileMenu />
+          </Col>
           <Col xs={4}>
             <RightSideColumn />
           </Col>
