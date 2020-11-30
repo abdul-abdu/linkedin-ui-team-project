@@ -17,12 +17,28 @@
   -webkit-box-orient: vertical;
 }
 
+#person h6:hover,
+#person span:hover {
+  text-decoration: underline;
+}
+
 #person {
   padding: 0;
   padding-top: 8px;
   padding-bottom: 8px;
   margin: 10px;
   position: relative;
+}
+
+#person svg {
+  border: 1px solid #5f5f5f;
+  border-radius: 50000px;
+  color: #5f5f5f;
+}
+#person svg:hover {
+  border: 1px solid #3a3a3a;
+  color: #3a3a3a;
+  background-color: #7a7a7a46;
 }
 
 #divider {

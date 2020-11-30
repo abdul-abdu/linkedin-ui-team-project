@@ -21,7 +21,7 @@ class IndividualPerson extends React.Component {
             </Col>
 
             <Col xs={2} className="d-flex align-items-center">
-              <PersonAddIcon color="disabled" />
+              <PersonAddIcon />
             </Col>
           </Row>
         </Container>

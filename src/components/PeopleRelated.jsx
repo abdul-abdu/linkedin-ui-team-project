@@ -33,7 +33,11 @@ class PeopleRelated extends React.Component {
         <Row>
           <h5
             className="mb-0"
-            style={{ paddingLeft: "15px", marginTop: "24px" }}
+            style={{
+              paddingLeft: "15px",
+              marginTop: "24px",
+              fontWeight: "normal",
+            }}
           >
             People you may know
           </h5>
