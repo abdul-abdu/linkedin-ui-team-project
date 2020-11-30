@@ -14,6 +14,8 @@ import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai"
 
+import DropdownProfileMenu from "./DropdownProfileMenu";
+
 class ProfileLeft extends React.Component {
   render() {
     return (
@@ -32,6 +34,7 @@ class ProfileLeft extends React.Component {
             </div>
             <div className="profile-info">
               <div className="buttons-row">
+
                 <DropdownButton
                   id="dropdown-basic-button"
                   title="Add profile section"
@@ -44,6 +47,8 @@ class ProfileLeft extends React.Component {
                     Something else
                   </Dropdown.Item>
                 </DropdownButton>
+                <DropdownProfileMenu />
+        
                 <Button id="moreBtn">More...</Button>
                 <BiPencil className="biPencil" />
               </div>
@@ -80,7 +85,7 @@ class ProfileLeft extends React.Component {
             </Container>
           </div>
         </div>
-
+        
         <div
           className="profile-card mt-3 profile-profile-section"
           style={{ padding: "10px" }}
@@ -239,7 +244,6 @@ class ProfileLeft extends React.Component {
             <Col xs={1} style={{float: 'right'}}><BiPencil style={{color: '#0A66C2', fontSize: '1.6rem'}} /></Col>
           </Row>
         </div>
-
       </div>
     );
   }

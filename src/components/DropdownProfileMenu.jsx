@@ -1,6 +1,7 @@
 import React from "react";
 import { Accordion, Card, Button, ListGroup, Dropdown } from "react-bootstrap";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import "./DropdownProfileMenu.css";
 
 class DropdownProfileMenu extends React.Component {
   render() {
@@ -10,7 +11,7 @@ class DropdownProfileMenu extends React.Component {
           Add profile section
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
+        <Dropdown.Menu id="profileDrop">
           <Accordion defaultActiveKey="0">
             <Card>
               <Card.Header className="d-flex justify-content-between align-items-center">

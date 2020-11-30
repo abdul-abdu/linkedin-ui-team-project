@@ -17,9 +17,9 @@ const LinkedIn = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-4 container">
-      <Row className="mt-2">
-        <Col md={{ span: 10, offset: 1 }}>
+    <footer className="pb-4 container">
+      <Row>
+        <Col /*md={{ span: 10, offset: 1 }}*/>
           <Row>
             <Col>
               <div>
