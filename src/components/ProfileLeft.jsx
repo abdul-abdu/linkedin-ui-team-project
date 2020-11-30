@@ -8,10 +8,9 @@ class ProfileLeft extends React.Component{
     render(){
         return(
             <>
+
               <div className='profile-card col-12 col-lg-8'>
-                <p>Et aliqua occaecat ipsum reprehenderit eu quis officia incididunt adipisicing ea laborum sunt id. 
-                Ut sint est duis do aliqua laboris excepteur aliquip voluptate cillum. Commodo velit aliqua excepteur 
-                quis ullamco. Sit tempor qui anim et consequat pariatur. Ea nostrud amet laborum veniam nisi labore magna.</p>
+            
                 <div class='profile-profile-section'>
                     <div className='coverImgHolder'>
                         <img src='/assets/images/cover.jpg' alt='cover-img' className='fluid coverImg' />
@@ -51,6 +50,18 @@ class ProfileLeft extends React.Component{
                             </Col>
                         </Row>
                     </Container>
+                </div>
+              </div>
+
+              
+              <div className='profile-card col-12 col-lg-8 mt-3'>
+                <div className='profile-profile-section' style={{padding: '10px'}}>
+                    <h4 style={{texAlign: 'left !important'}}>Featured</h4>
+                    <div className='profile-info-box' style={{ margin: '0 auto'}}>
+                        <p style={{textAlign: 'left'}}>
+                        <strong>Showcase your work</strong> by featuring your best posts, documents, media and websites.
+                        <a style={{color: '#0A66C2'}}><br />Add Featured</a></p>
+                    </div>
                 </div>
               </div>
             </>
