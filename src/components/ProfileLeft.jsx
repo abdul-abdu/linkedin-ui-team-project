@@ -1,9 +1,11 @@
 import React from 'react';
+import ProfileCard from './ProfileCard';
 
-class Profile extends React.Compoent{
+class Profile extends React.Component{
     render(){
         return(
             <>
+            <ProfileCard />
             </>
         );
     }
