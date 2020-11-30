@@ -1,0 +1,56 @@
+#LearningRecomend {
+  background-color: white;
+  border-radius: 8px;
+  border: solid 1px #deddda;
+}
+
+#LearningRecomend .playButton {
+  position: absolute;
+  top: 13px;
+  left: 48px;
+  border-radius: 100px;
+}
+#LearningRecomend .playButton svg {
+  border-radius: 100px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0px;
+}
+#LearningRecomend .playButton svg path {
+  margin: 0px;
+}
+
+#LearningRecomend > .row:last-child h6 {
+  margin: 0;
+  color: #0a66c2;
+  font-weight: 600;
+}
+
+#LearningRecomend .row:first-of-type {
+  padding-top: 30px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+#LearningRecomend .row:last-of-type {
+  padding: 10px 15px;
+  border-top: 1px solid #deddda;
+}
+
+#LearningRecomend span {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+}
+#LearningRecomend span.text-muted {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+}
+#LearningRecomend .RecomendItem {
+  height: 70px;
+}
+#LearningRecomend .RecomendItem.lastItem {
+  margin-bottom: 15px;
+  height: 70px;
+}

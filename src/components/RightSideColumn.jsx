@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import LinkedinLearning from "./LinkedinLearning";
 import PeopleRelated from "./PeopleRelated";
 
 class RightSideColumn extends React.Component {
@@ -9,6 +10,7 @@ class RightSideColumn extends React.Component {
         <Row>
           <Col xs={12}>
             <PeopleRelated />
+            <LinkedinLearning />
           </Col>
         </Row>
       </Container>

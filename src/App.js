@@ -6,10 +6,10 @@ import { Container, Row, Col } from "react-bootstrap";
 
 function App() {
   return (
-    <Container style={{ backgroundColor: "grey" }}>
+    <Container style={{ backgroundColor: "white" }}>
       <Row>
-        <Col xs={9}></Col>
-        <Col xs={3}>
+        <Col xs={8}></Col>
+        <Col xs={4}>
           <RightSideColumn />
         </Col>
       </Row>
