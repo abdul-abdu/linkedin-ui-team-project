@@ -1,7 +1,10 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
+import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
+import { Link } from "react-router-dom";
+import { FaThList } from "react-icons/fa";
 
 class FormModal extends React.Component {
   state = {
@@ -24,12 +27,41 @@ class FormModal extends React.Component {
     e.preventDefault();
     await this.postExperience();
     await this.cheekyFetch();
+    await this.editExperience();
   };
 
   postExperience = async () => {
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
+        {
+          method: "PUT",
+          body: JSON.stringify(),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let message = await response.json();
+      this.setState({
+        role: this.state.role.value,
+        company: this.state.company.value,
+        startDate: this.state.startDate.value,
+        endDate: this.state.endDate.value,
+        description: this.state.description.value,
+        area: this.state.area.value,
+      });
+      console.log(message);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  editExperience = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
         {
           method: "POST",
           body: JSON.stringify(this.state.experience),
@@ -65,9 +97,9 @@ class FormModal extends React.Component {
 
   updateFormField = (e) => {
     let experience = { ...this.state.experience };
-    let currentId = e.currentTarget.id;
+    let currentId = e.currentTarget._id;
     experience[currentId] = e.currentTarget.value;
-    this.setState({ experience: experience });
+    this.setState({ experience: experience[currentId] });
   };
 
   render() {
@@ -81,7 +113,7 @@ class FormModal extends React.Component {
     const { show } = this.state;
     return (
       <>
-        <Button id="modal-btn" onClick={handleShow}>
+        <Button id="modal-button" onClick={handleShow}>
           <GrAdd />
         </Button>
 

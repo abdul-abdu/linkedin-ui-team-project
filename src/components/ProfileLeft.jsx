@@ -11,10 +11,9 @@ import {
   ProgressBar,
   Table,
 } from "react-bootstrap";
-import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import { BiPencil } from "react-icons/bi";
 import DropdownProfileMenu from "./DropdownProfileMenu";
 import { withRouter } from "react-router-dom";
 // import ProfileModal from "./ProfileModal"
@@ -32,15 +31,14 @@ class ProfileLeft extends React.Component {
     this.fetchProfile();
   };
 
-
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.user !== this.state.user) {
-      console.log(prevState.user, 'prevState.user')
-      console.log(this.state.user, 'this.state.user')
+      console.log(prevState.user, "prevState.user");
+      console.log(this.state.user, "this.state.user");
 
-      this.fetchExperience()
+      this.fetchExperience();
     }
-  }
+  };
 
   fetchProfile = async () => {
     try {
@@ -53,31 +51,32 @@ class ProfileLeft extends React.Component {
         }
       );
       let parsedResponse = await response.json();
+
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
     }
   };
 
-
   fetchExperience = async () => {
-    console.log('fetchExperience Runed', this.state.user._id)
+    console.log("fetchExperience Runed", this.state.user._id);
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
         }
-      })
+      );
 
       const parsedResponse = await response.json();
-      console.log(parsedResponse, 'experience')
-      this.setState({ experiences: parsedResponse })
 
+      this.setState({ experiences: parsedResponse });
     } catch (error) {
-      console.log('Error at experiences:', error)
+      console.log("Error at experiences:", error);
     }
-
-  }
+  };
 
   render() {
     return (
@@ -98,11 +97,11 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <img src={this.state.user.image} alt="profilePic" />
               ) : (
-                  <img
-                    src="/assets/images/user-placeholder.png"
-                    alt="profilePic"
-                  />
-                )}
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
@@ -118,24 +117,24 @@ class ProfileLeft extends React.Component {
                   {this.state.user.name} {this.state.user.surname}
                 </h4>
               ) : (
-                  <h4>Name Surname</h4>
-                )}
+                <h4>Name Surname</h4>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
               ) : (
-                  <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-                )}
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
                   <span style={{ color: "#0A66C2" }}>Contact info</span>
                 </p>
               ) : (
-                  <p style={{ lineHeight: "0.01rem" }}>
-                    New York •{" "}
-                    <span style={{ color: "#0A66C2" }}>Contact info</span>
-                  </p>
-                )}
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
@@ -217,7 +216,7 @@ class ProfileLeft extends React.Component {
             </Col>
           </Row>
           {this.state.experiences.map((experience, idx) => (
-            <Row className="d-flex justify-content-between">
+            <Row key={idx} className="d-flex justify-content-between">
               <Col xs={1}>
                 <img src="https://placehold.it/60x60" alt="pic" />
               </Col>
@@ -228,12 +227,13 @@ class ProfileLeft extends React.Component {
                   {experience.startDate}
                 </p>
               </Col>
-              <Button id="edit-btn">
+
+              <Form experience={experience} expId={experience._id} />
+              <Button id="edit-btn" onClick={() => editExperience}>
                 <BiPencil />
               </Button>
             </Row>
           ))}
-
         </div>
 
         <div

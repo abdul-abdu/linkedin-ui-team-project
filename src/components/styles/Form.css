@@ -25,12 +25,14 @@
   display: flex;
   justify-content: space-between;
 }
-#modal-btn {
+#modal-button {
   background-color: transparent;
   border: none;
+  height: 50%;
+  margin: auto 0;
 }
 
-#modal-btn:hover {
+#modal-button:hover {
   background-color: #0a66c256;
   border-radius: 50%;
   border: none;
@@ -45,12 +47,11 @@
   background-color: transparent;
   border: none;
   color: blue;
-  height: 40px;
-  margin-right: 3px;
+  border-radius: 50%;
+  height: 50%;
+  margin: auto 0;
 }
 
 #edit-btn:hover {
   background-color: #0a66c256;
-  border-radius: 50%;
-  border: none;
 }
