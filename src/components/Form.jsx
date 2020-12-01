@@ -91,6 +91,7 @@ class FormModal extends React.Component {
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
+          size="lg"
         >
           <Modal.Header closeButton>
             <Modal.Title>Experiencies</Modal.Title>

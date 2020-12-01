@@ -20,7 +20,6 @@ import DropdownProfileMenu from "./DropdownProfileMenu";
 class ProfileLeft extends React.Component {
   state = {
     user: "",
-    experience: [],
   };
 
   componentDidMount = () => {
@@ -43,10 +42,6 @@ class ProfileLeft extends React.Component {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  showNewExp = (exp) => {
-    this.setState({ experience: exp });
   };
 
   render() {
@@ -148,7 +143,7 @@ class ProfileLeft extends React.Component {
               <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
                 Featured
               </h4>
-              <Form userId={this.state.user._id} exp={this.showNewExp} />
+              <Form userId={this.state.user._id} />
             </div>
             <div
               className="profile-info-box"
