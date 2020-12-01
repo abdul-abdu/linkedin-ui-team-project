@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "../components/Form";
 import "../styles/ProfileLeft.css";
 import {
   Dropdown,
@@ -69,7 +70,10 @@ class ProfileLeft extends React.Component {
 
         <div className="profile-card mt-3">
           <div className="profile-profile-section" style={{ padding: "10px" }}>
-            <h4 style={{ texAlign: "left !important" }}>Featured</h4>
+            <div className="component-exp-wrapper">
+              <h4 style={{ texAlign: "left !important" }}>Featured</h4>
+              <Form />
+            </div>
             <div className="profile-info-box" style={{ margin: "0 auto" }}>
               <p style={{ textAlign: "left" }}>
                 <strong>Showcase your work</strong> by featuring your best
