@@ -1,8 +1,8 @@
 import React from "react";
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "./IndividualPerson.css";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import { Link, withRouter } from "react-router-dom";
+// import PersonAddIcon from "@material-ui/icons/PersonAdd";
+// import { Link, withRouter } from "react-router-dom";
 import ShodyDivider from "./ShodyDivider";
 
 class IndividualPerson extends React.Component {
@@ -27,7 +27,7 @@ class IndividualPerson extends React.Component {
                   viewBox="0 0 16 16"
                   data-supported-dps="16x16"
                   fill="currentColor"
-                  class="mercado-match"
+                  className="mercado-match"
                   width="16"
                   height="16"
                   focusable="false"
