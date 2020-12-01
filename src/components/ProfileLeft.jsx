@@ -246,7 +246,7 @@ class ProfileLeft extends React.Component {
           style={{ padding: "20px" }}
         >
           <Row>
-            <Col className="mb-2">
+            <Col className="mb-2 pl-3">
               <h4>Activity</h4>
             </Col>
             <Col>
@@ -288,7 +288,7 @@ class ProfileLeft extends React.Component {
           style={{ padding: "20px", maxHeight: "515px !important" }}
         >
           <Row>
-            <Col className="mb-2">
+            <Col className="mb-2 pl-3">
               <h4>Education: </h4>
             </Col>
             <Col style={{ float: "right" }}>
@@ -316,7 +316,7 @@ class ProfileLeft extends React.Component {
           </Row>
           <hr />
           <Row>
-            <Col className="mb-2">
+            <Col className="mb-2 pl-3">
               <h4>Licenses & certifications: </h4>
             </Col>
             <Col style={{ float: "right" }}>
