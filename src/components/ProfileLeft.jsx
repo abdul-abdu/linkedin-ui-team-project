@@ -135,20 +135,20 @@ class ProfileLeft extends React.Component {
         </div>
 
         <div className="profile-card mt-3">
-
           <div
             className="profile-profile-section mb-2"
             style={{ padding: "10px" }}
           >
             <div className="component-exp-wrapper">
-              <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>Featured</h4>
-              <Form />
+              <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
+                Featured
+              </h4>
+              <Form userId={this.state.user._id} />
             </div>
             <div
               className="profile-info-box"
               style={{ margin: "0 auto", width: "98%" }}
             >
-
               <p style={{ textAlign: "left" }}>
                 <strong>Showcase your work</strong> by featuring your best
                 posts, documents, media and websites.
