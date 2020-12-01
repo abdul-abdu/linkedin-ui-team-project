@@ -13,7 +13,40 @@ import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 
+
+
+// fetch("https://striveschool-api.herokuapp.com/api/product/", {
+//   headers: {
+//     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzY1ODRiY2RlMTAwMTc2MTZhOTEiLCJpYXQiOjE2MDUwOTI5NTIsImV4cCI6MTYwNjMwMjU1Mn0.167moYNgptnQpkntwtLaEyr3cDG3_2 - rg9gOnjJ4syQ"
+//   }
+// }
+
 class Navbar extends React.Component {
+
+  state = {
+    user: ''
+  }
+
+  componentDidMount = () => {
+    this.fetchProfile();
+  };
+
+  fetchProfile = async () => {
+    console.log(process.env.REACT_APP_BE_URL, 'process.env.REACT_APP_AUTHORIZATION_CODE')
+    try {
+      const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/me', {
+        headers: {
+          "Authorization": `Bearer ${process.env.REACT_APP_BE_URL}`
+        }
+      })
+      const parsedResponse = await response.json();
+      console.log(parsedResponse, 'parsedResponse');
+      this.setState({ user: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <Container fluid className="main-container">
