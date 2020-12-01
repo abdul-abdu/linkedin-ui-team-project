@@ -16,7 +16,7 @@ class PeopleRelated extends React.Component {
         "https://striveschool-api.herokuapp.com/api/profile/",
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_AUTHORIZATION_CODE}`,
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
