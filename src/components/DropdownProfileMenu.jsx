@@ -2,7 +2,7 @@ import React from "react";
 import { Accordion, Card, Button, ListGroup, Dropdown } from "react-bootstrap";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "./DropdownProfileMenu.css";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class DropdownProfileMenu extends React.Component {
   render() {
