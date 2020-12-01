@@ -26,7 +26,6 @@ class ProfileLeft extends React.Component {
   handleClose = () => this.setState({ modalShow: false });
   handleShow = () => this.setState({ modalShow: true });
 
-
   componentDidMount = () => {
     this.fetchProfile();
   };
@@ -52,8 +51,11 @@ class ProfileLeft extends React.Component {
   render() {
     return (
       <div className="col-12 col-lg-8 mt-3">
-        <div className="profile-card" >
-          <div className="profile-profile-section" style={{maxHeight: '460px'}}>
+        <div className="profile-card">
+          <div
+            className="profile-profile-section"
+            style={{ maxHeight: "460px" }}
+          >
             <div className="coverImgHolder">
               <img
                 src="/assets/images/cover.jpg"
@@ -65,11 +67,11 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <img src={this.state.user.image} alt="profilePic" />
               ) : (
-                  <img
-                    src="/assets/images/user-placeholder.png"
-                    alt="profilePic"
-                  />
-                )}
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
@@ -85,24 +87,24 @@ class ProfileLeft extends React.Component {
                   {this.state.user.name} {this.state.user.surname}
                 </h4>
               ) : (
-                  <h4>Name Surname</h4>
-                )}
+                <h4>Name Surname</h4>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
               ) : (
-                  <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-                )}
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
                   <span style={{ color: "#0A66C2" }}>Contact info</span>
                 </p>
               ) : (
-                  <p style={{ lineHeight: "0.01rem" }}>
-                    New York •{" "}
-                    <span style={{ color: "#0A66C2" }}>Contact info</span>
-                  </p>
-                )}
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
@@ -161,7 +163,7 @@ class ProfileLeft extends React.Component {
               <p style={{ textAlign: "left" }}>
                 <strong>Showcase your work</strong> by featuring your best
                 posts, documents, media and websites.
-                <a href='#aaa' style={{ color: "#0A66C2" }}>
+                <a href="#aaa" style={{ color: "#0A66C2" }}>
                   <br />
                   Add Featured
                 </a>
@@ -169,10 +171,10 @@ class ProfileLeft extends React.Component {
             </div>
           </div>
         </div>
-        
+
         <div
           className="profile-card mt-3 profile-profile-section "
-          style={{ padding: "20px"}}
+          style={{ padding: "20px" }}
         >
           <Row>
             <Col className="mb-2 pl-3">
@@ -186,13 +188,11 @@ class ProfileLeft extends React.Component {
           </Row>
           <Row>
             <Col xs={1}>
-              <img src="https://placehold.it/60x60" />
+              <img src="https://placehold.it/60x60" alt="pic" />
             </Col>
             <Col xs={10} className="pl-4">
               <h6>Web Developer</h6>
-              <p style={{ fontSize: "0.9rem" }}>
-                Google, LLC
-              </p>
+              <p style={{ fontSize: "0.9rem" }}>Google, LLC</p>
               <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
                 2019-Present
               </p>
@@ -267,7 +267,7 @@ class ProfileLeft extends React.Component {
               <div className="acivity-course">
                 <Row>
                   <Col xs={1}>
-                    <img src="https://placehold.it/60x60" alt='placeholder' />
+                    <img src="https://placehold.it/60x60" alt="placeholder" />
                   </Col>
                   <Col xs={7} className="ml-5">
                     <h6>Learning ECMAScript 6+ (ES6+)</h6>
@@ -280,7 +280,7 @@ class ProfileLeft extends React.Component {
               <div className="acivity-course">
                 <Row>
                   <Col xs={1}>
-                    <img src="https://placehold.it/60x60" alt='placeholder' />
+                    <img src="https://placehold.it/60x60" alt="placeholder" />
                   </Col>
                   <Col xs={7} className="ml-5">
                     <h6>Learning ECMAScript 6+ (ES6+)</h6>
@@ -308,7 +308,7 @@ class ProfileLeft extends React.Component {
           </Row>
           <Row>
             <Col xs={1}>
-              <img src="https://placehold.it/60x60" alt='placeholder' />
+              <img src="https://placehold.it/60x60" alt="placeholder" />
             </Col>
             <Col xs={10} className="pl-4">
               <h6>University of Something</h6>
@@ -339,7 +339,7 @@ class ProfileLeft extends React.Component {
               <img
                 src="/assets/images/logo.png"
                 style={{ height: "60px", width: "60px" }}
-                alt='logo'
+                alt="logo"
               />
             </Col>
             <Col xs={10} className="pl-4">
@@ -358,7 +358,7 @@ class ProfileLeft extends React.Component {
               <img
                 src="/assets/images/logo.png"
                 style={{ height: "60px", width: "60px" }}
-                alt='logo'
+                alt="logo"
               />
             </Col>
             <Col xs={10} className="pl-4">
@@ -373,7 +373,6 @@ class ProfileLeft extends React.Component {
             </Col>
           </Row>
         </div>
-        
       </div>
     );
   }
