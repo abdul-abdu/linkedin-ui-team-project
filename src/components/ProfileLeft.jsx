@@ -16,6 +16,7 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import DropdownProfileMenu from "./DropdownProfileMenu";
+import { withRouter } from "react-router-dom";
 // import ProfileModal from "./ProfileModal"
 
 class ProfileLeft extends React.Component {
@@ -151,9 +152,13 @@ class ProfileLeft extends React.Component {
                 Featured
               </h4>
               <Col style={{ float: "right" }}>
-              <AiOutlinePlus
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              />
+                <AiOutlinePlus
+                  style={{
+                    fontSize: "1.6rem",
+                    float: "right",
+                    color: "#0A66C2",
+                  }}
+                />
               </Col>
             </div>
             <div
@@ -178,10 +183,14 @@ class ProfileLeft extends React.Component {
         >
           <Row>
             <Col className="mb-2 pl-3">
-              <h4>Experience: </h4>
+              <h4 onClick={() => this.props.history.push("/experience")}>
+                Experience:{" "}
+              </h4>
             </Col>
             <Col style={{ float: "right" }}>
-              <span style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}>
+              <span
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              >
                 <Form userId={this.state.user._id} />
               </span>
             </Col>
@@ -378,4 +387,4 @@ class ProfileLeft extends React.Component {
   }
 }
 
-export default ProfileLeft;
+export default withRouter(ProfileLeft);
