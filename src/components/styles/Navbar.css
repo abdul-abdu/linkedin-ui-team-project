@@ -85,3 +85,17 @@
     display: none;
   }
 }
+
+#dropdown-menu-align-right {
+  padding: 0;
+  background: none;
+  color: rgb(53, 53, 53);
+  border: none;
+  font-size: 12px;
+  letter-spacing: 1;
+  font-weight: 400;
+}
+
+.dropdown-item h6 {
+  font-weight: 700;
+}
