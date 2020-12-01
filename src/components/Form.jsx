@@ -16,10 +16,14 @@ class FormModal extends React.Component {
     },
   };
 
+  componentDidMount = () => {
+    this.cheekyFetch();
+  };
+
   sendData = async (e) => {
     e.preventDefault();
     await this.postExperience();
-    this.cheekyFetch();
+    await this.cheekyFetch();
   };
 
   postExperience = async () => {
@@ -53,6 +57,7 @@ class FormModal extends React.Component {
         }
       );
       let paresedResponse = await response.json();
+      this.props.exp(paresedResponse);
       console.log(paresedResponse);
     } catch (error) {
       console.log(error);
@@ -77,7 +82,7 @@ class FormModal extends React.Component {
     const { show } = this.state;
     return (
       <>
-        <Button id="modal-btn" variant="primary" onClick={handleShow}>
+        <Button id="modal-btn" onClick={handleShow}>
           <GrAdd />
         </Button>
 
@@ -115,7 +120,11 @@ class FormModal extends React.Component {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Check type="checkbox" label="Current job" />
+                <Form.Check
+                  className="my-2"
+                  type="checkbox"
+                  label="I'm currently working here"
+                />
                 <Form.Label>Start Date *</Form.Label>
                 <Form.Control
                   type="date"
