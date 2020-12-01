@@ -2,6 +2,7 @@ import React from "react";
 import { Accordion, Card, Button, ListGroup, Dropdown } from "react-bootstrap";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import "./DropdownProfileMenu.css";
+import { Link, withRouter } from "react-router-dom";
 
 class DropdownProfileMenu extends React.Component {
   render() {
@@ -66,7 +67,11 @@ class DropdownProfileMenu extends React.Component {
               </Card.Header>
               <Accordion.Collapse eventKey="3">
                 <ListGroup variant="flush">
-                  <ListGroup.Item>Work Experience</ListGroup.Item>
+                  <ListGroup.Item
+                    onClick={() => this.props.history.push("/experience")}
+                  >
+                    Work Experience
+                  </ListGroup.Item>
                   <ListGroup.Item>Education</ListGroup.Item>
                   <ListGroup.Item>Licenses & certificates</ListGroup.Item>
                   <ListGroup.Item>Volunteer experience</ListGroup.Item>
@@ -141,4 +146,4 @@ class DropdownProfileMenu extends React.Component {
   }
 }
 
-export default DropdownProfileMenu;
+export default withRouter(DropdownProfileMenu);

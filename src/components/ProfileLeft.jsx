@@ -8,16 +8,47 @@ import {
   Container,
   Row,
   Col,
+  ProgressBar,
+  Table,
 } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
+import { BsFillBookmarkFill } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
+
 import DropdownProfileMenu from "./DropdownProfileMenu";
 
 class ProfileLeft extends React.Component {
+  state = {
+    user: "",
+  };
+
+  componentDidMount = () => {
+    this.fetchProfile();
+  };
+
+  fetchProfile = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      console.log(parsedResponse);
+      this.setState({ user: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <div className="col-12 col-lg-8 mt-3">
         <div className="profile-card">
-          <div class="profile-profile-section">
+          <div className="profile-profile-section">
             <div className="coverImgHolder">
               <img
                 src="/assets/images/cover.jpg"
@@ -26,22 +57,47 @@ class ProfileLeft extends React.Component {
               />
             </div>
             <div className="profilePic">
-              <img src="/assets/images/user-placeholder.png" alt="profilePic" />
+              {this.state.user !== "" ? (
+                <img src={this.state.user.image} alt="profilePic" />
+              ) : (
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
                 <DropdownProfileMenu />
+
                 <Button id="moreBtn">More...</Button>
                 <BiPencil className="biPencil" />
               </div>
             </div>
             <div className="nameSurnameUni">
-              <h4>Name Surname</h4>
-              <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-              <p style={{ lineHeight: "0.01rem" }}>
-                New York •{" "}
-                <span style={{ color: "#0A66C2" }}>Contact info</span>
-              </p>
+              {this.state.user !== "" ? (
+                <h4>
+                  {this.state.user.name} {this.state.user.surname}
+                </h4>
+              ) : (
+                <h4>Name Surname</h4>
+              )}
+              {this.state.user !== "" ? (
+                <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
+              ) : (
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
+              {this.state.user !== "" ? (
+                <p style={{ lineHeight: "0.01rem" }}>
+                  {this.state.user.area} •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              ) : (
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
@@ -68,13 +124,31 @@ class ProfileLeft extends React.Component {
           </div>
         </div>
 
+        <div
+          className="profile-card mt-3 profile-profile-section"
+          style={{ padding: "15px" }}
+        >
+          <h4>
+            Profile Strength: <strong>Intermediate</strong>
+          </h4>
+          <ProgressBar animated now={75} className="mt-4" />
+        </div>
+
         <div className="profile-card mt-3">
-          <div className="profile-profile-section" style={{ padding: "10px" }}>
+
+          <div
+            className="profile-profile-section mb-2"
+            style={{ padding: "10px" }}
+          >
             <div className="component-exp-wrapper">
-              <h4 style={{ texAlign: "left !important" }}>Featured</h4>
+              <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>Featured</h4>
               <Form />
             </div>
-            <div className="profile-info-box" style={{ margin: "0 auto" }}>
+            <div
+              className="profile-info-box"
+              style={{ margin: "0 auto", width: "98%" }}
+            >
+
               <p style={{ textAlign: "left" }}>
                 <strong>Showcase your work</strong> by featuring your best
                 posts, documents, media and websites.
@@ -85,6 +159,175 @@ class ProfileLeft extends React.Component {
               </p>
             </div>
           </div>
+        </div>
+
+        <div
+          className="profile-card mt-3 profile-profile-section mb-2"
+          style={{ padding: "20px", backgroundColor: "#DCE6F1" }}
+        >
+          <h4>Your Dashboard</h4>
+          <p>
+            <em>Private to you</em>
+          </p>
+          <div className="dashboardHolder">
+            <Table>
+              <tbody>
+                <tr>
+                  <td>
+                    <h2>2</h2>
+                    <p>Who viewed your profile</p>
+                  </td>
+                  <td>
+                    <h2>0</h2>
+                    <p>Article views</p>
+                  </td>
+                  <td>
+                    <h2>4</h2>
+                    <p>Search appearances</p>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+          <div className="dashboardHolder">
+            <Row style={{ lineHeight: "0.7rem" }}>
+              <Col xs={1} className="mt-2 ml-1">
+                <BsFillBookmarkFill
+                  style={{
+                    fontSize: "1.6rem",
+                    margin: "4px",
+                    marginLeft: "10px",
+                  }}
+                />
+              </Col>
+              <Col xs={10} className="mt-1">
+                <h6>My items</h6>
+                <p>Keep track of your jobs, courses and articles</p>
+              </Col>
+            </Row>
+          </div>
+        </div>
+
+        <div
+          className="profile-card mt-3 profile-profile-section "
+          style={{ padding: "20px" }}
+        >
+          <Row>
+            <Col className="mb-2">
+              <h4>Activity</h4>
+            </Col>
+            <Col>
+              <p style={{ color: "#0A66C2", float: "right" }}>See more</p>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} lg={6}>
+              <div className="acivity-course">
+                <Row>
+                  <Col xs={1}>
+                    <img src="https://placehold.it/60x60" />
+                  </Col>
+                  <Col xs={7} className="ml-5">
+                    <h6>Learning ECMAScript 6+ (ES6+)</h6>
+                    <p style={{ fontSize: "0.8rem" }}>shared by Name</p>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col xs={12} lg={6}>
+              <div className="acivity-course">
+                <Row>
+                  <Col xs={1}>
+                    <img src="https://placehold.it/60x60" />
+                  </Col>
+                  <Col xs={7} className="ml-5">
+                    <h6>Learning ECMAScript 6+ (ES6+)</h6>
+                    <p style={{ fontSize: "0.8rem" }}>shared by Name</p>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        <div
+          className="profile-card mt-3 profile-profile-section "
+          style={{ padding: "20px", maxHeight: "515px !important" }}
+        >
+          <Row>
+            <Col className="mb-2">
+              <h4>Education: </h4>
+            </Col>
+            <Col style={{ float: "right" }}>
+              <AiOutlinePlus
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={1}>
+              <img src="https://placehold.it/60x60" />
+            </Col>
+            <Col xs={10} className="pl-4">
+              <h6>University of Something</h6>
+              <p style={{ fontSize: "0.9rem" }}>
+                Bachelor of Computer Science, Computer Software Engineering
+              </p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                2015-2019
+              </p>
+            </Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col className="mb-2">
+              <h4>Licenses & certifications: </h4>
+            </Col>
+            <Col style={{ float: "right" }}>
+              <AiOutlinePlus
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={1}>
+              <img
+                src="/assets/images/logo.png"
+                style={{ height: "60px", width: "60px" }}
+              />
+            </Col>
+            <Col xs={10} className="pl-4">
+              <h6>Learning ECMAScript 6+ (ES6+)</h6>
+              <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                Issued Novermber 2020 • No expiration date
+              </p>
+            </Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={1}>
+              <img
+                src="/assets/images/logo.png"
+                style={{ height: "60px", width: "60px" }}
+              />
+            </Col>
+            <Col xs={10} className="pl-4">
+              <h6>CSS: Selectors</h6>
+              <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
+              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                Issued Novermber 2020 • No expiration date
+              </p>
+            </Col>
+            <Col xs={1} style={{ float: "right" }}>
+              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
+            </Col>
+          </Row>
         </div>
       </div>
     );

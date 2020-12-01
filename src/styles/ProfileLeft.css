@@ -91,4 +91,34 @@ body{
     padding: 2px;
     border-radius: 5px;
     padding: 5px;
+    padding-bottom: 0px;
 }
+.profile-profile-section h2{
+    color: #0A66C2;
+}
+.profile-profile-section tbody{
+    background-color: white;
+    border-radius: 5px;
+}
+.profile-profile-section tbody p{
+    font-size: 1rem;
+}
+.profile-profile-section td:hover{
+    text-decoration: underline #0A66C2;
+    cursor: pointer;
+}
+.dashboardHolder{
+    width: 95%;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: white;
+    margin: 3px;
+}
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;               
+    background-color:#757575;
+    height: 1px;
+  }
