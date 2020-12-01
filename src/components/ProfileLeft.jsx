@@ -169,11 +169,11 @@ class ProfileLeft extends React.Component {
             <Col className="mb-2 pl-3">
               <h4>Experience: </h4>
             </Col>
-            <Col style={{ float: "right" }}>
+            {/*<Col style={{ float: "right" }}>
               <AiOutlinePlus
                 style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
               />
-            </Col>
+              </Col>*/}
           </Row>
           <Row>
             <Col xs={1}>
