@@ -11,7 +11,15 @@ import { AiOutlineSearch } from "react-icons/ai";
 import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, DropdownButton, Dropdown, Image } from "react-bootstrap";
+import {
+  Container,
+  DropdownButton,
+  Col,
+  Dropdown,
+  Button,
+  Image,
+  Row,
+} from "react-bootstrap";
 
 // fetch("https://striveschool-api.herokuapp.com/api/product/", {
 //   headers: {
@@ -128,52 +136,62 @@ class Navbar extends React.Component {
             <div className="navbar-profile-menu mx-3 text-center">
               {/* <CgProfile className="icon" /> */}
               <img src={abdul} alt="" />
-              <DropdownButton
-                menuAlign="right"
-                title="Me"
-                id="dropdown-menu-align-right"
-              >
-                {this.state.user ? (
-                  <>
-                    <Dropdown.Item eventKey="1">
-                      Access My Premium
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="2">
-                      Settings & Privacy
-                    </Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Help</Dropdown.Item>
-                  </>
-                ) : (
-                  <>
-                    <Dropdown.Item eventKey="1">Image</Dropdown.Item>
-                    <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
-                  </>
-                )}
+              <Dropdown alignRight>
+                <Dropdown.Toggle id="dropdown-menu-align-right" title="Me">
+                  Me
+                </Dropdown.Toggle>
+                <Dropdown.Menu id="meMenu" style={{ minWidth: "300px" }}>
+                  {this.state.user ? (
+                    <>
+                      <Dropdown.Item
+                        eventKey="1"
+                        style={{ padding: "4px 12px" }}
+                      >
+                        <div className="d-flex">
+                          <img
+                            src={this.state.user.image}
+                            alt=""
+                            width="56px"
+                          />
 
-                <Dropdown.Item
-                  eventKey="4"
-                  style={{
-                    borderRadius: "20px",
-                    color: "blue",
-                    border: "1px solid blue",
-                  }}
-                >
-                  View Profile
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header>Account</Dropdown.Header>
-                <Dropdown.Item eventKey="5">Access My Premium</Dropdown.Item>
-                <Dropdown.Item eventKey="6">Settings & Privacy</Dropdown.Item>
-                <Dropdown.Item eventKey="7">Help</Dropdown.Item>
-                <Dropdown.Item eventKey="8">Language</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header>Manage</Dropdown.Header>
-                <Dropdown.Item eventKey="9">Posts & Activity</Dropdown.Item>
-                <Dropdown.Item eventKey="10">Job Posting Account</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item eventKey="11">Sign Out</Dropdown.Item>
-              </DropdownButton>
+                          <div className="pl-1 d-flex flex-column justify-content-center">
+                            <h6>
+                              {this.state.user.name +
+                                " " +
+                                this.state.user.surname}
+                            </h6>
+                            <h6>{this.state.user.title}</h6>
+                          </div>
+                        </div>
+                      </Dropdown.Item>
+                    </>
+                  ) : (
+                    <>
+                      <Dropdown.Item eventKey="1">Image</Dropdown.Item>
+                      <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
+                      <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
+                    </>
+                  )}
+
+                  <Dropdown.Item eventKey="4">
+                    <Button id="profileButton">View Profile</Button>
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Header>Account</Dropdown.Header>
+                  <Dropdown.Item eventKey="5">Access My Premium</Dropdown.Item>
+                  <Dropdown.Item eventKey="6">Settings & Privacy</Dropdown.Item>
+                  <Dropdown.Item eventKey="7">Help</Dropdown.Item>
+                  <Dropdown.Item eventKey="8">Language</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Header>Manage</Dropdown.Header>
+                  <Dropdown.Item eventKey="9">Posts & Activity</Dropdown.Item>
+                  <Dropdown.Item eventKey="10">
+                    Job Posting Account
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item eventKey="11">Sign Out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
             <div className="side-menu mx-4">
               <div className="products-menu text-center">
