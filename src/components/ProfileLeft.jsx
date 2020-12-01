@@ -150,7 +150,11 @@ class ProfileLeft extends React.Component {
               <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
                 Featured
               </h4>
-              <Form userId={this.state.user._id} />
+              <Col style={{ float: "right" }}>
+              <AiOutlinePlus
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              />
+              </Col>
             </div>
             <div
               className="profile-info-box"
@@ -177,9 +181,9 @@ class ProfileLeft extends React.Component {
               <h4>Experience: </h4>
             </Col>
             <Col style={{ float: "right" }}>
-              <AiOutlinePlus
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              />
+              <span style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}>
+                <Form userId={this.state.user._id} />
+              </span>
             </Col>
           </Row>
           <Row>
