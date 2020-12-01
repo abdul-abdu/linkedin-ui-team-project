@@ -12,8 +12,7 @@ import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, DropdownButton, Dropdown, Image } from "react-bootstrap";
-
-
+import { withRouter } from "react-router-dom";
 
 // fetch("https://striveschool-api.herokuapp.com/api/product/", {
 //   headers: {
@@ -22,10 +21,9 @@ import { Container, DropdownButton, Dropdown, Image } from "react-bootstrap";
 // }
 
 class Navbar extends React.Component {
-
   state = {
-    user: ''
-  }
+    user: "",
+  };
 
   componentDidMount = () => {
     this.fetchProfile();
@@ -33,13 +31,16 @@ class Navbar extends React.Component {
 
   fetchProfile = async () => {
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/me', {
-        headers: {
-          "Authorization": `Bearer ${process.env.REACT_APP_BE_URL}`
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
         }
-      })
+      );
       const parsedResponse = await response.json();
-      console.log(parsedResponse, 'parsedResponse');
+      console.log(parsedResponse, "parsedResponse");
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
@@ -60,7 +61,10 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-right">
-            <div className="navbar-home mx-3 text-center">
+            <div
+              className="navbar-home mx-3 text-center"
+              onClick={() => this.props.history.push("/")}
+            >
               <AiFillHome className="icon" />
               <h5
                 style={{
@@ -137,34 +141,36 @@ class Navbar extends React.Component {
                   {this.state.user !== "" ? (
                     <>
                       <Image href={this.state.image} />
-                      <h6>
-
-                        {this.state.user.name}
-                      </h6>
+                      <h6>{this.state.user.name}</h6>
                     </>
                   ) : (
-                      <h6>Name</h6>
-                    )}
+                    <h6>Name</h6>
+                  )}
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="2">
                   {this.state.user !== "" ? (
-                    <h6>
-                      {this.state.user.surname}
-                    </h6>
+                    <h6>{this.state.user.surname}</h6>
                   ) : (
-                      <h6>surname</h6>
-                    )}
+                    <h6>surname</h6>
+                  )}
                 </Dropdown.Item>
                 <Dropdown.Item eventKey="3">
                   {this.state.user !== "" ? (
-                    <span>
-                      {this.state.user.title}
-                    </span>
+                    <span>{this.state.user.title}</span>
                   ) : (
-                      <h6>job title</h6>
-                    )}
+                    <h6>job title</h6>
+                  )}
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="4" style={{ borderRadius: '20px', color: 'blue', border: '1px solid blue' }}>View Profile</Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="4"
+                  style={{
+                    borderRadius: "20px",
+                    color: "blue",
+                    border: "1px solid blue",
+                  }}
+                >
+                  View Profile
+                </Dropdown.Item>
                 <Dropdown.Divider />
               </DropdownButton>
             </div>
@@ -203,4 +209,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
