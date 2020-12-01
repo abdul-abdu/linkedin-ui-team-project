@@ -32,7 +32,7 @@ class Navbar extends React.Component {
   };
 
   fetchProfile = async () => {
-    console.log(process.env.REACT_APP_BE_URL, 'process.env.REACT_APP_AUTHORIZATION_CODE')
+    console.log(process.env.REACT_APP_BE_URL, 'process.env.REACT_APP_BE_URL')
     try {
       const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/me', {
         headers: {
