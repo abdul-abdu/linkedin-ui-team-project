@@ -1,4 +1,5 @@
 import React from "react";
+import Form from "../components/Form";
 import "../styles/ProfileLeft.css";
 import {
   Dropdown,
@@ -138,9 +139,12 @@ class ProfileLeft extends React.Component {
             className="profile-profile-section mb-2"
             style={{ padding: "10px" }}
           >
-            <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
-              Featured
-            </h4>
+            <div className="component-exp-wrapper">
+              <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
+                Featured
+              </h4>
+              <Form userId={this.state.user._id} />
+            </div>
             <div
               className="profile-info-box"
               style={{ margin: "0 auto", width: "98%" }}

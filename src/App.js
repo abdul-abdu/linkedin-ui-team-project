@@ -2,8 +2,6 @@ import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Footer.css";
-
-// import { Container, Row, Col } from "react-bootstrap";
 import Footer from "./components/Footer";
 import NavbarApp from "./components/Navbar";
 import ProfilePage from "./components/ProfilePage";
