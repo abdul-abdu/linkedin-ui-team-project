@@ -1,20 +1,20 @@
 import { Row, Col, Container } from "react-bootstrap";
-import React from 'react'
+import React from "react";
 
-import { FaLinkedin } from 'react-icons/fa';
-import { AiOutlineSetting, AiFillQuestionCircle } from 'react-icons/ai';
-
-
+import { FaLinkedin } from "react-icons/fa";
+import { AiFillQuestionCircle, AiOutlineSetting } from "react-icons/ai";
 
 const LinkedIn = () => {
   return (
-    <div className='d-flex align-items-center' style={{ color: 'blue', fontSize: '25px' }}>
-      <b>Linked</b><FaLinkedin />
-    </div >
-  )
-}
-
-
+    <div
+      className="d-flex align-items-center"
+      style={{ color: "blue", fontSize: "25px" }}
+    >
+      <b>Linked</b>
+      <FaLinkedin />
+    </div>
+  );
+};
 
 const Footer = () => {
   return (
