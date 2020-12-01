@@ -150,11 +150,6 @@ class ProfileLeft extends React.Component {
               <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
                 Featured
               </h4>
-              <Col style={{ float: "right" }}>
-              <AiOutlinePlus
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              />
-              </Col>
             </div>
             <div
               className="profile-info-box"
@@ -181,25 +176,27 @@ class ProfileLeft extends React.Component {
               <h4>Experience: </h4>
             </Col>
             <Col style={{ float: "right" }}>
-              <span style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}>
+              <span
+                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
+              >
                 <Form userId={this.state.user._id} />
               </span>
             </Col>
           </Row>
-          <Row>
+          <Row className="d-flex justify-content-between">
             <Col xs={1}>
               <img src="https://placehold.it/60x60" alt="pic" />
             </Col>
-            <Col xs={10} className="pl-4">
+            <Col xs={9} className="pl-4">
               <h6>Web Developer</h6>
               <p style={{ fontSize: "0.9rem" }}>Google, LLC</p>
               <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
                 2019-Present
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}>
-              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
-            </Col>
+            <Button id="edit-btn">
+              <BiPencil />
+            </Button>
           </Row>
         </div>
 
