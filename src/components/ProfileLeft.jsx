@@ -30,8 +30,17 @@ class ProfileLeft extends React.Component {
 
   componentDidMount = () => {
     this.fetchProfile();
-    this.fetchExperience()
   };
+
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.user !== this.state.user) {
+      console.log(prevState.user, 'prevState.user')
+      console.log(this.state.user, 'this.state.user')
+
+      this.fetchExperience()
+    }
+  }
 
   fetchProfile = async () => {
     try {
@@ -52,22 +61,20 @@ class ProfileLeft extends React.Component {
 
 
   fetchExperience = async () => {
-    if (this.state) {
-      try {
-        const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/:5fc4c441ed266800170ea3d6/experiences`, {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`
-          }
-        })
+    console.log('fetchExperience Runed', this.state.user._id)
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`
+        }
+      })
 
-        const parsedResponse = await response.json();
-        console.log(parsedResponse, 'parsedResponse')
-        console.log(parsedResponse, 'experience')
-        this.setState({ experiences: parsedResponse })
+      const parsedResponse = await response.json();
+      console.log(parsedResponse, 'experience')
+      this.setState({ experiences: parsedResponse })
 
-      } catch (error) {
-        console.log('Error at experiences:', error)
-      }
+    } catch (error) {
+      console.log('Error at experiences:', error)
     }
 
   }
@@ -209,21 +216,24 @@ class ProfileLeft extends React.Component {
               </span>
             </Col>
           </Row>
-          <Row className="d-flex justify-content-between">
-            <Col xs={1}>
-              <img src="https://placehold.it/60x60" alt="pic" />
-            </Col>
-            <Col xs={9} className="pl-4">
-              <h6>Web Developer</h6>
-              <p style={{ fontSize: "0.9rem" }}>Google, LLC</p>
-              <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
-                2019-Present
-              </p>
-            </Col>
-            <Button id="edit-btn">
-              <BiPencil />
-            </Button>
-          </Row>
+          {this.state.experiences.map((experience, idx) => (
+            <Row className="d-flex justify-content-between">
+              <Col xs={1}>
+                <img src="https://placehold.it/60x60" alt="pic" />
+              </Col>
+              <Col xs={9} className="pl-4">
+                <h6>{experience.role}</h6>
+                <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
+                <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                  {experience.startDate}
+                </p>
+              </Col>
+              <Button id="edit-btn">
+                <BiPencil />
+              </Button>
+            </Row>
+          ))}
+
         </div>
 
         <div
