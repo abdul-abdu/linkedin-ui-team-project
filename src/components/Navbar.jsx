@@ -13,8 +13,6 @@ import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, DropdownButton, Dropdown, Image } from "react-bootstrap";
 
-
-
 // fetch("https://striveschool-api.herokuapp.com/api/product/", {
 //   headers: {
 //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzY1ODRiY2RlMTAwMTc2MTZhOTEiLCJpYXQiOjE2MDUwOTI5NTIsImV4cCI6MTYwNjMwMjU1Mn0.167moYNgptnQpkntwtLaEyr3cDG3_2 - rg9gOnjJ4syQ"
@@ -22,10 +20,9 @@ import { Container, DropdownButton, Dropdown, Image } from "react-bootstrap";
 // }
 
 class Navbar extends React.Component {
-
   state = {
-    user: ''
-  }
+    user: "",
+  };
 
   componentDidMount = () => {
     this.fetchProfile();
@@ -33,13 +30,16 @@ class Navbar extends React.Component {
 
   fetchProfile = async () => {
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/profile/me', {
-        headers: {
-          "Authorization": `Bearer ${process.env.REACT_APP_BE_URL}`
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
         }
-      })
+      );
       const parsedResponse = await response.json();
-      console.log(parsedResponse, 'parsedResponse');
+      console.log(parsedResponse, "parsedResponse");
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
@@ -133,39 +133,46 @@ class Navbar extends React.Component {
                 title="Me"
                 id="dropdown-menu-align-right"
               >
-                <Dropdown.Item eventKey="1">
-                  {this.state.user !== "" ? (
-                    <>
-                      <Image href={this.state.image} />
-                      <h6>
+                {this.state.user ? (
+                  <>
+                    <Dropdown.Item eventKey="1">
+                      Access My Premium
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="2">
+                      Settings & Privacy
+                    </Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Help</Dropdown.Item>
+                  </>
+                ) : (
+                  <>
+                    <Dropdown.Item eventKey="1">Image</Dropdown.Item>
+                    <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
+                    <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
+                  </>
+                )}
 
-                        {this.state.user.name}
-                      </h6>
-                    </>
-                  ) : (
-                      <h6>Name</h6>
-                    )}
+                <Dropdown.Item
+                  eventKey="4"
+                  style={{
+                    borderRadius: "20px",
+                    color: "blue",
+                    border: "1px solid blue",
+                  }}
+                >
+                  View Profile
                 </Dropdown.Item>
-                <Dropdown.Item eventKey="2">
-                  {this.state.user !== "" ? (
-                    <h6>
-                      {this.state.user.surname}
-                    </h6>
-                  ) : (
-                      <h6>surname</h6>
-                    )}
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="3">
-                  {this.state.user !== "" ? (
-                    <span>
-                      {this.state.user.title}
-                    </span>
-                  ) : (
-                      <h6>job title</h6>
-                    )}
-                </Dropdown.Item>
-                <Dropdown.Item eventKey="4" style={{ borderRadius: '20px', color: 'blue', border: '1px solid blue' }}>View Profile</Dropdown.Item>
                 <Dropdown.Divider />
+                <Dropdown.Header>Account</Dropdown.Header>
+                <Dropdown.Item eventKey="5">Access My Premium</Dropdown.Item>
+                <Dropdown.Item eventKey="6">Settings & Privacy</Dropdown.Item>
+                <Dropdown.Item eventKey="7">Help</Dropdown.Item>
+                <Dropdown.Item eventKey="8">Language</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Header>Manage</Dropdown.Header>
+                <Dropdown.Item eventKey="9">Posts & Activity</Dropdown.Item>
+                <Dropdown.Item eventKey="10">Job Posting Account</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item eventKey="11">Sign Out</Dropdown.Item>
               </DropdownButton>
             </div>
             <div className="side-menu mx-4">
