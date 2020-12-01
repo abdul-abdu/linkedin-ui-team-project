@@ -17,11 +17,39 @@ import { AiOutlinePlus } from "react-icons/ai";
 import DropdownProfileMenu from "./DropdownProfileMenu";
 
 class ProfileLeft extends React.Component {
+
+  state = {
+    user: ''
+  }
+
+  componentDidMount = () => {
+    this.fetchProfile();
+  };
+
+  fetchProfile = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_AUTHORIZATION_CODE}`,
+            
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      console.log(parsedResponse);
+      this.setState({ user: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <div className="col-12 col-lg-8 mt-3">
         <div className="profile-card">
-          <div class="profile-profile-section">
+          <div className="profile-profile-section">
             <div className="coverImgHolder">
               <img
                 src="/assets/images/cover.jpg"
@@ -30,7 +58,9 @@ class ProfileLeft extends React.Component {
               />
             </div>
             <div className="profilePic">
-              <img src="/assets/images/user-placeholder.png" alt="profilePic" />
+            {this.state.user !== "" ?
+            <img src={this.state.user.image} alt="profilePic" />
+              : <img src="/assets/images/user-placeholder.png" alt="profilePic" />}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
@@ -41,12 +71,17 @@ class ProfileLeft extends React.Component {
               </div>
             </div>
             <div className="nameSurnameUni">
-              <h4>Name Surname</h4>
-              <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              {this.state.user !== "" ? <h4>{this.state.user.name} {this.state.user.surname}</h4> :<h4>Name Surname</h4>}
+              {this.state.user !== "" ? <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p> : <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>}
+              {this.state.user !== "" ?
               <p style={{ lineHeight: "0.01rem" }}>
+              {this.state.user.area} •{" "}
+              <span style={{ color: "#0A66C2" }}>Contact info</span>
+            </p>
+              :<p style={{ lineHeight: "0.01rem" }}>
                 New York •{" "}
                 <span style={{ color: "#0A66C2" }}>Contact info</span>
-              </p>
+              </p>}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
