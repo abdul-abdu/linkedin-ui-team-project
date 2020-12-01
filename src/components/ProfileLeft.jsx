@@ -17,10 +17,9 @@ import { AiOutlinePlus } from "react-icons/ai";
 import DropdownProfileMenu from "./DropdownProfileMenu";
 
 class ProfileLeft extends React.Component {
-
   state = {
-    user: ''
-  }
+    user: "",
+  };
 
   componentDidMount = () => {
     this.fetchProfile();
@@ -32,8 +31,7 @@ class ProfileLeft extends React.Component {
         "https://striveschool-api.herokuapp.com/api/profile/me",
         {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_AUTHORIZATION_CODE}`,
-            
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
@@ -58,9 +56,14 @@ class ProfileLeft extends React.Component {
               />
             </div>
             <div className="profilePic">
-            {this.state.user !== "" ?
-            <img src={this.state.user.image} alt="profilePic" />
-              : <img src="/assets/images/user-placeholder.png" alt="profilePic" />}
+              {this.state.user !== "" ? (
+                <img src={this.state.user.image} alt="profilePic" />
+              ) : (
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
@@ -71,17 +74,29 @@ class ProfileLeft extends React.Component {
               </div>
             </div>
             <div className="nameSurnameUni">
-              {this.state.user !== "" ? <h4>{this.state.user.name} {this.state.user.surname}</h4> :<h4>Name Surname</h4>}
-              {this.state.user !== "" ? <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p> : <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>}
-              {this.state.user !== "" ?
-              <p style={{ lineHeight: "0.01rem" }}>
-              {this.state.user.area} •{" "}
-              <span style={{ color: "#0A66C2" }}>Contact info</span>
-            </p>
-              :<p style={{ lineHeight: "0.01rem" }}>
-                New York •{" "}
-                <span style={{ color: "#0A66C2" }}>Contact info</span>
-              </p>}
+              {this.state.user !== "" ? (
+                <h4>
+                  {this.state.user.name} {this.state.user.surname}
+                </h4>
+              ) : (
+                <h4>Name Surname</h4>
+              )}
+              {this.state.user !== "" ? (
+                <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
+              ) : (
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
+              {this.state.user !== "" ? (
+                <p style={{ lineHeight: "0.01rem" }}>
+                  {this.state.user.area} •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              ) : (
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
