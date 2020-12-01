@@ -30,7 +30,27 @@
   border: none;
 }
 
+#modal-btn:hover {
+  background-color: #0a66c256;
+  border-radius: 50%;
+  border: none;
+}
+
 .component-exp-wrapper {
   display: flex;
   justify-content: space-between;
+}
+
+#edit-btn {
+  background-color: transparent;
+  border: none;
+  color: blue;
+  height: 40px;
+  margin-right: 3px;
+}
+
+#edit-btn:hover {
+  background-color: #0a66c256;
+  border-radius: 50%;
+  border: none;
 }

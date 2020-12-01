@@ -22,6 +22,9 @@ import {
   Row,
 } from "react-bootstrap";
 
+import { withRouter } from "react-router-dom";
+
+
 // fetch("https://striveschool-api.herokuapp.com/api/product/", {
 //   headers: {
 //     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzY1ODRiY2RlMTAwMTc2MTZhOTEiLCJpYXQiOjE2MDUwOTI5NTIsImV4cCI6MTYwNjMwMjU1Mn0.167moYNgptnQpkntwtLaEyr3cDG3_2 - rg9gOnjJ4syQ"
@@ -69,7 +72,10 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-right">
-            <div className="navbar-home mx-3 text-center">
+            <div
+              className="navbar-home mx-3 text-center"
+              onClick={() => this.props.history.push("/")}
+            >
               <AiFillHome className="icon" />
               <h5
                 style={{
@@ -145,6 +151,7 @@ class Navbar extends React.Component {
                 <Dropdown.Menu id="meMenu" style={{ minWidth: "300px" }}>
                   {this.state.user ? (
                     <>
+
                       <Dropdown.Item
                         eventKey="1"
                         style={{ padding: "4px 12px" }}
@@ -194,6 +201,7 @@ class Navbar extends React.Component {
                   <Dropdown.Item eventKey="11">Sign Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
+
             </div>
             <div className="side-menu mx-4">
               <div className="products-menu text-center">
@@ -230,4 +238,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
