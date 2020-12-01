@@ -211,7 +211,11 @@ class ProfileLeft extends React.Component {
               <span
                 style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
               >
-                <Form userId={this.state.user._id} />
+                <Form
+                  userId={this.state.user._id}
+                  method="POST"
+                  fetchExperience={this.fetchExperience}
+                />
               </span>
             </Col>
           </Row>
@@ -228,10 +232,16 @@ class ProfileLeft extends React.Component {
                 </p>
               </Col>
 
-              <Form experience={experience} expId={experience._id} />
-              <Button id="edit-btn" onClick={() => editExperience}>
+              <Form
+                userId={this.state.user._id}
+                experience={experience}
+                expId={experience._id}
+                method="PUT"
+                fetchExperience={this.fetchExperience}
+              />
+              {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
                 <BiPencil />
-              </Button>
+              </Button> */}
             </Row>
           ))}
         </div>
