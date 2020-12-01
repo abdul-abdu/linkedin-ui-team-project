@@ -4,6 +4,7 @@ import "./IndividualPerson.css";
 // import PersonAddIcon from "@material-ui/icons/PersonAdd";
 // import { Link, withRouter } from "react-router-dom";
 import ShodyDivider from "./ShodyDivider";
+import { withRouter } from "react-router-dom";
 
 class IndividualPerson extends React.Component {
   render() {
@@ -15,7 +16,12 @@ class IndividualPerson extends React.Component {
               <img src={this.props.pic} alt="" width="56px" />
             </Col>
 
-            <Col className="d-flex flex-column align-items-start">
+            <Col
+              className="d-flex flex-column align-items-start"
+              onClick={() =>
+                this.props.history.push("/profile/" + this.props.userid)
+              }
+            >
               <h6>{this.props.name}</h6>
               <span>{this.props.job}</span>
             </Col>
@@ -44,4 +50,4 @@ class IndividualPerson extends React.Component {
   }
 }
 
-export default IndividualPerson;
+export default withRouter(IndividualPerson);

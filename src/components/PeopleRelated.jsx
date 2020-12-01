@@ -39,21 +39,24 @@ class PeopleRelated extends React.Component {
               fontWeight: "normal",
             }}
           >
-            People you may know
+            {this.props.title}
           </h5>
         </Row>
         {this.state.other &&
-          this.state.other.slice(5, 10).map((person, index) => (
-            <>
-              <IndividualPerson
-                name={person.name}
-                job={person.title}
-                pic={person.image}
-                key={person._id}
-                divider={index === 4 ? false : true}
-              />
-            </>
-          ))}
+          this.state.other
+            .slice(this.props.arrPosition, this.props.arrPosition + 5)
+            .map((person, index) => (
+              <>
+                <IndividualPerson
+                  name={person.name}
+                  job={person.title}
+                  pic={person.image}
+                  key={index}
+                  userid={person._id}
+                  divider={index === 4 ? false : true}
+                />
+              </>
+            ))}
         {this.state.other.length === 0 && (
           <>
             <IndividualPerson

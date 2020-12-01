@@ -1,15 +1,15 @@
 import React from 'react';
-import {Row, Col} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import '../styles/ProfileLeft.css';
 import { BiPencil } from "react-icons/bi";
 import Form from './Form';
 
 const ExperiencePage = () => {
-    return(
-        <>
-        <div
+  return (
+    <>
+      <div
         className="profile-card mt-3 profile-profile-section "
-        style={{ padding: "20px"}}
+        style={{ padding: "20px" }}
       >
         <Row>
           <Col className="mb-2 pl-3">
@@ -20,11 +20,11 @@ const ExperiencePage = () => {
               style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
             />*/}
             <span style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}><Form /></span>
-            </Col>
+          </Col>
         </Row>
         <Row>
           <Col xs={1}>
-            <img src="https://placehold.it/60x60" />
+            <img src="https://placehold.it/60x60" alt='img' />
           </Col>
           <Col xs={10} className="pl-4">
             <h6>Web Developer</h6>
@@ -40,8 +40,8 @@ const ExperiencePage = () => {
           </Col>
         </Row>
       </div>
-        </>
-        );
+    </>
+  );
 }
 
 export default ExperiencePage;

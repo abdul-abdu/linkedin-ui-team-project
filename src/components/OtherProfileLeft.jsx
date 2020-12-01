@@ -2,8 +2,6 @@ import React from "react";
 import Form from "../components/Form";
 import "../styles/ProfileLeft.css";
 import {
-  // Dropdown,
-  // DropdownButton,
   Button,
   Container,
   Row,
@@ -11,16 +9,16 @@ import {
   ProgressBar,
   Table,
 } from "react-bootstrap";
+import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BiPencil } from "react-icons/bi";
+
 import DropdownProfileMenu from "./DropdownProfileMenu";
 import { withRouter } from "react-router-dom";
-// import ProfileModal from "./ProfileModal"
 
-class ProfileLeft extends React.Component {
+class OtherProfileLeft extends React.Component {
   state = {
-    user: "",
+    user: {},
     experiences: [],
   };
 
@@ -32,18 +30,19 @@ class ProfileLeft extends React.Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.user !== this.state.user) {
-      console.log(prevState.user, "prevState.user");
+    if (prevProps.userid !== this.props.userid) {
       console.log(this.state.user, "this.state.user");
 
       this.fetchExperience();
+      this.fetchProfile();
     }
   };
 
   fetchProfile = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "https://striveschool-api.herokuapp.com/api/profile/" +
+          this.props.userid,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
@@ -51,7 +50,7 @@ class ProfileLeft extends React.Component {
         }
       );
       let parsedResponse = await response.json();
-
+      console.log(parsedResponse);
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
@@ -59,10 +58,9 @@ class ProfileLeft extends React.Component {
   };
 
   fetchExperience = async () => {
-    console.log("fetchExperience Runed", this.state.user._id);
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userid}/experiences`,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
@@ -71,7 +69,7 @@ class ProfileLeft extends React.Component {
       );
 
       const parsedResponse = await response.json();
-
+      console.log(parsedResponse, "experience");
       this.setState({ experiences: parsedResponse });
     } catch (error) {
       console.log("Error at experiences:", error);
@@ -84,7 +82,7 @@ class ProfileLeft extends React.Component {
         <div className="profile-card">
           <div
             className="profile-profile-section"
-            style={{ maxHeight: "460px" }}
+            style={{ maxHeight: "380px" }}
           >
             <div className="coverImgHolder">
               <img
@@ -105,10 +103,8 @@ class ProfileLeft extends React.Component {
             </div>
             <div className="profile-info">
               <div className="buttons-row">
-                <DropdownProfileMenu />
-
+                <Button id="dropdown-basic-button">Message</Button>
                 <Button id="moreBtn">More...</Button>
-                <BiPencil className="biPencil" />
               </div>
             </div>
             <div className="nameSurnameUni">
@@ -136,153 +132,38 @@ class ProfileLeft extends React.Component {
                 </p>
               )}
             </div>
-            <Container className="fluid boxes">
-              <Row className="row-cols-12 row-cols-md-12">
-                <Col>
-                  <div className="profile-info-box">
-                    <p>
-                      <strong>Show recruiters you're open to work</strong> - you
-                      control who sees this. •
-                      <span style={{ color: "#0A66C2" }}>Get started</span>
-                    </p>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="profile-info-box">
-                    <p>
-                      <strong>Share that you're hiring</strong> - and attract
-                      qualified candidates •
-                      <span style={{ color: "#0A66C2" }}>Get started</span>
-                    </p>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
           </div>
         </div>
 
-        <div
-          className="profile-card mt-3 profile-profile-section"
-          style={{ padding: "15px" }}
-        >
-          <h4>
-            Profile Strength: <strong>Intermediate</strong>
-          </h4>
-          <ProgressBar animated now={75} className="mt-4" />
-        </div>
-
-        <div className="profile-card mt-3">
+        {this.state.experiences.length > 0 && (
           <div
-            className="profile-profile-section mb-2"
-            style={{ padding: "10px" }}
+            className="profile-card mt-3 profile-profile-section "
+            style={{ padding: "20px" }}
           >
-            <div className="component-exp-wrapper">
-              <h4 style={{ texAlign: "left !important", paddingLeft: "10px" }}>
-                Featured
-              </h4>
-            </div>
-            <div
-              className="profile-info-box"
-              style={{ margin: "0 auto", width: "98%" }}
-            >
-              <p style={{ textAlign: "left" }}>
-                <strong>Showcase your work</strong> by featuring your best
-                posts, documents, media and websites.
-                <a href="#aaa" style={{ color: "#0A66C2" }}>
-                  <br />
-                  Add Featured
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="profile-card mt-3 profile-profile-section "
-          style={{ padding: "20px" }}
-        >
-          <Row>
-            <Col className="mb-2 pl-3">
-              <h4 onClick={() => this.props.history.push("/experience")}>
-                Experience:{" "}
-              </h4>
-            </Col>
-            <Col style={{ float: "right" }}>
-              <span
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              >
-                <Form userId={this.state.user._id} />
-              </span>
-            </Col>
-          </Row>
-          {this.state.experiences.map((experience, idx) => (
-            <Row key={idx} className="d-flex justify-content-between">
-              <Col xs={1}>
-                <img src="https://placehold.it/60x60" alt="pic" />
-              </Col>
-              <Col xs={9} className="pl-4">
-                <h6>{experience.role}</h6>
-                <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
-                <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
-                  {experience.startDate}
-                </p>
-              </Col>
-
-              <Form experience={experience} expId={experience._id} />
-              <Button id="edit-btn" onClick={() => editExperience}>
-                <BiPencil />
-              </Button>
-            </Row>
-          ))}
-        </div>
-
-        <div
-          className="profile-card mt-3 profile-profile-section mb-2"
-          style={{ padding: "20px", backgroundColor: "#DCE6F1" }}
-        >
-          <h4>Your Dashboard</h4>
-          <p>
-            <em>Private to you</em>
-          </p>
-          <div className="dashboardHolder">
-            <Table>
-              <tbody>
-                <tr>
-                  <td>
-                    <h2>2</h2>
-                    <p>Who viewed your profile</p>
-                  </td>
-                  <td>
-                    <h2>0</h2>
-                    <p>Article views</p>
-                  </td>
-                  <td>
-                    <h2>4</h2>
-                    <p>Search appearances</p>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-          <div className="dashboardHolder">
-            <Row style={{ lineHeight: "0.7rem" }}>
-              <Col xs={1} className="mt-2 ml-1">
-                <BsFillBookmarkFill
-                  style={{
-                    fontSize: "1.6rem",
-                    margin: "4px",
-                    marginLeft: "10px",
-                  }}
-                />
-              </Col>
-              <Col xs={10} className="mt-1">
-                <h6>My items</h6>
-                <p>Keep track of your jobs, courses and articles</p>
+            <Row>
+              <Col className="mb-2 pl-3">
+                <h4 onClick={() => this.props.history.push("/experience")}>
+                  Experience:{" "}
+                </h4>
               </Col>
             </Row>
+            {this.state.experiences.map((experience, index) => (
+              <Row className="d-flex justify-content-between" key={index}>
+                <Col xs={1}>
+                  <img src="https://placehold.it/60x60" alt="pic" />
+                </Col>
+                <Col xs={9} className="pl-4">
+                  <h6>{experience.role}</h6>
+                  <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
+                  <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
+                    {experience.startDate}
+                  </p>
+                </Col>
+                <Button id="edit-btn"></Button>
+              </Row>
+            ))}
           </div>
-        </div>
-
+        )}
         <div
           className="profile-card mt-3 profile-profile-section "
           style={{ padding: "20px" }}
@@ -332,11 +213,6 @@ class ProfileLeft extends React.Component {
             <Col className="mb-2 pl-3">
               <h4>Education: </h4>
             </Col>
-            <Col style={{ float: "right" }}>
-              <AiOutlinePlus
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              />
-            </Col>
           </Row>
           <Row>
             <Col xs={1}>
@@ -351,20 +227,14 @@ class ProfileLeft extends React.Component {
                 2015-2019
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}>
-              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
-            </Col>
+            <Col xs={1} style={{ float: "right" }}></Col>
           </Row>
           <hr />
           <Row>
             <Col className="mb-2 pl-3">
               <h4>Licenses & certifications: </h4>
             </Col>
-            <Col style={{ float: "right" }}>
-              <AiOutlinePlus
-                style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
-              />
-            </Col>
+            <Col style={{ float: "right" }}></Col>
           </Row>
           <Row>
             <Col xs={1}>
@@ -381,9 +251,7 @@ class ProfileLeft extends React.Component {
                 Issued Novermber 2020 • No expiration date
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}>
-              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
-            </Col>
+            <Col xs={1} style={{ float: "right" }}></Col>
           </Row>
           <Row>
             <Col xs={1}>
@@ -400,9 +268,7 @@ class ProfileLeft extends React.Component {
                 Issued Novermber 2020 • No expiration date
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}>
-              <BiPencil style={{ color: "#0A66C2", fontSize: "1.6rem" }} />
-            </Col>
+            <Col xs={1} style={{ float: "right" }}></Col>
           </Row>
         </div>
       </div>
@@ -410,4 +276,4 @@ class ProfileLeft extends React.Component {
   }
 }
 
-export default withRouter(ProfileLeft);
+export default withRouter(OtherProfileLeft);
