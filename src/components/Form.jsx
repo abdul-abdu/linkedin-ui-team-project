@@ -57,7 +57,6 @@ class FormModal extends React.Component {
         }
       );
       let paresedResponse = await response.json();
-      this.props.exp(paresedResponse);
       console.log(paresedResponse);
     } catch (error) {
       console.log(error);
