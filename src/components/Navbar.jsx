@@ -11,6 +11,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import WorkAlert from "./WorkAlert";
 import {
   Container,
   DropdownButton,
@@ -81,6 +82,7 @@ class Navbar extends React.Component {
                 Home
               </h5>
             </div>
+            <WorkAlert />
             <div className="navbar-network mx-3 text-center">
               <BsFillPeopleFill className="icon" />
               <h5
