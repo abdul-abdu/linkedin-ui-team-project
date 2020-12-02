@@ -1,11 +1,33 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Form } from "react-bootstrap";
 import "./styles/IndividualPost.css";
 import PublicIcon from "@material-ui/icons/Public";
 import { withRouter } from "react-router-dom";
 import PostDropdown from "./PostDropdown";
 
 class IndividualPost extends React.Component {
+  state = {
+    addComments: false,
+    showComments: false,
+    commentArray: [],
+    comment: {
+      comment: "",
+      rate: 5,
+      elementId: this.props.post._id,
+    },
+  };
+
+  componentDidMount = () => {
+    this.fetchComments();
+  };
+
+  updateField = (e) => {
+    let comment = { ...this.state.comment };
+    let commentId = e.currentTarget.id;
+    comment[commentId] = e.currentTarget.value;
+    this.setState({ comment: comment });
+  };
+
   calculateTimeDiff = () => {
     let currentTime = new Date();
     let postDate = new Date(this.props.post.createdAt);
@@ -29,6 +51,54 @@ class IndividualPost extends React.Component {
       } else {
         return timeDiff + " (edited)";
       }
+    }
+  };
+
+  fetchComments = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/" +
+          this.props.post._id,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      console.log(parsedResponse);
+      this.setState({ commentArray: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  postComment = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.comment),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("comment saved");
+        this.setState({
+          comment: {
+            comment: "",
+            rate: 5,
+            elementId: this.props.post._id,
+          },
+        });
+        this.fetchComments();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -75,6 +145,18 @@ class IndividualPost extends React.Component {
             <p>{this.props.post.text} </p>
           </Col>
         </Row>
+        {this.state.commentArray.length > 0 && (
+          <span
+            className="howMany"
+            onClick={() =>
+              this.state.showComments
+                ? this.setState({ showComments: false })
+                : this.setState({ showComments: true })
+            }
+          >
+            {this.state.commentArray.length} Comments
+          </span>
+        )}
         <hr />
         <Row>
           <Col xs={12} className="postBottomRow">
@@ -93,7 +175,14 @@ class IndividualPost extends React.Component {
               </svg>
               <span>Like</span>
             </div>
-            <div className="postBottomIcons">
+            <div
+              className="postBottomIcons"
+              onClick={() =>
+                this.state.addComments
+                  ? this.setState({ addComments: false })
+                  : this.setState({ addComments: true })
+              }
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -140,6 +229,39 @@ class IndividualPost extends React.Component {
             </div>
           </Col>
         </Row>
+        {this.state.addComments && (
+          <div className="d-flex align-items-center">
+            <img
+              src={this.props.post.user.image}
+              alt=""
+              width="40px"
+              height="40px"
+              style={{
+                objectFit: "cover",
+                borderRadius: "100%",
+                marginRight: "10px",
+              }}
+            />
+            <Form.Control
+              type="text"
+              placeholder="Add a comment..."
+              id="comment"
+              style={{ borderRadius: "100px" }}
+              value={this.state.comment.comment}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  this.postComment();
+                }
+              }}
+              onChange={(e) => this.updateField(e)}
+            />
+          </div>
+        )}
+        {this.state.showComments &&
+          this.state.commentArray &&
+          this.state.commentArray.map((com) => (
+            <h5>{com.comment + " " + com.author}</h5>
+          ))}
       </Container>
     );
   }
