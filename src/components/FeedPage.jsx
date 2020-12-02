@@ -1,13 +1,24 @@
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import PostsColumn from "./PostsColumn";
 
 import CreateFeed from './CreateFeed'
 
 class FeedPage extends React.Component {
   render() {
     return (
-      <div className="mt-5">
-        <CreateFeed />
-      </div>
+
+      <Container className="mt-5">
+        <Row>
+          <Col>THIUS IS THE FEED PAGE DOOD</Col>
+          <Col>
+            <CreateFeed />
+            <PostsColumn />
+          </Col>
+          <Col>THIUS IS THE FEED PAGE DOOD</Col>
+        </Row>
+      </Container>
+
     );
   }
 }
