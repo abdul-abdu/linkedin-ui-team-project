@@ -1,0 +1,65 @@
+.feedPost {
+  min-width: 550px;
+  background-color: white;
+  margin: 20px 0px;
+  padding: 10px;
+  border: 1px solid #deddda;
+  border-radius: 10px;
+}
+
+.feedPost .postTopRow {
+  display: flex;
+}
+
+.feedPost .postTopRow img {
+  margin: 0px 10px;
+  margin-left: 25px;
+  border-radius: 100%;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+}
+
+.feedPost .postTopRow .nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.feedPost .postTopRow .nameBox > span {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.feedPost .postTopRow .nameBox h6 {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+.feedPost .postTopRow .nameBox h6 span {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: normal;
+}
+
+.feedPost .postMiddleRow {
+  font-size: 14px;
+  margin: 15px 0px;
+}
+
+.feedPost .postBottomRow {
+  display: flex;
+  align-items: center;
+}
+.feedPost .postBottomRow .postBottomIcons {
+  margin-left: 25px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.feedPost .postBottomRow .postBottomIcons svg {
+  margin-right: 3px;
+}
