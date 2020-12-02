@@ -1,6 +1,5 @@
 svg {
   font-size: 25px;
-  margin-right: 10px;
 }
 
 svg:first-child {
@@ -21,7 +20,7 @@ svg:first-child {
   background-color: rgb(157, 198, 231);
 }
 
-a {
+.inner-body a {
   font-weight: 600;
   font-size: 16px;
   text-transform: lowercase;
@@ -29,4 +28,8 @@ a {
 
 .inner-body {
   margin-top: 20px;
+}
+
+.inner-body b {
+  margin-left: 10px;
 }
