@@ -7,10 +7,33 @@ import { Link } from "react-router-dom";
 
 class EditIntro extends Component {
   state = {
-    show: false
+    show: false,
+    user: {},
   }
 
   setModalShow = (bool) => this.setState({ show: bool })
+
+  fetchUser = async () => {
+    const url = 'https://striveschool-api.herokuapp.com/api/profile/'
+    try {
+      const response = await fetch(url + this.props.userInfo._id, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+        }
+      })
+      const parsedResponse = await response.json()
+      this.setState({ user: parsedResponse })
+
+      console.log(parsedResponse, 'parsedResponse profile')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  componentDidMount = () => {
+    this.fetchUser()
+  }
 
   render() {
     return (
@@ -54,7 +77,11 @@ class EditIntro extends Component {
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>First Name *</Form.Label>
-                  <Form.Control type="text" value={this.props.userInfo.name} />
+                  <Form.Control
+                    type="text"
+                    value={this.state.userInfo.name}
+
+                  />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridPassword">
