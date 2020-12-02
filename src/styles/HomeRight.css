@@ -11,18 +11,38 @@
     font-size: 0.9rem;
 }
 .recomandations img{
-    width: 55px;
-    height: 55px;
-    height: 50%;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    margin-left: -15px;
+    margin-left: -10px;
+    margin-right: 5px;
+    margin-top: -5px;
 }
 .recomandations h6{
     font-size: 0.8rem;
 }
 .recomandations button{
-    border-radius: 8px;
+    border-radius: 20px;
     border: 1px solid #0A66C2;
     color: #0A66C2;
     background-color: white;
+    padding: 0px 6px 5px 6px;
+}
+.singleRecomandation{
+    margin-bottom: 0.8rem;
+}
+.singleRecomandation:hover{
+    cursor: pointer;
+}
+.bottomh6{
+    font-size: 0.8rem;
+    color: #0A66C2;
+}
+.bottomh6:hover{
+    color: #094f96;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.singleRecomandation.second:hover{
+    text-decoration: underline;
 }
