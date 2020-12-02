@@ -9,19 +9,41 @@ class HomeProfile extends React.Component {
     user: "",
   };
 
+  componentDidMount = () =>{
+    this.fetchUser();
+  }
+
+  fetchUser = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/me",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      console.log("parsedResponse::::::::::::::::", parsedResponse);
+      this.setState({user: parsedResponse});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <div id="wrapper">
         <div className="profile-wrapper">
           <img src="/assets/images/cover.jpg" alt="cover" class="cover-img" />
           <img
-            src="/assets/images/user-placeholder.png"
+            src={this.state.user.image}
             alt="profile"
             class="profile-img"
           />
           <div class="profile-info">
-            <h6>Name Surname</h6>
-            <p>Software Developer</p>
+            <h6>{this.state.user.name} {this.state.user.surname}</h6>
+            <p>{this.state.user.title}</p>
           </div>
           <hr />
           <Row className="growNetwork prof-section">
