@@ -140,7 +140,7 @@ class FormModal extends React.Component {
       );
       let parsedResp = await response.json();
       console.log(parsedResp);
-      if (response.ok) {
+      if (parsedResp.ok) {
         this.handleClose();
         this.props.fetchExperience();
       }
