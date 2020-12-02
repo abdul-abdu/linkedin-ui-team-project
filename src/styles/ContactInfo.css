@@ -1,15 +1,14 @@
 svg {
   font-size: 25px;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
-svg:first-of-type {
+svg:first-child {
   text-align: center;
-  margin: 0;
 }
 
 .info {
-  margin-left: 30px;
+  margin-left: 35px;
 }
 
 .pencil {
