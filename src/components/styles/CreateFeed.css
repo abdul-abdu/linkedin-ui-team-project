@@ -1,9 +1,10 @@
 .create-feed {
-  width: 100%;
+  width: 110%;
   padding: 20px;
   margin-top: 5%;
   display: flex;
   justify-content: center;
+  margin-left: -10px;
 }
 
 .feed-wrapper {
