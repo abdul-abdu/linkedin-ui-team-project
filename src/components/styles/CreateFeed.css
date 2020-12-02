@@ -1,13 +1,11 @@
 .create-feed {
   width: 100%;
-  padding: 20px;
   margin-top: 5%;
   display: flex;
   justify-content: center;
 }
 
 .feed-wrapper {
-  width: 33%;
   background-color: white;
   padding: 15px;
   border-radius: 10px;
