@@ -1,12 +1,18 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import PostsColumn from "./PostsColumn";
 
 class FeedPage extends React.Component {
   render() {
     return (
       <Container className="mt-5">
-        THIUS IS THE FEED PAGE DOOD <PostsColumn />{" "}
+        <Row>
+          <Col>THIUS IS THE FEED PAGE DOOD</Col>
+          <Col>
+            <PostsColumn />
+          </Col>
+          <Col>THIUS IS THE FEED PAGE DOOD</Col>
+        </Row>
       </Container>
     );
   }

@@ -9,6 +9,17 @@ class IndividualPost extends React.Component {
   render() {
     return (
       <Container className="feedPost">
+        {(this.props.post.user.name.toLowerCase().includes("sexy") ||
+          this.props.post.user.surname.toLowerCase().includes("sexy") ||
+          this.props.post.text.toLowerCase().includes("sexy")) && (
+          <Row className="kreyGasm">
+            <Col className="memeMachine">
+              <span className="sexyBeast">Sexy Beast</span>
+              <span className="likesThis">likes this</span>
+            </Col>
+            <hr />
+          </Row>
+        )}
         <Row>
           <Col className="postTopRow">
             <div>
@@ -38,6 +49,7 @@ class IndividualPost extends React.Component {
             <p>{this.props.post.text} </p>
           </Col>
         </Row>
+        <hr />
         <Row>
           <Col xs={12} className="postBottomRow">
             <div className="postBottomIcons">
