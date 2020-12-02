@@ -27,13 +27,13 @@ const ContactInfo = ({ userInfo }) => {
           <Modal.Title>{userInfo.name + ' ' + userInfo.surname}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className='d-flex justify-content-between'>
+          <div className='d-flex justify-content-between inner-body'>
             <h3>Contact Info</h3>
             <Link className='pencil d-flex align-items-center'>
               <BiPencil />
             </Link>
           </div>
-          <div>
+          <div className='inner-body'>
             <div className='d-flex align-items-center'>
               <AiFillLinkedin />
               <b> Your Profile</b>
@@ -42,7 +42,7 @@ const ContactInfo = ({ userInfo }) => {
               <Link>linkedin.com/in/{userInfo.name + '-' + userInfo.surname + '-' + userInfo._id}</Link>
             </div>
           </div>
-          <div>
+          <div className='inner-body'>
             <div className='d-flex align-items-center'>
               <FiPhone />
               <b> Phone</b>
@@ -51,7 +51,7 @@ const ContactInfo = ({ userInfo }) => {
               <span>phone number</span>
             </div>
           </div>
-          <div>
+          <div className='inner-body'>
             <div className='d-flex align-items-center'>
               <AiOutlineMail />
               <b> Email</b>
@@ -60,7 +60,7 @@ const ContactInfo = ({ userInfo }) => {
               <Link>{userInfo.email}</Link>
             </div>
           </div>
-          <div>
+          <div className='inner-body'>
             <div className='d-flex align-items-center'>
               <MdCake />
               <b> Birthday</b>
