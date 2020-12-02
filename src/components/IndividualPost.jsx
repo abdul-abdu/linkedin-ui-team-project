@@ -6,6 +6,32 @@ import { withRouter } from "react-router-dom";
 import PostDropdown from "./PostDropdown";
 
 class IndividualPost extends React.Component {
+  calculateTimeDiff = () => {
+    let currentTime = new Date();
+    let postDate = new Date(this.props.post.createdAt);
+    let currentMilli = currentTime.getTime();
+    let postMilli = postDate.getTime();
+    let diffMilli = currentMilli - postMilli;
+    let diffMins = Math.ceil(diffMilli / 60000);
+    if (diffMins >= 60) {
+      let timeDiff = Math.floor(diffMins / 60).toString() + "h";
+      console.log(timeDiff);
+      if (this.props.post.createdAt === this.props.post.updatedAt) {
+        return timeDiff;
+      } else {
+        return timeDiff + " (edited)";
+      }
+    } else {
+      let timeDiff = diffMins.toString() + "m";
+      console.log(timeDiff);
+      if (this.props.post.createdAt === this.props.post.updatedAt) {
+        return timeDiff;
+      } else {
+        return timeDiff + " (edited)";
+      }
+    }
+  };
+
   render() {
     return (
       <Container className="feedPost">
@@ -38,7 +64,7 @@ class IndividualPost extends React.Component {
               </h6>
               <span>{this.props.post.user.title}</span>
               <span>
-                {this.props.post.createdAt} • <PublicIcon fontSize="small" />
+                {this.calculateTimeDiff()} • <PublicIcon fontSize="small" />
               </span>
             </div>
             <PostDropdown user={this.props.post.user} />
