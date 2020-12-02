@@ -14,7 +14,7 @@ class StartPost extends Component {
   state = {
     show: false,
     fetching: false,
-    text: '',
+    post: { text: '' },
     errMessage: '',
   };
 
@@ -24,9 +24,12 @@ class StartPost extends Component {
   handleShow = () => this.setModalShow(true);
 
   updatePostField = (e) => {
-    let post = this.state.text
-    post = e.currentTarget.value
-    this.setState({ text: post })
+    let Post = { ...this.state.post }
+    let textPost = Post.text
+
+    textPost = e.currentTarget.value
+    Post.text = textPost
+    this.setState({ post: Post })
   }
 
 
@@ -35,10 +38,10 @@ class StartPost extends Component {
     this.setState({ fetching: true })
 
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
+      const response = await fetch('https://striveschool-api.herokuapp.com/api/posts',
         {
           method: 'POST',
-          body: JSON.stringify(this.state.text),
+          body: JSON.stringify(this.state.post),
           headers: new Headers({
             "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
@@ -52,6 +55,7 @@ class StartPost extends Component {
           errMessage: '',
           fetching: false,
         })
+        this.handleClose()
 
       } else {
         console.log('an error occurred')
@@ -136,7 +140,12 @@ class StartPost extends Component {
                   Close
                 </Button>
 
-                <Button type='submit' variant="outline-light" className="feed-btn">
+                <Button
+                  type='submit'
+                  variant="outline-light"
+                  className="feed-btn"
+
+                >
                   POST
                 </Button>
               </div>
