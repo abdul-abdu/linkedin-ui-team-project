@@ -19,6 +19,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Form from "../components/Form";
 import DropdownProfileMenu from "./DropdownProfileMenu";
 import ContactInfo from './ContactInfo'
+import EditIntro from './EditIntro'
+
 
 class ProfileLeft extends React.Component {
   state = {
@@ -104,11 +106,16 @@ class ProfileLeft extends React.Component {
                 )}
             </div>
             <div className="profile-info">
-              <div className="buttons-row">
+              <div className="buttons-row align-items-center">
                 <DropdownProfileMenu />
 
                 <Button id="moreBtn">More...</Button>
-                <BiPencil className="biPencil" />
+                {this.state.user ? (
+                  <EditIntro userInfo={this.state.user} />
+                ) : (
+                    <BiPencil className="biPencil" />
+                  )}
+
               </div>
             </div>
             <div className="nameSurnameUni">
