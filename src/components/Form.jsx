@@ -119,9 +119,6 @@ class FormModal extends React.Component {
   // };
 
   updateFormField = (e) => {
-    // let experience = { ...this.state.experience };
-    // let currentId = e.currentTarget._id;
-    // experience[currentId] = e.currentTarget.value;
     this.setState({
       experience: {
         ...this.state.experience,
@@ -232,6 +229,9 @@ class FormModal extends React.Component {
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
+            </Button>
+            <Button variant="danger" onClick={this.handleDelete}>
+              Delete
             </Button>
             <Button variant="primary" onClick={(e) => this.sendData(e)}>
               Save
