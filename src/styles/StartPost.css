@@ -1,0 +1,16 @@
+div button {
+  display: block;
+  width: 200px;
+  text-align: center;
+  margin: 2px;
+  border-radius: 20px !important;
+  background-color: white !important;
+  color: gray !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+button:hover {
+  border: 2px solid gray !important;
+  background-color: rgb(212, 212, 212) !important;
+}
