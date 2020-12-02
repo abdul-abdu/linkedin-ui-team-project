@@ -125,7 +125,7 @@ class FormModal extends React.Component {
     });
   };
 
-  handleDelete = async () => {
+  handleDelete = async (expId) => {
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
@@ -140,7 +140,7 @@ class FormModal extends React.Component {
       );
       let parsedResp = await response.json();
       console.log(parsedResp);
-      if (parsedResp.ok) {
+      if (parsedResp.ok && this.props.expId !== expId) {
         this.handleClose();
         this.props.fetchExperience();
       }
