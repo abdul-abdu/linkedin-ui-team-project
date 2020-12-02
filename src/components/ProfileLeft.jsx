@@ -30,15 +30,14 @@ class ProfileLeft extends React.Component {
     this.fetchProfile();
   };
 
-
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.user !== this.state.user) {
-      console.log(prevState.user, 'prevState.user')
-      console.log(this.state.user, 'this.state.user')
+      console.log(prevState.user, "prevState.user");
+      console.log(this.state.user, "this.state.user");
 
-      this.fetchExperience()
+      this.fetchExperience();
     }
-  }
+  };
 
   fetchProfile = async () => {
     try {
@@ -51,31 +50,32 @@ class ProfileLeft extends React.Component {
         }
       );
       let parsedResponse = await response.json();
+
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
     }
   };
 
-
   fetchExperience = async () => {
-    console.log('fetchExperience Runed', this.state.user._id)
+    console.log("fetchExperience Runed", this.state.user._id);
     try {
-      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
         }
-      })
+      );
 
       const parsedResponse = await response.json();
-      console.log(parsedResponse, 'experience')
-      this.setState({ experiences: parsedResponse })
 
+      this.setState({ experiences: parsedResponse });
     } catch (error) {
-      console.log('Error at experiences:', error)
+      console.log("Error at experiences:", error);
     }
-
-  }
+  };
 
   render() {
     return (
@@ -217,12 +217,16 @@ class ProfileLeft extends React.Component {
               <span
                 style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
               >
-                <Form userId={this.state.user._id} />
+                <Form
+                  userId={this.state.user._id}
+                  method="POST"
+                  fetchExperience={this.fetchExperience}
+                />
               </span>
             </Col>
           </Row>
           {this.state.experiences.map((experience, idx) => (
-            <Row className="d-flex justify-content-between">
+            <Row key={idx} className="d-flex justify-content-between">
               <Col xs={1}>
                 <img src="https://placehold.it/60x60" alt="pic" />
               </Col>
@@ -233,12 +237,19 @@ class ProfileLeft extends React.Component {
                   {experience.startDate}
                 </p>
               </Col>
-              <Button id="edit-btn">
+
+              <Form
+                userId={this.state.user._id}
+                experience={experience}
+                expId={experience._id}
+                method="PUT"
+                fetchExperience={this.fetchExperience}
+              />
+              {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
                 <BiPencil />
-              </Button>
+              </Button> */}
             </Row>
           ))}
-
         </div>
 
         <div

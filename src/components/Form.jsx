@@ -1,29 +1,40 @@
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
+import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
+import { Link } from "react-router-dom";
+import { FaThList } from "react-icons/fa";
 
 class FormModal extends React.Component {
   state = {
     show: false,
-    experience: {
-      role: "",
-      company: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-      area: "",
-    },
+    experience:
+      this.props.method === "PUT"
+        ? this.props.experience
+        : {
+            role: "",
+            company: "",
+            startDate: "",
+            endDate: "",
+            description: "",
+            area: "",
+          },
   };
 
-  componentDidMount = () => {
-    this.cheekyFetch();
-  };
+  // componentDidMount = () => {
+  //   this.cheekyFetch();
+  // };
 
   sendData = async (e) => {
     e.preventDefault();
-    await this.postExperience();
-    await this.cheekyFetch();
+    if (this.props.method === "POST") {
+      await this.postExperience();
+      // await this.cheekyFetch();
+    } else {
+      await this.editExperience();
+      // await this.cheekyFetch();
+    }
   };
 
   postExperience = async () => {
@@ -40,54 +51,102 @@ class FormModal extends React.Component {
         }
       );
       let message = await response.json();
+      this.setState({
+        role: "",
+        company: "",
+        startDate: "",
+        endDate: "",
+        description: "",
+        area: "",
+      });
+      if (response.ok) {
+        this.handleClose();
+        this.props.fetchExperience();
+      }
       console.log(message);
     } catch (error) {
       console.log(error);
     }
   };
 
-  cheekyFetch = async () => {
+  editExperience = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
         {
+          method: "PUT",
+          body: JSON.stringify(this.state.experience),
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
-      let paresedResponse = await response.json();
-      console.log(paresedResponse);
+      let message = await response.json();
+      console.log(message);
+      if (response.ok) {
+        this.handleClose();
+        this.props.fetchExperience();
+      }
     } catch (error) {
       console.log(error);
     }
   };
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+
+  // cheekyFetch = async () => {
+  //   try {
+  //     let response = await fetch(
+  //       `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+  //         },
+  //       }
+  //     );
+  //     let paresedResponse = await response.json();
+
+  //     console.log(paresedResponse);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   updateFormField = (e) => {
-    let experience = { ...this.state.experience };
-    let currentId = e.currentTarget.id;
-    experience[currentId] = e.currentTarget.value;
-    this.setState({ experience: experience });
+    // let experience = { ...this.state.experience };
+    // let currentId = e.currentTarget._id;
+    // experience[currentId] = e.currentTarget.value;
+    this.setState({
+      experience: {
+        ...this.state.experience,
+        [e.currentTarget.id]: e.currentTarget.value,
+      },
+    });
   };
 
   render() {
-    const handleShow = () => {
-      this.setState({ show: true });
-    };
-
-    const handleClose = () => {
-      this.setState({ show: false });
-    };
     const { show } = this.state;
     return (
       <>
-        <Button id="modal-btn" onClick={handleShow}>
-          <GrAdd />
+        {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
+                <BiPencil />
+              </Button> */}
+        <Button
+          id={this.props.method === "POST" ? "modal-button" : "edit-btn"}
+          onClick={this.handleShow}
+        >
+          {this.props.method === "POST" ? <GrAdd /> : <BiPencil />}
         </Button>
 
         <Modal
           show={show}
-          onHide={handleClose}
+          onHide={this.handleClose}
           backdrop="static"
           keyboard={false}
           size="lg"
@@ -171,7 +230,7 @@ class FormModal extends React.Component {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
             <Button variant="primary" onClick={(e) => this.sendData(e)}>

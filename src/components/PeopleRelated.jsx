@@ -51,7 +51,8 @@ class PeopleRelated extends React.Component {
                   name={person.name}
                   job={person.title}
                   pic={person.image}
-                  key={person._id}
+                  key={index}
+                  userid={person._id}
                   divider={index === 4 ? false : true}
                 />
               </>
