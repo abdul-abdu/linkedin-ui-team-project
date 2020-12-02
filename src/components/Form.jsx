@@ -3,8 +3,6 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
 import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
-import { Link } from "react-router-dom";
-import { FaThList } from "react-icons/fa";
 
 class FormModal extends React.Component {
   state = {
@@ -127,8 +125,33 @@ class FormModal extends React.Component {
     });
   };
 
+  handleDelete = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
+        {
+          method: "DELETE",
+          body: JSON.stringify(this.state.experience),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResp = await response.json();
+      console.log(parsedResp);
+      if (response.ok) {
+        this.handleClose();
+        this.props.fetchExperience();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     const { show } = this.state;
+    const { experience } = this.state;
     return (
       <>
         {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
@@ -230,7 +253,12 @@ class FormModal extends React.Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Button variant="danger" onClick={this.handleDelete}>
+            <Button
+              variant={this.props.method === "POST" ? "secondary" : "danger"}
+              onClick={() =>
+                this.handleDelete(experience.expId) && window.location.reload()
+              }
+            >
               Delete
             </Button>
             <Button variant="primary" onClick={(e) => this.sendData(e)}>
