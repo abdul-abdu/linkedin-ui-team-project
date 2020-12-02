@@ -13,12 +13,66 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
+    fetching: false,
+    text: '',
+    errMessage: '',
   };
 
   setModalShow = (boolean) => this.setState({ show: boolean });
 
   handleClose = () => this.setModalShow(false);
   handleShow = () => this.setModalShow(true);
+
+  updatePostField = (e) => {
+    let post = this.state.text
+    post = e.currentTarget.value
+    this.setState({ text: post })
+  }
+
+
+  submitPost = async (e) => {
+    e.preventDefault();
+    this.setState({ fetching: true })
+
+    try {
+      const response = await fetch('https://striveschool-api.herokuapp.com/api/posts/',
+        {
+          method: 'POST',
+          body: JSON.stringify(this.state.text),
+          headers: new Headers({
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          })
+        })
+
+      if (response.ok) {
+        alert('Post sent !')
+        this.setState({
+          text: '',
+          errMessage: '',
+          fetching: false,
+        })
+
+      } else {
+        console.log('an error occurred')
+        let error = await response.json()
+        this.setState({
+          errMessage: error.message,
+          fetching: false,
+        })
+      }
+
+    } catch (e) {
+      console.log(e) // Error
+      this.setState({
+        errMessage: e.message,
+        loading: false,
+      })
+    }
+  }
+
+
+
 
   render() {
     return (
@@ -36,51 +90,58 @@ class StartPost extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Create Post</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Form.Group>
-              <Form.Control
-                size="lg"
-                type="textarea"
-                placeholder="What do you want to talk about?"
-              />
-              <br />
-            </Form.Group>
-            <div>
-              <Link to="#ss">Add hashtag </Link>
-              <span> Help the right people see your post</span>
-            </div>
-            <div className="d-flex justify-content-between">
+          <Form onSubmit={this.submitPost}>
+            <Modal.Body>
+              <Form.Group>
+                <Form.Control
+                  size="lg"
+                  type="textarea"
+                  placeholder="What do you want to talk about?"
+                  id='post'
+                  value={this.state.text}
+                  onChange={this.updatePostField}
+                  required
+                />
+                <br />
+              </Form.Group>
               <div>
-                <Link>
-                  <CgMathPlus />
-                </Link>
-                <Link>
-                  <AiFillPlaySquare />
-                </Link>
-                <Link>
-                  <GrNotes />
-                </Link>
-                <Link>
-                  <HiOutlinePhotograph />
-                </Link>
+                <Link to="#ss">Add hashtag </Link>
+                <span> Help the right people see your post</span>
               </div>
-            </div>
-          </Modal.Body>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <Link>
+                    <CgMathPlus />
+                  </Link>
+                  <Link>
+                    <AiFillPlaySquare />
+                  </Link>
+                  <Link>
+                    <GrNotes />
+                  </Link>
+                  <Link>
+                    <HiOutlinePhotograph />
+                  </Link>
+                </div>
+              </div>
+            </Modal.Body>
 
-          <Modal.Footer>
-            <div className="feed-btn-wrapper">
-              <Button
-                onClick={this.handleClose}
-                variant="outline-primary"
-                className="feed-btn"
-              >
-                Close
-              </Button>
-              <Button variant="outline-light text-dark" className="feed-btn">
-                Done
-              </Button>
-            </div>
-          </Modal.Footer>
+            <Modal.Footer>
+              <div className="feed-btn-wrapper">
+                <Button
+                  onClick={this.handleClose}
+                  variant="outline-primary"
+                  className="feed-btn"
+                >
+                  Close
+                </Button>
+
+                <Button type='submit' variant="outline-light" className="feed-btn">
+                  POST
+                </Button>
+              </div>
+            </Modal.Footer>
+          </Form>
         </Modal>
       </>
     );
