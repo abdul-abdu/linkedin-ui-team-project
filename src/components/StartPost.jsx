@@ -24,7 +24,7 @@ class StartPost extends Component {
     return (
       <>
         <div className="d-flex align-items-center" onClick={this.handleShow}>
-          <BsPencilSquare />
+          <BsPencilSquare className="mr-3" />
           <Form.Control size="lg" type="text" placeholder="Start a post" />
         </div>
 
@@ -69,7 +69,11 @@ class StartPost extends Component {
 
           <Modal.Footer>
             <div className="feed-btn-wrapper">
-              <Button variant="outline-primary" className="feed-btn">
+              <Button
+                onClick={this.handleClose}
+                variant="outline-primary"
+                className="feed-btn"
+              >
                 Close
               </Button>
               <Button variant="outline-light text-dark" className="feed-btn">
