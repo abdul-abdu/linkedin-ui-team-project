@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import '../styles/ContactInfo.css'
+
 import { AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
 import { FiPhone } from 'react-icons/fi';
 import { MdCake } from 'react-icons/md';
 import { BiPencil } from 'react-icons/bi';
+
 
 
 const ContactInfo = ({ userInfo }) => {
@@ -15,37 +18,57 @@ const ContactInfo = ({ userInfo }) => {
 
   return (
     <>
-      <Link onClick={handleShow}>
+      <Link onClick={handleShow} style={{ fontWeight: 600, textTransform: 'capitalize' }}>
         Contact Info
       </Link>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{userInfo.name}</Modal.Title>
+          <Modal.Title>{userInfo.name + ' ' + userInfo.surname}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='d-flex justify-content-between'>
-            <h2>Contact Info</h2>
-            <BiPencil />
+            <h3>Contact Info</h3>
+            <Link className='pencil d-flex align-items-center'>
+              <BiPencil />
+            </Link>
           </div>
           <div>
-            <AiFillLinkedin />
-            <Link>linkedin.com/in/abdugaffor-abdurahimov-baa398192</Link>
+            <div className='d-flex align-items-center'>
+              <AiFillLinkedin />
+              <b> Your Profile</b>
+            </div>
+            <div className='info'>
+              <Link>linkedin.com/in/{userInfo.name + '-' + userInfo.surname + '-' + userInfo._id}</Link>
+            </div>
           </div>
           <div>
-            <FiPhone />
-            <h4>Phone</h4>
-            <span>phone number</span>
+            <div className='d-flex align-items-center'>
+              <FiPhone />
+              <b> Phone</b>
+            </div>
+            <div className='info'>
+              <span>phone number</span>
+            </div>
           </div>
           <div>
-            <AiOutlineMail />
-            <Link>Email</Link>
-            <span>user email</span>
+            <div className='d-flex align-items-center'>
+              <AiOutlineMail />
+              <b> Email</b>
+            </div>
+            <div className='info'>
+              <Link>{userInfo.email}</Link>
+            </div>
           </div>
           <div>
-            <MdCake />
-            <h4>Birthday</h4>
-            <span>Users birthday</span>
+            <div className='d-flex align-items-center'>
+              <MdCake />
+              <b> Birthday</b>
+
+            </div>
+            <div className='info'>
+              <p>Users birthday</p>
+            </div>
           </div>
         </Modal.Body>
       </Modal>
