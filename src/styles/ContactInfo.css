@@ -20,7 +20,7 @@ svg:first-child {
   background-color: rgb(157, 198, 231);
 }
 
-a {
+.inner-body a {
   font-weight: 600;
   font-size: 16px;
   text-transform: lowercase;
