@@ -10,8 +10,8 @@ class FeedPage extends React.Component {
       <Container style={{marginTop: '2rem'}}>
         <Row>
           <Col md={2}><HomeProfile /></Col>
-          <Col md={7}><CreateFeed /></Col>
-          <Col md={3}><HomeRight /></Col>
+          <Col md={6}><CreateFeed /></Col>
+          <Col md={3} style={{ marginLeft: '20px'}}><HomeRight /></Col>
         </Row>
         <hr />
       </Container>

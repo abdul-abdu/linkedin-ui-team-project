@@ -1,0 +1,28 @@
+.recomandations{
+    border: 1px solid #b1b1b1;
+    border-radius: 8px;
+    height: auto;
+    width: 100%;
+    margin-top: 3.2rem;
+    background-color: white;
+    padding: 5px 20px;
+}
+.title{
+    font-size: 0.9rem;
+}
+.recomandations img{
+    width: 55px;
+    height: 55px;
+    height: 50%;
+    border-radius: 50%;
+    margin-left: -15px;
+}
+.recomandations h6{
+    font-size: 0.8rem;
+}
+.recomandations button{
+    border-radius: 8px;
+    border: 1px solid #0A66C2;
+    color: #0A66C2;
+    background-color: white;
+}
