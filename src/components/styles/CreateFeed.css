@@ -1,0 +1,40 @@
+.create-feed {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.feed-wrapper {
+  width: 35%;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 0.05rem solid rgb(161, 161, 161);
+}
+
+.feed-icons-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pic-icon {
+  color: rgb(0, 153, 255);
+}
+
+.vid-icon {
+  color: orange;
+}
+
+.event-icon {
+  color: gray;
+}
+
+.article-icon {
+  color: ;
+}
+
+.feed-icons-wrapper {
+  font-size: 13px;
+  font-weight: 600;
+}
