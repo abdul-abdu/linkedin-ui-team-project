@@ -3,6 +3,8 @@ import {Container, Row, Col} from 'react-bootstrap';
 import CreateFeed from './CreateFeed';
 import HomeProfile from './HomeProfile';
 import HomeRight from './HomeRight';
+import PostsColumn from "./PostsColumn";
+import "./styles/FeedPage.css";
 
 class FeedPage extends React.Component {
   render() {
@@ -14,6 +16,7 @@ class FeedPage extends React.Component {
           <Col md={3} style={{ marginLeft: '20px'}}><HomeRight /></Col>
         </Row>
         <hr />
+
       </Container>
     );
   }
