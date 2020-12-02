@@ -12,8 +12,8 @@ class CreateFeed extends Component {
   render() {
     return (
       <div className="create-feed">
-        <Container className="feed-wrapper">
-          <StartPost />
+        <Container className="feed-wrapper" fetchPosts={this.props.fetchPosts}>
+          <StartPost fetchPosts={this.props.fetchPosts} />
           <div className="feed-icons-wrapper mt-3">
             <div className="pic-icon d-flex text-center">
               <AiFillPicture />

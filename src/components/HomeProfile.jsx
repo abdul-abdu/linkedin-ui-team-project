@@ -3,15 +3,16 @@ import { Row, Col } from "react-bootstrap";
 import "../styles/HomeProfile.css";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
+import { withRouter } from "react-router-dom";
 
 class HomeProfile extends React.Component {
   state = {
     user: "",
   };
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
     this.fetchUser();
-  }
+  };
 
   fetchUser = async () => {
     try {
@@ -25,7 +26,7 @@ class HomeProfile extends React.Component {
       );
       let parsedResponse = await response.json();
       console.log("parsedResponse::::::::::::::::", parsedResponse);
-      this.setState({user: parsedResponse});
+      this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
     }
@@ -36,13 +37,15 @@ class HomeProfile extends React.Component {
       <div id="wrapper">
         <div className="profile-wrapper">
           <img src="/assets/images/cover.jpg" alt="cover" class="cover-img" />
-          <img
-            src={this.state.user.image}
-            alt="profile"
-            class="profile-img"
-          />
-          <div class="profile-info">
-            <h6>{this.state.user.name} {this.state.user.surname}</h6>
+          <img src={this.state.user.image} alt="profile" class="profile-img" />
+          <div
+            class="profile-info"
+            onClick={() => this.props.history.push("/")}
+            style={{ cursor: "pointer" }}
+          >
+            <h6>
+              {this.state.user.name} {this.state.user.surname}
+            </h6>
             <p>{this.state.user.title}</p>
           </div>
           <hr />
@@ -124,4 +127,4 @@ class HomeProfile extends React.Component {
   }
 }
 
-export default HomeProfile;
+export default withRouter(HomeProfile);

@@ -9,6 +9,7 @@ class IndividualPost extends React.Component {
   state = {
     addComments: false,
     showComments: false,
+    profiles: [],
     commentArray: [],
     comment: {
       comment: "",
@@ -18,6 +19,7 @@ class IndividualPost extends React.Component {
   };
 
   componentDidMount = () => {
+    this.fetchProfiles();
     this.fetchComments();
   };
 
@@ -28,29 +30,46 @@ class IndividualPost extends React.Component {
     this.setState({ comment: comment });
   };
 
-  calculateTimeDiff = () => {
+  calculateTimeDiff = (current, updated) => {
     let currentTime = new Date();
-    let postDate = new Date(this.props.post.createdAt);
+    let postDate = new Date(current);
     let currentMilli = currentTime.getTime();
     let postMilli = postDate.getTime();
     let diffMilli = currentMilli - postMilli;
     let diffMins = Math.ceil(diffMilli / 60000);
     if (diffMins >= 60) {
       let timeDiff = Math.floor(diffMins / 60).toString() + "h";
-      console.log(timeDiff);
-      if (this.props.post.createdAt === this.props.post.updatedAt) {
+
+      if (current === updated) {
         return timeDiff;
       } else {
-        return timeDiff + " (edited)";
+        return timeDiff + "• Edited";
       }
     } else {
       let timeDiff = diffMins.toString() + "m";
-      console.log(timeDiff);
-      if (this.props.post.createdAt === this.props.post.updatedAt) {
+
+      if (current === updated) {
         return timeDiff;
       } else {
-        return timeDiff + " (edited)";
+        return timeDiff + "• Edited";
       }
+    }
+  };
+
+  fetchProfiles = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      this.setState({ profiles: parsedResponse });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -66,7 +85,6 @@ class IndividualPost extends React.Component {
         }
       );
       let parsedResponse = await response.json();
-      console.log(parsedResponse);
       this.setState({ commentArray: parsedResponse });
     } catch (error) {
       console.log(error);
@@ -102,10 +120,28 @@ class IndividualPost extends React.Component {
     }
   };
 
+  checkBothArray = (commentEmail) => {
+    if (this.state.profiles) {
+      const commenter = this.state.profiles.find(
+        (profile) => profile.email === commentEmail
+      );
+
+      console.log(commentEmail);
+      console.log(commenter + " commenter**********");
+      if (commenter) {
+        return commenter.name + " " + commenter.surname;
+      } else {
+        return commentEmail;
+      }
+    } else {
+      return commentEmail + " no profiles";
+    }
+  };
+
   render() {
     return (
       <Container className="feedPost">
-        {(this.props.post.user.name.toLowerCase().includes("sexy") ||
+        {/* {(this.props.post.user.name.toLowerCase().includes("sexy") ||
           this.props.post.user.surname.toLowerCase().includes("sexy") ||
           this.props.post.text.toLowerCase().includes("sexy")) && (
           <Row className="kreyGasm">
@@ -115,7 +151,7 @@ class IndividualPost extends React.Component {
             </Col>
             <hr />
           </Row>
-        )}
+        )} */}
         <Row>
           <Col className="postTopRow">
             <div>
@@ -134,7 +170,11 @@ class IndividualPost extends React.Component {
               </h6>
               <span>{this.props.post.user.title}</span>
               <span>
-                {this.calculateTimeDiff()} • <PublicIcon fontSize="small" />
+                {this.calculateTimeDiff(
+                  this.props.post.createdAt,
+                  this.props.post.updatedAt
+                )}{" "}
+                • <PublicIcon fontSize="small" />
               </span>
             </div>
             <PostDropdown user={this.props.post.user} />
@@ -258,9 +298,35 @@ class IndividualPost extends React.Component {
           </div>
         )}
         {this.state.showComments &&
+          this.state.profiles &&
           this.state.commentArray &&
-          this.state.commentArray.map((com) => (
-            <h5>{com.comment + " " + com.author}</h5>
+          this.state.commentArray.map((com, index) => (
+            <div className="d-flex mt-2" key={index}>
+              <img
+                src={this.props.post.user.image}
+                alt=""
+                width="40px"
+                height="40px"
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "100%",
+                  marginRight: "10px",
+                  marginTop: "5px",
+                }}
+              />
+              <div className="commentArea">
+                <div className="topRow">
+                  <span className="author">
+                    {this.checkBothArray(com.author)}
+                  </span>
+                  <span className="time">
+                    {this.calculateTimeDiff(com.createdAt, com.updatedAt)}
+                  </span>
+                </div>
+
+                <p>{com.comment}</p>
+              </div>
+            </div>
           ))}
       </Container>
     );

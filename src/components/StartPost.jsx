@@ -14,8 +14,8 @@ class StartPost extends Component {
   state = {
     show: false,
     fetching: false,
-    post: { text: '' },
-    errMessage: '',
+    post: { text: "" },
+    errMessage: "",
   };
 
   setModalShow = (boolean) => this.setState({ show: boolean });
@@ -24,59 +24,56 @@ class StartPost extends Component {
   handleShow = () => this.setModalShow(true);
 
   updatePostField = (e) => {
-    let Post = { ...this.state.post }
-    let textPost = Post.text
+    let Post = { ...this.state.post };
+    let textPost = Post.text;
 
-    textPost = e.currentTarget.value
-    Post.text = textPost
-    this.setState({ post: Post })
-  }
-
+    textPost = e.currentTarget.value;
+    Post.text = textPost;
+    this.setState({ post: Post });
+  };
 
   submitPost = async (e) => {
     e.preventDefault();
-    this.setState({ fetching: true })
+    this.setState({ fetching: true });
 
     try {
-      const response = await fetch('https://striveschool-api.herokuapp.com/api/posts',
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts",
         {
-          method: 'POST',
+          method: "POST",
           body: JSON.stringify(this.state.post),
           headers: new Headers({
             "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          })
-        })
+          }),
+        }
+      );
 
       if (response.ok) {
-        alert('Post sent !')
+        alert("Post sent !");
         this.setState({
-          text: '',
-          errMessage: '',
+          post: { text: "" },
+          errMessage: "",
           fetching: false,
-        })
-        this.handleClose()
-
+        });
+        this.props.fetchPosts();
+        this.handleClose();
       } else {
-        console.log('an error occurred')
-        let error = await response.json()
+        console.log("an error occurred");
+        let error = await response.json();
         this.setState({
           errMessage: error.message,
           fetching: false,
-        })
+        });
       }
-
     } catch (e) {
-      console.log(e) // Error
+      console.log(e); // Error
       this.setState({
         errMessage: e.message,
         loading: false,
-      })
+      });
     }
-  }
-
-
-
+  };
 
   render() {
     return (
@@ -101,7 +98,7 @@ class StartPost extends Component {
                   size="lg"
                   type="textarea"
                   placeholder="What do you want to talk about?"
-                  id='post'
+                  id="post"
                   value={this.state.text}
                   onChange={this.updatePostField}
                   required
@@ -141,10 +138,9 @@ class StartPost extends Component {
                 </Button>
 
                 <Button
-                  type='submit'
+                  type="submit"
                   variant="outline-light"
                   className="feed-btn"
-
                 >
                   POST
                 </Button>
