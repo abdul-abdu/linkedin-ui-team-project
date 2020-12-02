@@ -125,22 +125,19 @@ class FormModal extends React.Component {
     });
   };
 
-  handleDelete = async (expId) => {
+  handleDelete = async (expId, e) => {
+    e.preventDefault();
     try {
       let response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
         {
           method: "DELETE",
-          body: JSON.stringify(this.state.experience),
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
-      let parsedResp = await response.json();
-      console.log(parsedResp);
-      if (parsedResp.ok && this.props.expId !== expId) {
+      if (response.ok && this.props.expId !== expId) {
         this.handleClose();
         this.props.fetchExperience();
       }
@@ -255,9 +252,7 @@ class FormModal extends React.Component {
             </Button>
             <Button
               variant={this.props.method === "POST" ? "secondary" : "danger"}
-              onClick={() =>
-                this.handleDelete(experience.expId) && window.location.reload()
-              }
+              onClick={(e) => this.handleDelete(experience.expId, e)}
             >
               Delete
             </Button>
