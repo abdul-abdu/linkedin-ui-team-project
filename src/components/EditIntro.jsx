@@ -33,24 +33,24 @@ class EditIntro extends Component {
           </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="coverImgHolder">
-              <Image
-                src="/assets/images/cover.jpg"
-                alt="cover-img"
-                className="fluid coverImg"
-              />
-            </div>
-            <div className="profilePic">
-              {this.props.userInfo !== "" ? (
-                <img src={this.props.userInfo.image} alt="profilePic" />
-              ) : (
-                  <img
-                    src="/assets/images/user-placeholder.png"
-                    alt="profilePic"
-                  />
-                )}
-            </div>
             <Form>
+              <div className="coverImgHolder">
+                <Image
+                  src="/assets/images/cover.jpg"
+                  alt="cover-img"
+                  className="fluid coverImg"
+                />
+              </div>
+              <div className="profilePic">
+                {this.props.userInfo !== "" ? (
+                  <img src={this.props.userInfo.image} alt="profilePic" />
+                ) : (
+                    <img
+                      src="/assets/images/user-placeholder.png"
+                      alt="profilePic"
+                    />
+                  )}
+              </div>
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>First Name *</Form.Label>
@@ -68,7 +68,7 @@ class EditIntro extends Component {
                 <h4> + Record name pronunciation</h4>
               </Form.Row>
               <Form.Row>
-                Name pronunciation can only be added using our mobile app.
+                Name pronunciation can only be added using your mobile app.
               </Form.Row>
               <br />
 
