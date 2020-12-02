@@ -5,6 +5,7 @@
   padding: 10px;
   border: 1px solid #deddda;
   border-radius: 10px;
+  position: relative;
 }
 
 .feedPost .postTopRow {
@@ -37,6 +38,10 @@
   color: rgba(0, 0, 0, 0.8);
   margin: 0;
 }
+.feedPost .postTopRow .nameBox h6:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
 .feedPost .postTopRow .nameBox h6 span {
   color: rgba(0, 0, 0, 0.6);
   font-weight: normal;
@@ -52,12 +57,17 @@
   align-items: center;
 }
 .feedPost .postBottomRow .postBottomIcons {
-  margin-left: 25px;
+  margin-left: 20px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
   font-weight: 600;
   display: flex;
   align-items: center;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+.feedPost .postBottomRow .postBottomIcons:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .feedPost .postBottomRow .postBottomIcons svg {

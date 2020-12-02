@@ -3,6 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "./styles/IndividualPost.css";
 import PublicIcon from "@material-ui/icons/Public";
 import { withRouter } from "react-router-dom";
+import PostDropdown from "./PostDropdown";
 
 class IndividualPost extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class IndividualPost extends React.Component {
                 {this.props.post.createdAt} • <PublicIcon fontSize="small" />
               </span>
             </div>
+            <PostDropdown user={this.props.post.user} />
           </Col>
         </Row>
         <Row className="postMiddleRow">
