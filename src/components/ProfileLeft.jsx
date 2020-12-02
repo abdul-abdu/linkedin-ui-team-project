@@ -104,7 +104,7 @@ class ProfileLeft extends React.Component {
               )}
             </div>
             <div className="profile-info">
-              <div className="buttons-row align-items-center">
+              <div className="buttons-row align-items-center" style={{top: '-8rem'}}>
                 <DropdownProfileMenu />
 
                 <Button id="moreBtn">More...</Button>
