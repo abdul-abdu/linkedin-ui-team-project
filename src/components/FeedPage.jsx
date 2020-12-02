@@ -1,22 +1,22 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import {Container, Row, Col} from 'react-bootstrap';
+import CreateFeed from './CreateFeed';
+import HomeProfile from './HomeProfile';
+import HomeRight from './HomeRight';
 import PostsColumn from "./PostsColumn";
 import "./styles/FeedPage.css";
-import CreateFeed from "./CreateFeed";
 
 class FeedPage extends React.Component {
   render() {
     return (
-      <Container className="mt-5" id="soloHalo2">
+      <Container style={{marginTop: '2rem'}}>
         <Row>
-          <Col>THIUS IS THE FEED PAGE DOOD</Col>
-          <Col>
-            <CreateFeed />
-            <hr />
-            <PostsColumn />
-          </Col>
-          <Col>THIUS IS THE FEED PAGE DOOD</Col>
+          <Col md={2}><HomeProfile /></Col>
+          <Col md={6}><CreateFeed /></Col>
+          <Col md={3} style={{ marginLeft: '20px'}}><HomeRight /></Col>
         </Row>
+        <hr />
+
       </Container>
     );
   }
