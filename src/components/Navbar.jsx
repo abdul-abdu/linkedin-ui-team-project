@@ -73,7 +73,7 @@ class Navbar extends React.Component {
           <div className="navbar-right">
             <div
               className="navbar-home mx-3 text-center"
-              onClick={() => this.props.history.push("/")}
+              onClick={() => this.props.history.push("/feed")}
             >
               <AiFillHome className="icon" />
               <h5
@@ -181,7 +181,12 @@ class Navbar extends React.Component {
                   )}
 
                   <Dropdown.Item eventKey="4">
-                    <Button id="profileButton">View Profile</Button>
+                    <Button
+                      id="profileButton"
+                      onClick={() => this.props.history.push("/")}
+                    >
+                      View Profile
+                    </Button>
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Header>Account</Dropdown.Header>

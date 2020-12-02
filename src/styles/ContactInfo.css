@@ -1,6 +1,5 @@
 svg {
   font-size: 25px;
-  margin-right: 10px;
 }
 
 svg:first-child {
@@ -29,4 +28,8 @@ a {
 
 .inner-body {
   margin-top: 20px;
+}
+
+.inner-body b {
+  margin-left: 10px;
 }
