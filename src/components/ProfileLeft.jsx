@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../components/Form";
+import { withRouter } from "react-router-dom";
 import "../styles/ProfileLeft.css";
 import {
   // Dropdown,
@@ -11,22 +11,20 @@ import {
   ProgressBar,
   Table,
 } from "react-bootstrap";
+
 import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 
+import Form from "../components/Form";
 import DropdownProfileMenu from "./DropdownProfileMenu";
-import { withRouter } from "react-router-dom";
-// import ProfileModal from "./ProfileModal"
+import ContactInfo from './ContactInfo'
 
 class ProfileLeft extends React.Component {
   state = {
     user: "",
     experiences: [],
   };
-
-  handleClose = () => this.setState({ modalShow: false });
-  handleShow = () => this.setState({ modalShow: true });
 
   componentDidMount = () => {
     this.fetchProfile();
@@ -82,6 +80,7 @@ class ProfileLeft extends React.Component {
   render() {
     return (
       <div className="col-12 col-lg-8 mt-3">
+
         <div className="profile-card">
           <div
             className="profile-profile-section"
@@ -128,7 +127,13 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
-                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                  <span style={{ color: "#0A66C2" }}>
+                    {this.state.user ? (
+                      <ContactInfo userInfo={this.state.user} />
+                    ) : (
+                        <>Contact Info</>
+                      )}
+                  </span>
                 </p>
               ) : (
                   <p style={{ lineHeight: "0.01rem" }}>
