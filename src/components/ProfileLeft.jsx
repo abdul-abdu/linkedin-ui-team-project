@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../components/Form";
+import { withRouter } from "react-router-dom";
 import "../styles/ProfileLeft.css";
 import {
   // Dropdown,
@@ -11,21 +11,22 @@ import {
   ProgressBar,
   Table,
 } from "react-bootstrap";
+
+import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BiPencil } from "react-icons/bi";
+
+import Form from "../components/Form";
 import DropdownProfileMenu from "./DropdownProfileMenu";
-import { withRouter } from "react-router-dom";
-// import ProfileModal from "./ProfileModal"
+import ContactInfo from './ContactInfo'
+import EditIntro from './EditIntro'
+
 
 class ProfileLeft extends React.Component {
   state = {
     user: "",
     experiences: [],
   };
-
-  handleClose = () => this.setState({ modalShow: false });
-  handleShow = () => this.setState({ modalShow: true });
 
   componentDidMount = () => {
     this.fetchProfile();
@@ -81,6 +82,7 @@ class ProfileLeft extends React.Component {
   render() {
     return (
       <div className="col-12 col-lg-8 mt-3">
+
         <div className="profile-card">
           <div
             className="profile-profile-section"
@@ -97,18 +99,23 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <img src={this.state.user.image} alt="profilePic" />
               ) : (
-                <img
-                  src="/assets/images/user-placeholder.png"
-                  alt="profilePic"
-                />
-              )}
+                  <img
+                    src="/assets/images/user-placeholder.png"
+                    alt="profilePic"
+                  />
+                )}
             </div>
             <div className="profile-info">
-              <div className="buttons-row">
+              <div className="buttons-row align-items-center">
                 <DropdownProfileMenu />
 
                 <Button id="moreBtn">More...</Button>
-                <BiPencil className="biPencil" />
+                {this.state.user ? (
+                  <EditIntro userInfo={this.state.user} />
+                ) : (
+                    <BiPencil className="biPencil" />
+                  )}
+
               </div>
             </div>
             <div className="nameSurnameUni">
@@ -117,24 +124,30 @@ class ProfileLeft extends React.Component {
                   {this.state.user.name} {this.state.user.surname}
                 </h4>
               ) : (
-                <h4>Name Surname</h4>
-              )}
+                  <h4>Name Surname</h4>
+                )}
               {this.state.user !== "" ? (
                 <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
               ) : (
-                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-              )}
+                  <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+                )}
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
-                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                  <span style={{ color: "#0A66C2" }}>
+                    {this.state.user ? (
+                      <ContactInfo userInfo={this.state.user} />
+                    ) : (
+                        <>Contact Info</>
+                      )}
+                  </span>
                 </p>
               ) : (
-                <p style={{ lineHeight: "0.01rem" }}>
-                  New York •{" "}
-                  <span style={{ color: "#0A66C2" }}>Contact info</span>
-                </p>
-              )}
+                  <p style={{ lineHeight: "0.01rem" }}>
+                    New York •{" "}
+                    <span style={{ color: "#0A66C2" }}>Contact info</span>
+                  </p>
+                )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
