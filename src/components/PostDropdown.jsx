@@ -6,11 +6,12 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import CancelIcon from "@material-ui/icons/Cancel";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-
+import EditIcon from "@material-ui/icons/Edit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { BsLink45Deg, BsFillFlagFill } from "react-icons/bs";
 import EditPostImage from "./EditPostImage";
+import EditPost from "./EditPost";
 
 class PostDropdown extends React.Component {
   state = {
@@ -27,15 +28,27 @@ class PostDropdown extends React.Component {
             <MoreHorizIcon />
           </div>
           <div className="postDrop">
-            <div className="dreamsDropDistance">
-              <div className="iconMaster">
-                <BookmarkBorderIcon />
-              </div>
-              <div className="megatron">
-                <span className="is">Save</span>
-                <span className="dumb">Save for later</span>
-              </div>
-            </div>
+            {this.props.user._id === this.props.profile._id ? (
+              <>
+                <EditPostImage
+                  postID={this.props.postID}
+                  fetchPosts={this.props.fetchPosts}
+                />
+              </>
+            ) : (
+              <>
+                <div className="dreamsDropDistance">
+                  <div className="iconMaster">
+                    <BookmarkBorderIcon />
+                  </div>
+                  <div className="megatron">
+                    <span className="is">Save</span>
+                    <span className="dumb">Save for later</span>
+                  </div>
+                </div>
+              </>
+            )}
+
             <div className="dreamsDropDistance">
               <div className="iconMaster">
                 <BsLink45Deg />
@@ -45,10 +58,13 @@ class PostDropdown extends React.Component {
               </div>
             </div>
             {this.props.user._id === this.props.profile._id ? (
-              <EditPostImage
-                postID={this.props.postID}
-                fetchPosts={this.props.fetchPosts}
-              />
+              <>
+                <EditPost
+                  postID={this.props.postID}
+                  postBody={this.props.postBody}
+                  fetchPosts={this.props.fetchPosts}
+                />
+              </>
             ) : (
               <div className="dreamsDropDistance">
                 <div className="iconMaster">

@@ -174,14 +174,7 @@ class IndividualPost extends React.Component {
         <Row>
           <Col className="postTopRow">
             <div>
-              <img
-                src={
-                  this.props.post.image
-                    ? this.props.post.image
-                    : this.props.post.user.image
-                }
-                alt="userImage"
-              />
+              <img src={this.props.post.user.image} alt="userImage" />
             </div>
             <div className="nameBox">
               <h6
@@ -205,6 +198,7 @@ class IndividualPost extends React.Component {
             </div>
             <PostDropdown
               postID={this.props.post._id}
+              postBody={this.props.post.text}
               user={this.props.post.user}
               profile={this.props.user}
               fetchPosts={this.props.fetchPosts}
@@ -216,6 +210,17 @@ class IndividualPost extends React.Component {
           <Col xs={12}>
             <p>{this.props.post.text} </p>
           </Col>
+        </Row>
+        {this.props.post.image && (
+          <Row className="postMiddleRow">
+            <Col>
+              <img src={this.props.post.image} alt="image" />
+            </Col>
+          </Row>
+        )}
+
+        <Row>
+          <Col></Col>
         </Row>
         {this.state.commentArray.length > 0 && (
           <span

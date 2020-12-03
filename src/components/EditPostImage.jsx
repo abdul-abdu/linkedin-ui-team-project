@@ -1,5 +1,6 @@
 import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { Button, Form } from "react-bootstrap";
 
 class EditPostImage extends React.Component {
@@ -11,24 +12,31 @@ class EditPostImage extends React.Component {
   postImage = async (e) => {
     e.preventDefault();
     try {
-      let formData = new FormData();
-      let chosenImage = await document.querySelector("#postImageDood").files[0];
+      let post = new FormData();
+      let chosenImage = document.querySelector("#postImageDood").files[0];
       await this.setState({ image: chosenImage });
-      await formData.append("post", this.state.image);
+      await post.append("post", this.state.image);
       console.log(chosenImage);
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/" + this.props.postID,
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
+      console.log(this.state.image);
+      console.log(post);
+      if (post) {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/posts/" +
+            this.props.postID,
+          {
+            method: "POST",
+            body: post,
+            headers: new Headers({
+              Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+              Accept: "application/json",
+            }),
+          }
+        );
+        console.log(response);
+        if (response.ok) {
+          this.props.fetchPosts();
+          this.setState({ show: false });
         }
-      );
-      if (response.ok) {
-        this.props.fetchPosts();
-        this.setState({ show: false });
       }
     } catch (error) {
       console.log(error);
@@ -43,13 +51,11 @@ class EditPostImage extends React.Component {
             onClick={() => this.setState({ show: false })}
           >
             <div className="iconMaster">
-              <EditIcon />
+              <AttachFileIcon />
             </div>
             <div className="megatron">
-              <span className="is">Change your post?</span>
-              <span className="dumb">
-                If you've made a mistake, you can fix it!
-              </span>
+              <span className="is">Attach an image?</span>
+              <span className="dumb">Share a funny pic, or something!</span>
             </div>
           </div>
           <div className="postDrop">
@@ -58,7 +64,7 @@ class EditPostImage extends React.Component {
                 <Form.Label htmlFor="postImageDood">
                   Change Post Image:
                 </Form.Label>
-                <Form.Control type="file" id="postImageDood" />
+                <Form.Control type="file" id="postImageDood" accept="image/*" />
               </Form.Group>
               <Button type="submit">SEND</Button>
             </Form>
@@ -72,13 +78,11 @@ class EditPostImage extends React.Component {
           onClick={() => this.setState({ show: true })}
         >
           <div className="iconMaster">
-            <EditIcon />
+            <AttachFileIcon />
           </div>
           <div className="megatron">
-            <span className="is">Change your post?</span>
-            <span className="dumb">
-              If you've made a mistake, you can fix it!
-            </span>
+            <span className="is">Attach an image?</span>
+            <span className="dumb">Share a funny pic, or something!</span>
           </div>
         </div>
       );
