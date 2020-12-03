@@ -49,8 +49,7 @@ class Navbar extends React.Component {
           <div className="navbar-left">
             <AiFillLinkedin className="Linkedin-icon" />
             
-            <div className="search-input">
-            <Search />
+            <div className="search-input"><Search />
               {/*<AiOutlineSearch />
                <input type="text" placeholder="search" />*/}
             </div>
