@@ -91,11 +91,11 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <img src={this.state.user.image} alt="profilePic" />
               ) : (
-                  <img
-                    src="/assets/images/user-placeholder.png"
-                    alt="profilePic"
-                  />
-                )}
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row align-items-center">
@@ -105,8 +105,8 @@ class ProfileLeft extends React.Component {
                 {this.state.user ? (
                   <EditIntro userInfo={this.state.user} />
                 ) : (
-                    <BiPencil className="biPencil" />
-                  )}
+                  <BiPencil className="biPencil" />
+                )}
               </div>
             </div>
             <div className="nameSurnameUni">
@@ -115,13 +115,13 @@ class ProfileLeft extends React.Component {
                   {this.state.user.name} {this.state.user.surname}
                 </h4>
               ) : (
-                  <h4>Name Surname</h4>
-                )}
+                <h4>Name Surname</h4>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
               ) : (
-                  <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-                )}
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
@@ -129,16 +129,16 @@ class ProfileLeft extends React.Component {
                     {this.state.user ? (
                       <ContactInfo userInfo={this.state.user} />
                     ) : (
-                        <>Contact Info</>
-                      )}
+                      <>Contact Info</>
+                    )}
                   </span>
                 </p>
               ) : (
-                  <p style={{ lineHeight: "0.01rem" }}>
-                    New York •{" "}
-                    <span style={{ color: "#0A66C2" }}>Contact info</span>
-                  </p>
-                )}
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
             <Container className="fluid boxes">
               <Row className="row-cols-12 row-cols-md-12">
@@ -226,7 +226,14 @@ class ProfileLeft extends React.Component {
           {this.state.experiences.map((experience, idx) => (
             <Row key={idx} className="d-flex justify-content-between">
               <Col xs={1}>
-                <img src="https://placehold.it/60x60" alt="pic" />
+                <img
+                  src={
+                    experience.image
+                      ? experience.image
+                      : "https://placehold.it/60x60"
+                  }
+                  alt="pic"
+                />
               </Col>
               <Col xs={9} className="pl-4">
                 <h6>{experience.role}</h6>

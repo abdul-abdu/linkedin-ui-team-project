@@ -101,7 +101,7 @@ class StartPost extends Component {
               <Form.Group>
                 <Form.Control
                   size="lg"
-                  type="textarea"
+                  as="textarea"
                   placeholder="What do you want to talk about?"
                   id="post"
                   value={this.state.text}

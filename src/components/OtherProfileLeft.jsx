@@ -1,11 +1,6 @@
 import React from "react";
 import "../styles/ProfileLeft.css";
-import {
-  Button,
-  Row,
-  Col,
-} from "react-bootstrap";
-
+import { Button, Row, Col } from "react-bootstrap";
 
 import { withRouter } from "react-router-dom";
 
@@ -35,7 +30,7 @@ class OtherProfileLeft extends React.Component {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/" +
-        this.props.userid,
+          this.props.userid,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
@@ -88,11 +83,11 @@ class OtherProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <img src={this.state.user.image} alt="profilePic" />
               ) : (
-                  <img
-                    src="/assets/images/user-placeholder.png"
-                    alt="profilePic"
-                  />
-                )}
+                <img
+                  src="/assets/images/user-placeholder.png"
+                  alt="profilePic"
+                />
+              )}
             </div>
             <div className="profile-info">
               <div className="buttons-row">
@@ -106,24 +101,24 @@ class OtherProfileLeft extends React.Component {
                   {this.state.user.name} {this.state.user.surname}
                 </h4>
               ) : (
-                  <h4>Name Surname</h4>
-                )}
+                <h4>Name Surname</h4>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ fontSize: "1.2rem" }}>{this.state.user.title} </p>
               ) : (
-                  <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
-                )}
+                <p style={{ fontSize: "1.2rem" }}>Software Engineer</p>
+              )}
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
                   <span style={{ color: "#0A66C2" }}>Contact info</span>
                 </p>
               ) : (
-                  <p style={{ lineHeight: "0.01rem" }}>
-                    New York •{" "}
-                    <span style={{ color: "#0A66C2" }}>Contact info</span>
-                  </p>
-                )}
+                <p style={{ lineHeight: "0.01rem" }}>
+                  New York •{" "}
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -143,7 +138,16 @@ class OtherProfileLeft extends React.Component {
             {this.state.experiences.map((experience, index) => (
               <Row className="d-flex justify-content-between" key={index}>
                 <Col xs={1}>
-                  <img src="https://placehold.it/60x60" alt="pic" />
+                  <img
+                    src={
+                      experience.image
+                        ? experience.image
+                        : "https://placehold.it/60x60"
+                    }
+                    alt="pic"
+                    width="60px"
+                    height="60px"
+                  />
                 </Col>
                 <Col xs={9} className="pl-4">
                   <h6>{experience.role}</h6>

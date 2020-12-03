@@ -213,8 +213,12 @@ class IndividualPost extends React.Component {
         </Row>
         {this.props.post.image && (
           <Row className="postMiddleRow">
-            <Col>
-              <img src={this.props.post.image} alt="image" />
+            <Col className="d-flex justify-content-center">
+              <img
+                src={this.props.post.image}
+                alt="image"
+                style={{ maxWidth: "500px", objectFit: "cover" }}
+              />
             </Col>
           </Row>
         )}

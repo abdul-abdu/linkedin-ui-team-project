@@ -19,7 +19,7 @@ class EditPost extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ post: { text: this.props.body } });
+    this.setState({ post: { text: this.props.postBody } });
   };
 
   setModalShow = (boolean) => this.setState({ show: boolean });
@@ -106,7 +106,7 @@ class EditPost extends Component {
               <Form.Group>
                 <Form.Control
                   size="lg"
-                  type="textarea"
+                  as="textarea"
                   placeholder={this.props.postBody}
                   id="put"
                   value={this.state.post.text}
