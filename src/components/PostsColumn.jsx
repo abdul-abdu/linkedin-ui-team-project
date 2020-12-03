@@ -6,7 +6,12 @@ class PostsColumn extends React.Component {
     return (
       <>
         {this.props.postArray.map((singlePost, index) => (
-          <IndividualPost post={singlePost} key={index} />
+          <IndividualPost
+            user={this.props.user}
+            post={singlePost}
+            key={index}
+            fetchPosts={this.props.fetchPosts}
+          />
         ))}
       </>
     );

@@ -4,18 +4,23 @@ import { CgMathPlus } from "react-icons/cg";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
+import EditIcon from "@material-ui/icons/Edit";
 
 import "../styles/StartPost.css";
 
 const { Component } = require("react");
 const { Modal, Button, Form } = require("react-bootstrap");
 
-class StartPost extends Component {
+class EditPost extends Component {
   state = {
     show: false,
     fetching: false,
-    post: { text: "" },
+    post: { text: this.props.postBody },
     errMessage: "",
+  };
+
+  componentDidMount = () => {
+    this.setState({ post: { text: this.props.body } });
   };
 
   setModalShow = (boolean) => this.setState({ show: boolean });
@@ -38,9 +43,9 @@ class StartPost extends Component {
 
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts",
+        "https://striveschool-api.herokuapp.com/api/posts/" + this.props.postID,
         {
-          method: "POST",
+          method: "PUT",
           body: JSON.stringify(this.state.post),
           headers: new Headers({
             "Content-Type": "application/json",
@@ -50,7 +55,6 @@ class StartPost extends Component {
       );
 
       if (response.ok) {
-        alert("Post sent !");
         this.setState({
           post: { text: "" },
           errMessage: "",
@@ -78,14 +82,16 @@ class StartPost extends Component {
   render() {
     return (
       <>
-        <div className="d-flex align-items-center" onClick={this.handleShow}>
-          <BsPencilSquare className="mr-3" />
-          <Form.Control
-            disabled
-            size="lg"
-            type="text"
-            placeholder="Start a post"
-          />
+        <div className="dreamsDropDistance" onClick={this.handleShow}>
+          <div className="iconMaster">
+            <EditIcon />
+          </div>
+          <div className="megatron">
+            <span className="is">Change your post?</span>
+            <span className="dumb">
+              If you've made a mistake, you can fix it!
+            </span>
+          </div>
         </div>
 
         <Modal
@@ -94,7 +100,7 @@ class StartPost extends Component {
           animation={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Create Post</Modal.Title>
+            <Modal.Title>Edit Post</Modal.Title>
           </Modal.Header>
           <Form onSubmit={this.submitPost}>
             <Modal.Body>
@@ -102,9 +108,9 @@ class StartPost extends Component {
                 <Form.Control
                   size="lg"
                   type="textarea"
-                  placeholder="What do you want to talk about?"
-                  id="post"
-                  value={this.state.text}
+                  placeholder={this.props.postBody}
+                  id="put"
+                  value={this.state.post.text}
                   onChange={this.updatePostField}
                   required
                 />
@@ -131,26 +137,6 @@ class StartPost extends Component {
                 </div>
               </div>
             </Modal.Body>
-
-            <Modal.Footer>
-              <div className="feed-btn-wrapper">
-                <Button
-                  onClick={this.handleClose}
-                  variant="outline-primary"
-                  className="feed-btn"
-                >
-                  Close
-                </Button>
-
-                <Button
-                  type="submit"
-                  variant="outline-light"
-                  className="feed-btn"
-                >
-                  POST
-                </Button>
-              </div>
-            </Modal.Footer>
           </Form>
         </Modal>
       </>
@@ -158,4 +144,4 @@ class StartPost extends Component {
   }
 }
 
-export default StartPost;
+export default EditPost;
