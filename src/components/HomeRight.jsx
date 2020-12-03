@@ -21,7 +21,7 @@ const HomeRight = () => {
         <div class="singleRecomandation">
           <Row>
             <Col xs={2}>
-              <img src="/assets/images/stackoverflow.png" />
+              <img src="/assets/images/stackoverflow.png" alt='ddd' />
             </Col>
             <Col xs={6}>
               <h6>Stackoverflow</h6>
@@ -46,7 +46,7 @@ const HomeRight = () => {
         <div class="singleRecomandation">
           <Row>
             <Col xs={2}>
-              <img src="/assets/images/ffc.jpg" />
+              <img src="/assets/images/ffc.jpg" alt='ddd' />
             </Col>
             <Col xs={6}>
               <h6>FreeCodeCamp</h6>
@@ -71,7 +71,7 @@ const HomeRight = () => {
         <div class="singleRecomandation">
           <Row>
             <Col xs={2}>
-              <img src="/assets/images/ibm.png" />
+              <img src="/assets/images/ibm.png" alt='ddd' />
             </Col>
             <Col xs={6}>
               <h6>IBM</h6>
@@ -96,7 +96,7 @@ const HomeRight = () => {
         <h6 class="bottomh6">Click here for more recomandations</h6>
       </div>
 
-      <div className="recomandations second" style={{marginTop: '1rem'}}>
+      <div className="recomandations second" style={{ marginTop: '1rem' }}>
         <Row >
           <Col style={{ float: "left" }}>
             <p className="title">Today's most viewed courses</p>
