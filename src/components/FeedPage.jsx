@@ -60,7 +60,11 @@ class FeedPage extends React.Component {
                 <Spinner animation="border" variant="primary" />
               )}
               {this.state.postArray && !this.state.loading && (
-                <PostsColumn postArray={this.state.postArray} />
+                <PostsColumn
+                  user={this.props.user}
+                  postArray={this.state.postArray}
+                  fetchPosts={this.fetchPosts}
+                />
               )}
             </Row>
           </Col>
