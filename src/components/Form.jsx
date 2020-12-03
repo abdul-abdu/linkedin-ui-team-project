@@ -6,18 +6,14 @@ import "./styles/Form.css";
 class FormModal extends React.Component {
   state = {
     show: false,
-    image: null,
-    experience:
-      this.props.method === "PUT"
-        ? this.props.experience
-        : {
-            role: "",
-            company: "",
-            startDate: "",
-            endDate: "",
-            description: "",
-            area: "",
-          },
+    experience: {
+      role: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      area: "",
+    },
   };
 
   componentDidMount = () => {
@@ -50,12 +46,28 @@ class FormModal extends React.Component {
     }
   };
 
-  handleShow = () => {
-    this.setState({ show: true });
+  cheekyFetch = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let paresedResponse = await response.json();
+      console.log(paresedResponse);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  handleClose = () => {
-    this.setState({ show: false });
+  updateFormField = (e) => {
+    let experience = { ...this.state.experience };
+    let currentId = e.currentTarget.id;
+    experience[currentId] = e.currentTarget.value;
+    this.setState({ experience: experience });
   };
 
   fetchExpImg = async () => {

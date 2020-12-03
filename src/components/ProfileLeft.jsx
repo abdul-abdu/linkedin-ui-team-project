@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import Form from "../components/Form";
 import "../styles/ProfileLeft.css";
 import {
   // Dropdown,
@@ -11,33 +11,24 @@ import {
   ProgressBar,
   Table,
 } from "react-bootstrap";
-
 import { BiPencil } from "react-icons/bi";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import Form from "../components/Form";
 import DropdownProfileMenu from "./DropdownProfileMenu";
-import ContactInfo from "./ContactInfo";
-import EditIntro from "./EditIntro";
+import { withRouter } from "react-router-dom";
+// import ProfileModal from "./ProfileModal"
 
 class ProfileLeft extends React.Component {
   state = {
     user: "",
-    experiences: [],
   };
+
+  handleClose = () => this.setState({ modalShow: false });
+  handleShow = () => this.setState({ modalShow: true });
 
   componentDidMount = () => {
     this.fetchProfile();
-  };
-
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.user !== this.state.user) {
-      console.log(prevState.user, "prevState.user");
-      console.log(this.state.user, "this.state.user");
-
-      this.fetchExperience();
-    }
   };
 
   fetchProfile = async () => {
@@ -51,30 +42,10 @@ class ProfileLeft extends React.Component {
         }
       );
       let parsedResponse = await response.json();
-
+      console.log(parsedResponse);
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  fetchExperience = async () => {
-    console.log("fetchExperience Runed", this.state.user._id);
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-
-      const parsedResponse = await response.json();
-
-      this.setState({ experiences: parsedResponse });
-    } catch (error) {
-      console.log("Error at experiences:", error);
     }
   };
 
@@ -104,15 +75,11 @@ class ProfileLeft extends React.Component {
               )}
             </div>
             <div className="profile-info">
-              <div className="buttons-row align-items-center">
+              <div className="buttons-row">
                 <DropdownProfileMenu />
 
                 <Button id="moreBtn">More...</Button>
-                {this.state.user ? (
-                  <EditIntro userInfo={this.state.user} />
-                ) : (
-                  <BiPencil className="biPencil" />
-                )}
+                <BiPencil className="biPencil" />
               </div>
             </div>
             <div className="nameSurnameUni">
@@ -131,13 +98,7 @@ class ProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
-                  <span style={{ color: "#0A66C2" }}>
-                    {this.state.user ? (
-                      <ContactInfo userInfo={this.state.user} />
-                    ) : (
-                      <>Contact Info</>
-                    )}
-                  </span>
+                  <span style={{ color: "#0A66C2" }}>Contact info</span>
                 </p>
               ) : (
                 <p style={{ lineHeight: "0.01rem" }}>
@@ -221,11 +182,7 @@ class ProfileLeft extends React.Component {
               <span
                 style={{ fontSize: "1.6rem", float: "right", color: "#0A66C2" }}
               >
-                <Form
-                  userId={this.state.user._id}
-                  method="POST"
-                  fetchExperience={this.fetchExperience}
-                />
+                <Form userId={this.state.user._id} />
               </span>
             </Col>
           </Row>
@@ -351,6 +308,7 @@ class ProfileLeft extends React.Component {
             </Col>
           </Row>
         </div>
+
         <div
           className="profile-card mt-3 profile-profile-section "
           style={{ padding: "20px", maxHeight: "515px !important" }}
