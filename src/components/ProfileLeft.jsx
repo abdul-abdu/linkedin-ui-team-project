@@ -186,6 +186,7 @@ class ProfileLeft extends React.Component {
               </span>
             </Col>
           </Row>
+<<<<<<< Updated upstream
           <Row className="d-flex justify-content-between">
             <Col xs={1}>
               <img src="https://placehold.it/60x60" alt="pic" />
@@ -201,6 +202,40 @@ class ProfileLeft extends React.Component {
               <BiPencil />
             </Button>
           </Row>
+=======
+          {this.state.experiences.map((experience, idx) => (
+            <Row key={idx} className="d-flex justify-content-between">
+              <Col xs={1}>
+                <img src={experience.image} alt="pic" />
+              </Col>
+              <Col xs={9} className="pl-4">
+                <h6>{experience.role}</h6>
+                <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
+                <p
+                  style={{ fontSize: "0.7rem", marginTop: "-15px" }}
+                  title={experience.startDate}
+                >
+                  {new Intl.DateTimeFormat("en-GB", {
+                    month: "2-digit",
+                    day: "2-digit",
+                    year: "numeric",
+                  }).format(new Date(experience.startDate))}
+                </p>
+              </Col>
+
+              <Form
+                userId={this.state.user._id}
+                experience={experience}
+                expId={experience._id}
+                method="PUT"
+                fetchExperience={this.fetchExperience}
+              />
+              {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
+                <BiPencil />
+              </Button> */}
+            </Row>
+          ))}
+>>>>>>> Stashed changes
         </div>
 
         <div

@@ -6,6 +6,7 @@ import "./styles/Form.css";
 class FormModal extends React.Component {
   state = {
     show: false,
+<<<<<<< Updated upstream
     experience: {
       role: "",
       company: "",
@@ -14,6 +15,20 @@ class FormModal extends React.Component {
       description: "",
       area: "",
     },
+=======
+    image: null,
+    experience:
+      this.props.method === "PUT"
+        ? this.props.experience
+        : {
+            role: "",
+            company: "",
+            startDate: "",
+            endDate: "",
+            description: "",
+            area: "",
+          },
+>>>>>>> Stashed changes
   };
 
   componentDidMount = () => {
@@ -62,12 +77,59 @@ class FormModal extends React.Component {
       console.log(error);
     }
   };
+<<<<<<< Updated upstream
+=======
+  handleShow = () => {
+    this.setState({ show: true });
+  };
+
+  handleClose = () => {
+    this.setState({ show: false });
+  };
+>>>>>>> Stashed changes
 
   updateFormField = (e) => {
     let experience = { ...this.state.experience };
     let currentId = e.currentTarget.id;
     experience[currentId] = e.currentTarget.value;
     this.setState({ experience: experience });
+  };
+
+  fetchExpImg = async () => {
+    const formData = new FormData();
+    formData.append("experience", this.state.image);
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}/picture`,
+        {
+          method: "POST",
+          headers: new Headers({
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+            Accept: "application/json",
+          }),
+          body: formData,
+        }
+      );
+      if (response.ok) {
+        const content = await response.json();
+        this.fetchExperience();
+        console.log(content);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    this.setState({
+      role: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      area: "",
+    });
+  };
+
+  selectedImgHandler = (e) => {
+    this.setState({ image: e.target.files[0] });
   };
 
   render() {
@@ -81,8 +143,16 @@ class FormModal extends React.Component {
     const { show } = this.state;
     return (
       <>
+<<<<<<< Updated upstream
         <Button id="modal-btn" onClick={handleShow}>
           <GrAdd />
+=======
+        <Button
+          id={this.props.method === "POST" ? "modal-button" : "edit-btn"}
+          onClick={this.handleShow}
+        >
+          {this.props.method === "POST" ? <GrAdd /> : <BiPencil />}
+>>>>>>> Stashed changes
         </Button>
 
         <Modal
@@ -164,9 +234,21 @@ class FormModal extends React.Component {
                   placeholder="Es: Milano"
                 />
               </Form.Group>
+              <input
+                name="experience"
+                style={{ display: "none" }}
+                type="file"
+                value={this.state.image}
+                onChange={(e) => {
+                  this.selectedImgHandler(e);
+                }}
+                ref={(fileInput) => (this.fileInput = fileInput)}
+              />
             </Form>
             <div className="button-modal-wrapper">
-              <Button id="upload-btn">Upload</Button>
+              <Button onClick={() => this.fileInput.click()} id="upload-btn">
+                Upload
+              </Button>
               <Button id="link-btn">Link</Button>
             </div>
           </Modal.Body>
