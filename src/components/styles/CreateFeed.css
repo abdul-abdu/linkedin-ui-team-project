@@ -1,17 +1,20 @@
 .create-feed {
-  width: 100%;
+
+  width: 110%;
   padding: 20px;
+
   margin-top: 5%;
   display: flex;
   justify-content: center;
+  margin-left: -10px;
 }
 
 .feed-wrapper {
-  width: 33%;
+  width: 100%;
   background-color: white;
   padding: 15px;
   border-radius: 10px;
-  border: 0.05rem solid rgb(161, 161, 161);
+  border: 0.05rem solid #deddda;
 }
 
 .feed-icons-wrapper {
