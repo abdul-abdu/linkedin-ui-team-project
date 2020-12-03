@@ -5,30 +5,15 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
-import { CgMenuGridR } from "react-icons/cg";
 import { GrSchedulePlay } from "react-icons/gr";
 import { AiOutlineSearch } from "react-icons/ai";
 import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WorkAlert from "./WorkAlert";
-import {
-  Container,
-  DropdownButton,
-  Col,
-  Dropdown,
-  Button,
-  Image,
-  Row,
-} from "react-bootstrap";
+import { Container, Dropdown, Button } from "react-bootstrap";
 
 import { withRouter } from "react-router-dom";
-
-// fetch("https://striveschool-api.herokuapp.com/api/product/", {
-//   headers: {
-//     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmFiYzY1ODRiY2RlMTAwMTc2MTZhOTEiLCJpYXQiOjE2MDUwOTI5NTIsImV4cCI6MTYwNjMwMjU1Mn0.167moYNgptnQpkntwtLaEyr3cDG3_2 - rg9gOnjJ4syQ"
-//   }
-// }
 
 class Navbar extends React.Component {
   state = {
@@ -50,7 +35,6 @@ class Navbar extends React.Component {
         }
       );
       const parsedResponse = await response.json();
-      console.log(parsedResponse, "parsedResponse");
       this.setState({ user: parsedResponse });
     } catch (error) {
       console.log(error);
@@ -142,7 +126,10 @@ class Navbar extends React.Component {
             </div>
             <div className="navbar-profile-menu mx-3 text-center">
               {/* <CgProfile className="icon" /> */}
-              <img src={abdul} alt="" />
+              <img
+                src={this.state.user.image ? this.state.user.image : abdul}
+                alt=""
+              />
               <Dropdown alignRight>
                 <Dropdown.Toggle id="dropdown-menu-align-right" title="Me">
                   Me

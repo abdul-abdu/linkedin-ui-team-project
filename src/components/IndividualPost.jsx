@@ -1,11 +1,162 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Form } from "react-bootstrap";
 import "./styles/IndividualPost.css";
 import PublicIcon from "@material-ui/icons/Public";
 import { withRouter } from "react-router-dom";
 import PostDropdown from "./PostDropdown";
 
 class IndividualPost extends React.Component {
+  state = {
+    addComments: false,
+    showComments: false,
+    profiles: [],
+    commentArray: [],
+    comment: {
+      comment: "",
+      rate: 5,
+      elementId: this.props.post._id,
+    },
+  };
+
+  componentDidMount = () => {
+    this.fetchProfiles();
+    this.fetchComments();
+  };
+
+  updateField = (e) => {
+    let comment = { ...this.state.comment };
+    let commentId = e.currentTarget.id;
+    comment[commentId] = e.currentTarget.value;
+    this.setState({ comment: comment });
+  };
+
+  calculateTimeDiff = (current, updated) => {
+    let currentTime = new Date();
+    let postDate = new Date(current);
+    let currentMilli = currentTime.getTime();
+    let postMilli = postDate.getTime();
+    let diffMilli = currentMilli - postMilli;
+    let diffMins = Math.ceil(diffMilli / 60000);
+    if (diffMins >= 60) {
+      let timeDiff = Math.floor(diffMins / 60).toString() + "h";
+
+      if (current === updated) {
+        return timeDiff;
+      } else {
+        return timeDiff + "• Edited";
+      }
+    } else {
+      let timeDiff = diffMins.toString() + "m";
+
+      if (current === updated) {
+        return timeDiff;
+      } else {
+        return timeDiff + "• Edited";
+      }
+    }
+  };
+
+  fetchProfiles = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      this.setState({ profiles: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchComments = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/" +
+          this.props.post._id,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      this.setState({ commentArray: parsedResponse });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  postComment = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          method: "POST",
+          body: JSON.stringify(this.state.comment),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("comment saved");
+        this.setState({
+          comment: {
+            comment: "",
+            rate: 5,
+            elementId: this.props.post._id,
+          },
+        });
+        this.fetchComments();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  deletePost = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${this.props.post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      if (response.ok) {
+        this.props.fetchPosts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  checkBothArray = (commentEmail) => {
+    if (this.state.profiles) {
+      const commenter = this.state.profiles.find(
+        (profile) => profile.email === commentEmail
+      );
+
+      console.log(commentEmail);
+      console.log(commenter + " commenter**********");
+      if (commenter) {
+        return commenter.name + " " + commenter.surname;
+      } else {
+        return commentEmail;
+      }
+    } else {
+      return commentEmail + " no profiles";
+    }
+  };
+
   render() {
     return (
       <Container className="feedPost">
@@ -38,10 +189,21 @@ class IndividualPost extends React.Component {
               </h6>
               <span>{this.props.post.user.title}</span>
               <span>
-                {this.props.post.createdAt} • <PublicIcon fontSize="small" />
+                {this.calculateTimeDiff(
+                  this.props.post.createdAt,
+                  this.props.post.updatedAt
+                )}{" "}
+                • <PublicIcon fontSize="small" />
               </span>
             </div>
-            <PostDropdown user={this.props.post.user} />
+            <PostDropdown
+              postID={this.props.post._id}
+              postBody={this.props.post.text}
+              user={this.props.post.user}
+              profile={this.props.user}
+              fetchPosts={this.props.fetchPosts}
+              deletePost={this.deletePost}
+            />
           </Col>
         </Row>
         <Row className="postMiddleRow">
@@ -49,6 +211,29 @@ class IndividualPost extends React.Component {
             <p>{this.props.post.text} </p>
           </Col>
         </Row>
+        {this.props.post.image && (
+          <Row className="postMiddleRow">
+            <Col>
+              <img src={this.props.post.image} alt="image" />
+            </Col>
+          </Row>
+        )}
+
+        <Row>
+          <Col></Col>
+        </Row>
+        {this.state.commentArray.length > 0 && (
+          <span
+            className="howMany"
+            onClick={() =>
+              this.state.showComments
+                ? this.setState({ showComments: false })
+                : this.setState({ showComments: true })
+            }
+          >
+            {this.state.commentArray.length} Comments
+          </span>
+        )}
         <hr />
         <Row>
           <Col xs={12} className="postBottomRow">
@@ -67,7 +252,14 @@ class IndividualPost extends React.Component {
               </svg>
               <span>Like</span>
             </div>
-            <div className="postBottomIcons">
+            <div
+              className="postBottomIcons"
+              onClick={() =>
+                this.state.addComments
+                  ? this.setState({ addComments: false })
+                  : this.setState({ addComments: true })
+              }
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -114,6 +306,65 @@ class IndividualPost extends React.Component {
             </div>
           </Col>
         </Row>
+        {this.state.addComments && (
+          <div className="d-flex align-items-center">
+            <img
+              src={this.props.post.user.image}
+              alt=""
+              width="40px"
+              height="40px"
+              style={{
+                objectFit: "cover",
+                borderRadius: "100%",
+                marginRight: "10px",
+              }}
+            />
+            <Form.Control
+              type="text"
+              placeholder="Add a comment..."
+              id="comment"
+              style={{ borderRadius: "100px" }}
+              value={this.state.comment.comment}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  this.postComment();
+                }
+              }}
+              onChange={(e) => this.updateField(e)}
+            />
+          </div>
+        )}
+        {this.state.showComments &&
+          this.state.profiles &&
+          this.state.commentArray &&
+          this.state.commentArray.map((com, index) => (
+            <div className="d-flex mt-2" key={index}>
+              <img
+                src={this.props.post.user.image}
+                alt=""
+                width="40px"
+                height="40px"
+                style={{
+                  objectFit: "cover",
+                  borderRadius: "100%",
+                  marginRight: "10px",
+                  marginTop: "5px",
+                }}
+              />
+              <div className="commentArea">
+                <div className="topRow">
+                  <span className="author">
+                    {this.checkBothArray(com.author)}
+                  </span>
+                  <span className="time">
+                    {this.calculateTimeDiff(com.createdAt, com.updatedAt)}
+                  </span>
+                </div>
+
+                <p>{com.comment}</p>
+              </div>
+            </div>
+          ))}
       </Container>
     );
   }

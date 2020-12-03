@@ -21,7 +21,6 @@ class PeopleRelated extends React.Component {
         }
       );
       let parsedResponse = await response.json();
-      console.log(parsedResponse);
       this.setState({ other: parsedResponse });
     } catch (error) {
       console.log(error);
