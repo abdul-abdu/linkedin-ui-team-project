@@ -82,7 +82,7 @@ class StartPost extends Component {
       <>
         <div className="d-flex align-items-center" onClick={this.handleShow}>
           <BsPencilSquare className="mr-3" />
-          <Form.Control size="lg" type="text" placeholder="Start a post" />
+          <Form.Control disabled size="lg" type="text" placeholder="Start a post" />
         </div>
 
         <Modal
