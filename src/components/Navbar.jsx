@@ -11,11 +11,7 @@ import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WorkAlert from "./WorkAlert";
-import {
-  Container,
-  Dropdown,
-  Button,
-} from "react-bootstrap";
+import { Container, Dropdown, Button } from "react-bootstrap";
 
 import { withRouter } from "react-router-dom";
 
@@ -130,7 +126,10 @@ class Navbar extends React.Component {
             </div>
             <div className="navbar-profile-menu mx-3 text-center">
               {/* <CgProfile className="icon" /> */}
-              <img src={abdul} alt="" />
+              <img
+                src={this.state.user.image ? this.state.user.image : abdul}
+                alt=""
+              />
               <Dropdown alignRight>
                 <Dropdown.Toggle id="dropdown-menu-align-right" title="Me">
                   Me
@@ -161,12 +160,12 @@ class Navbar extends React.Component {
                       </Dropdown.Item>
                     </>
                   ) : (
-                      <>
-                        <Dropdown.Item eventKey="1">Image</Dropdown.Item>
-                        <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
-                        <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
-                      </>
-                    )}
+                    <>
+                      <Dropdown.Item eventKey="1">Image</Dropdown.Item>
+                      <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
+                      <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
+                    </>
+                  )}
 
                   <Dropdown.Item eventKey="4">
                     <Button
