@@ -101,7 +101,7 @@ class StartPost extends Component {
               <Form.Group>
                 <Form.Control
                   size="lg"
-                  type="textarea"
+                  as="textarea"
                   placeholder="What do you want to talk about?"
                   id="post"
                   value={this.state.text}
@@ -135,16 +135,8 @@ class StartPost extends Component {
             <Modal.Footer>
               <div className="feed-btn-wrapper">
                 <Button
-                  onClick={this.handleClose}
-                  variant="outline-primary"
-                  className="feed-btn"
-                >
-                  Close
-                </Button>
-
-                <Button
                   type="submit"
-                  variant="outline-light"
+                  variant="outline-dark"
                   className="feed-btn"
                 >
                   POST

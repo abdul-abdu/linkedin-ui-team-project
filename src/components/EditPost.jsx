@@ -4,6 +4,7 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
 import EditIcon from "@material-ui/icons/Edit";
+import { Button } from "react-bootstrap";
 
 import "../styles/StartPost.css";
 
@@ -19,7 +20,7 @@ class EditPost extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ post: { text: this.props.body } });
+    this.setState({ post: { text: this.props.postBody } });
   };
 
   setModalShow = (boolean) => this.setState({ show: boolean });
@@ -106,7 +107,7 @@ class EditPost extends Component {
               <Form.Group>
                 <Form.Control
                   size="lg"
-                  type="textarea"
+                  as="textarea"
                   placeholder={this.props.postBody}
                   id="put"
                   value={this.state.post.text}
@@ -136,6 +137,17 @@ class EditPost extends Component {
                 </div>
               </div>
             </Modal.Body>
+            <Modal.Footer>
+              <div className="feed-btn-wrapper">
+                <Button
+                  type="submit"
+                  variant="outline-dark"
+                  className="feed-btn"
+                >
+                  POST
+                </Button>
+              </div>
+            </Modal.Footer>
           </Form>
         </Modal>
       </>

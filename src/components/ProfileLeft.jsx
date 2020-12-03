@@ -36,6 +36,7 @@ class ProfileLeft extends React.Component {
   };
 
   fetchProfile = async () => {
+    alert("ok");
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/me",
@@ -103,7 +104,10 @@ class ProfileLeft extends React.Component {
 
                 <Button id="moreBtn">More...</Button>
                 {this.state.user ? (
-                  <EditIntro userInfo={this.state.user} />
+                  <EditIntro
+                    userInfo={this.state.user}
+                    fetchProfile={this.fetchProfile}
+                  />
                 ) : (
                   <BiPencil className="biPencil" />
                 )}
