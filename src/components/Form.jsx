@@ -6,16 +6,6 @@ import "./styles/Form.css";
 class FormModal extends React.Component {
   state = {
     show: false,
-<<<<<<< Updated upstream
-    experience: {
-      role: "",
-      company: "",
-      startDate: "",
-      endDate: "",
-      description: "",
-      area: "",
-    },
-=======
     image: null,
     experience:
       this.props.method === "PUT"
@@ -28,7 +18,6 @@ class FormModal extends React.Component {
             description: "",
             area: "",
           },
->>>>>>> Stashed changes
   };
 
   componentDidMount = () => {
@@ -68,7 +57,6 @@ class FormModal extends React.Component {
   handleClose = () => {
     this.setState({ show: false });
   };
-
 
   fetchExpImg = async () => {
     const formData = new FormData();
@@ -118,7 +106,6 @@ class FormModal extends React.Component {
     const { show } = this.state;
     return (
       <>
-        
         <Button
           id={this.props.method === "POST" ? "modal-button" : "edit-btn"}
           onClick={this.handleShow}
