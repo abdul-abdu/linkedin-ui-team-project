@@ -37,7 +37,7 @@ const HomeRight = () => {
                       marginTop: "15%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>
@@ -62,7 +62,7 @@ const HomeRight = () => {
                       marginTop: "15%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>
@@ -79,7 +79,7 @@ const HomeRight = () => {
             </Col>
             <Col xs={3}>
               <Row>
-                <button style={{margin: '0 auto'}}>
+                <button>
                   <AiOutlinePlus
                     style={{
                       float: "left",
@@ -87,7 +87,7 @@ const HomeRight = () => {
                       marginTop: "16%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>
