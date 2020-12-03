@@ -46,3 +46,27 @@
 .singleRecomandation.second:hover{
     text-decoration: underline;
 }
+.follow-btn{
+    display: inline;
+}
+@media only screen and (max-width: 600px) {
+    .follow-btn{
+        display: none;
+    }
+    .singleRecomandation Col Row button{
+        position: absolute;
+        top: 30%;
+        margin-top: 40%;
+        background-color: red;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .follow-btn{
+        display: none;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .follow-btn{
+        display: inline;
+    }
+}
