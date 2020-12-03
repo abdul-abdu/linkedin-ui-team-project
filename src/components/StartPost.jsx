@@ -11,6 +11,8 @@ const { Component } = require("react");
 const { Modal, Button, Form } = require("react-bootstrap");
 
 class StartPost extends Component {
+
+
   state = {
     show: false
   }
@@ -27,7 +29,7 @@ class StartPost extends Component {
           onClick={this.handleShow}
         >
           <BsPencilSquare />
-          <Form.Control size="lg" type="text" placeholder="Start a post" />
+          <Form.Control size="lg" type="text" placeholder="Start a post" disabled />
         </div>
 
         <Modal show={this.state.show} onHide={this.handleClose} animation={false}>
