@@ -61,24 +61,6 @@ class FormModal extends React.Component {
     }
   };
 
-  cheekyFetch = async () => {
-    try {
-      let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-      let paresedResponse = await response.json();
-      console.log(paresedResponse);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-<<<<<<< Updated upstream
-=======
   handleShow = () => {
     this.setState({ show: true });
   };
@@ -86,14 +68,7 @@ class FormModal extends React.Component {
   handleClose = () => {
     this.setState({ show: false });
   };
->>>>>>> Stashed changes
 
-  updateFormField = (e) => {
-    let experience = { ...this.state.experience };
-    let currentId = e.currentTarget.id;
-    experience[currentId] = e.currentTarget.value;
-    this.setState({ experience: experience });
-  };
 
   fetchExpImg = async () => {
     const formData = new FormData();
@@ -143,16 +118,12 @@ class FormModal extends React.Component {
     const { show } = this.state;
     return (
       <>
-<<<<<<< Updated upstream
-        <Button id="modal-btn" onClick={handleShow}>
-          <GrAdd />
-=======
+        
         <Button
           id={this.props.method === "POST" ? "modal-button" : "edit-btn"}
           onClick={this.handleShow}
         >
           {this.props.method === "POST" ? <GrAdd /> : <BiPencil />}
->>>>>>> Stashed changes
         </Button>
 
         <Modal
