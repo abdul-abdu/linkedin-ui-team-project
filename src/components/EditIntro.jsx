@@ -9,6 +9,7 @@ class EditIntro extends Component {
   state = {
     show: false,
     user: this.props.userInfo,
+    userImage: null
   }
 
   setModalShow = (bool) => this.setState({ show: bool })
@@ -22,6 +23,7 @@ class EditIntro extends Component {
 
   EditUserInfos = async (e) => {
     e.preventDefault()
+    this.updateProfilePic()
 
     const url = 'https://striveschool-api.herokuapp.com/api/profile/'
     try {
@@ -42,6 +44,37 @@ class EditIntro extends Component {
 
     } catch (error) {
 
+      console.log(error)
+    }
+  }
+
+  updateUserIMG = (e) => {
+    this.setState({ userImage: e.target.files[0] })
+  }
+
+
+  updateProfilePic = async () => {
+    const FormImage = new FormData()
+    FormImage.append('profile', this.state.userImage)
+
+    try {
+      const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/picture`, {
+        method: 'POST',
+        headers: new Headers({
+          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          Accept: 'application/json'
+        }),
+        body: FormImage
+      })
+      if (response.ok) {
+        const parRes = await response.json()
+        console.log(parRes)
+
+        alert('ok')
+      }
+
+
+    } catch (error) {
       console.log(error)
     }
   }
@@ -87,6 +120,9 @@ class EditIntro extends Component {
                       alt="profilePic"
                     />
                   )}
+                <>
+                  <input type='file' id='user-image' onChange={(e) => this.updateUserIMG(e)} />
+                </>
               </div>
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridEmail">
