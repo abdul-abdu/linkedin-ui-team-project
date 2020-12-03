@@ -160,7 +160,8 @@
 .downshift-dropdown{
   position: absolute;
   top: 2.9rem;
-  width: 18rem;
+  margin-left: -3rem;
+  width: 24rem;
 }
 .dropdown-item{
   position: relative;

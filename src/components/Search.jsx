@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Downshift from "downshift";
+import IndividualPerson from "./IndividualPerson";
 import "./styles/Navbar.css";
 
 class Search extends Component {
@@ -31,7 +32,7 @@ class Search extends Component {
   }
 
   downshiftOnChange(selectedUser) {
-    alert(`you have selected ${selectedUser.name} ${selectedUser.surname}`);
+    // alert(`you have selected ${selectedUser.name} ${selectedUser.surname}`);
   }
 
   componentDidMount = () =>{
@@ -108,7 +109,15 @@ class Search extends Component {
                         fontWeight: selectedItem === item ? "bold" : "normal"
                       }}
                     >
-                      {item.name && item.surname && item.name + ' '+ item.surname}
+                      {item.name && item.surname && 
+                        <IndividualPerson style={{fontSize: 'smaller'}}
+                  name={item.name}
+                  job={item.title}
+                  pic={item.image}
+                  userid={item._id}
+                  divider={index === 4 ? false : true}
+                />}
+                        {/* item.name + ' '+ item.surname*/}
                     </div>
               ))}
               </div>
