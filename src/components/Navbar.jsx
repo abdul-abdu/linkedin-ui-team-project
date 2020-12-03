@@ -12,6 +12,7 @@ import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WorkAlert from "./WorkAlert";
 import { Container, Dropdown, Button } from "react-bootstrap";
+import Search from './Search';
 
 import { withRouter } from "react-router-dom";
 
@@ -47,10 +48,11 @@ class Navbar extends React.Component {
         <div className="header container-lg">
           <div className="navbar-left">
             <AiFillLinkedin className="Linkedin-icon" />
-
+            
             <div className="search-input">
-              <AiOutlineSearch />
-              <input type="text" placeholder="search" />
+            <Search />
+              {/*<AiOutlineSearch />
+               <input type="text" placeholder="search" />*/}
             </div>
           </div>
 
