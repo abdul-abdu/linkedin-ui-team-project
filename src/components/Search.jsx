@@ -79,14 +79,14 @@ class Search extends Component {
           getLabelProps
         }) => (
           <div>
-            <label
+           {/* <label
               style={{ marginTop: "1rem", display: "block" }}
               {...getLabelProps()}
             >
               Search for users
-            </label>{" "}
+        </label>{" "}*/}
             <br />
-            <input
+            <input class='search-btn'
               {...getInputProps({
                 placeholder: "Search users",
                 onChange: this.inputOnChange
@@ -97,7 +97,7 @@ class Search extends Component {
              
                  {this.state.users
                 
-                  .slice(0, 10)
+                  .slice(0, 5)
                   .map((item, index) => (
                     <div
                       className="dropdown-item"
