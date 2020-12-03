@@ -1,7 +1,5 @@
 import React from "react";
-import { Button, Alert, Card, Container, Row } from "react-bootstrap";
 import "./styles/PostDropdown.css";
-import AddIcon from "@material-ui/icons/Add";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import CancelIcon from "@material-ui/icons/Cancel";

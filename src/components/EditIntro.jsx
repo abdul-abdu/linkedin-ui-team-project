@@ -56,7 +56,6 @@ class EditIntro extends Component {
   updateProfilePic = async () => {
     const FormImage = new FormData()
     FormImage.append('profile', this.state.userImage)
-
     try {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/picture`, {
         method: 'POST',
@@ -69,7 +68,6 @@ class EditIntro extends Component {
       if (response.ok) {
         const parRes = await response.json()
         console.log(parRes)
-
         alert('ok')
       }
 

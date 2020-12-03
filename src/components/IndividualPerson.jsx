@@ -1,8 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./IndividualPerson.css";
-// import PersonAddIcon from "@material-ui/icons/PersonAdd";
-// import { Link, withRouter } from "react-router-dom";
 import ShodyDivider from "./ShodyDivider";
 import { withRouter } from "react-router-dom";
 
