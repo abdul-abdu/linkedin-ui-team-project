@@ -120,6 +120,25 @@ class IndividualPost extends React.Component {
     }
   };
 
+  deletePost = async () => {
+    try {
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${this.props.post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      if (response.ok) {
+        this.props.fetchPosts();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   checkBothArray = (commentEmail) => {
     if (this.state.profiles) {
       const commenter = this.state.profiles.find(
@@ -141,7 +160,7 @@ class IndividualPost extends React.Component {
   render() {
     return (
       <Container className="feedPost">
-        {/* {(this.props.post.user.name.toLowerCase().includes("sexy") ||
+        {(this.props.post.user.name.toLowerCase().includes("sexy") ||
           this.props.post.user.surname.toLowerCase().includes("sexy") ||
           this.props.post.text.toLowerCase().includes("sexy")) && (
           <Row className="kreyGasm">
@@ -151,11 +170,18 @@ class IndividualPost extends React.Component {
             </Col>
             <hr />
           </Row>
-        )} */}
+        )}
         <Row>
           <Col className="postTopRow">
             <div>
-              <img src={this.props.post.user.image} alt="userImage" />
+              <img
+                src={
+                  this.props.post.image
+                    ? this.props.post.image
+                    : this.props.post.user.image
+                }
+                alt="userImage"
+              />
             </div>
             <div className="nameBox">
               <h6
@@ -177,7 +203,13 @@ class IndividualPost extends React.Component {
                 • <PublicIcon fontSize="small" />
               </span>
             </div>
-            <PostDropdown user={this.props.post.user} />
+            <PostDropdown
+              postID={this.props.post._id}
+              user={this.props.post.user}
+              profile={this.props.user}
+              fetchPosts={this.props.fetchPosts}
+              deletePost={this.deletePost}
+            />
           </Col>
         </Row>
         <Row className="postMiddleRow">
