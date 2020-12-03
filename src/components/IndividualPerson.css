@@ -1,5 +1,8 @@
 #person img {
   border-radius: 5000px;
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
 }
 
 #person h6 {

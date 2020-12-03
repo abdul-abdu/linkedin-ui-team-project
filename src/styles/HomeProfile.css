@@ -60,6 +60,7 @@ hr {
   margin-bottom: -11px;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 10px;
 }
 .prof-section:hover,
 .profile-saved-items:hover {
@@ -67,7 +68,7 @@ hr {
   cursor: pointer;
 }
 .profile-saved-items {
-  padding: 10px 0px 5px 2px;
+  padding: 10px 0px 5px 10px;
   margin-top: -22px;
 }
 .groups-wrapper {
@@ -79,6 +80,8 @@ hr {
   color: #0a66c2;
   padding: 10px 3px;
   margin-top: 1rem;
+  position: sticky !important;
+  top: 0;
 }
 .groups-wrapper h6 {
   font-size: 0.8rem !important;

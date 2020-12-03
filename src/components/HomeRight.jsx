@@ -79,12 +79,12 @@ const HomeRight = () => {
             </Col>
             <Col xs={3}>
               <Row>
-                <button>
+                <button style={{margin: '0 auto'}}>
                   <AiOutlinePlus
                     style={{
                       float: "left",
                       fontSize: "0.7rem",
-                      marginTop: "15%",
+                      marginTop: "16%",
                     }}
                   />
                   <span style={{ fontSize: "0.7rem" }}>Follow</span>
