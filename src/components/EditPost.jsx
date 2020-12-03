@@ -1,5 +1,4 @@
 import { Link } from "@material-ui/core";
-import { BsPencilSquare } from "react-icons/bs";
 import { CgMathPlus } from "react-icons/cg";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
@@ -9,7 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import "../styles/StartPost.css";
 
 const { Component } = require("react");
-const { Modal, Button, Form } = require("react-bootstrap");
+const { Modal, Form } = require("react-bootstrap");
 
 class EditPost extends Component {
   state = {

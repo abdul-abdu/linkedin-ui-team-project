@@ -6,7 +6,7 @@ import RightSideColumn from "./RightSideColumn";
 const ProfilePage = () => {
   return (
     <>
-      <Container style={{marginTop: '4rem'}}>
+      <Container style={{ marginTop: '4rem' }}>
         <Row>
           <ProfileLeft />
           <RightSideColumn />
