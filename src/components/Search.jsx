@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Downshift from "downshift";
-
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import "./styles/Navbar.css";
 
 class Search extends Component {
 

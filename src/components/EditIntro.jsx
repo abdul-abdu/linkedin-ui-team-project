@@ -40,6 +40,7 @@ class EditIntro extends Component {
       console.log('parsedResponse edti intro', parsedResponse)
       if (response.ok) {
         this.setModalShow(false)
+        this.props.fetchProfile()
       }
 
     } catch (error) {
@@ -68,7 +69,7 @@ class EditIntro extends Component {
       if (response.ok) {
         const parRes = await response.json()
         console.log(parRes)
-        alert('ok')
+        
       }
 
 
