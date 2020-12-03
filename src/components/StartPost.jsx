@@ -135,16 +135,8 @@ class StartPost extends Component {
             <Modal.Footer>
               <div className="feed-btn-wrapper">
                 <Button
-                  onClick={this.handleClose}
-                  variant="outline-primary"
-                  className="feed-btn"
-                >
-                  Close
-                </Button>
-
-                <Button
                   type="submit"
-                  variant="outline-light"
+                  variant="outline-dark"
                   className="feed-btn"
                 >
                   POST
