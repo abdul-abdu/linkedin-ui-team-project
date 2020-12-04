@@ -4,6 +4,7 @@ import { CgMathPlus } from "react-icons/cg";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 import "../styles/StartPost.css";
 
@@ -14,7 +15,7 @@ class StartPost extends Component {
   state = {
     show: false,
     post: { text: "" },
-    image: {},
+    image: null,
     errMessage: "",
   };
 
@@ -48,18 +49,18 @@ class StartPost extends Component {
         }
       );
 
-      if (response.ok && Object.keys(this.state.image).length === 0) {
+      if (response.ok && this.state.image) {
+        let hope = await response.json();
+        await this.postImage(hope._id);
+      } else if (response.ok) {
         alert("Post sent !");
         this.setState({
           post: { text: "" },
-          image: {},
+          image: null,
           errMessage: "",
         });
         this.props.fetchPosts();
         this.handleClose();
-      } else if (response.ok && this.state.image) {
-        let hope = await response.json();
-        await this.postImage(hope._id);
       } else {
         console.log("an error occurred");
         let error = await response.json();
@@ -96,7 +97,7 @@ class StartPost extends Component {
           alert("Post sent with image !");
           this.setState({
             post: { text: "" },
-            image: {},
+            image: null,
             errMessage: "",
           });
           this.props.fetchPosts();
@@ -143,6 +144,17 @@ class StartPost extends Component {
                 />
                 <br />
               </Form.Group>
+              {this.state.image && (
+                <div className="imagePreview">
+                  <img
+                    src={URL.createObjectURL(
+                      document.querySelector("#postImage").files[0]
+                    )}
+                    alt="image preview"
+                  />
+                  <br />
+                </div>
+              )}
               <div>
                 <Link to="#ss">Add hashtag </Link>
                 <span> Help the right people see your post</span>
@@ -167,9 +179,12 @@ class StartPost extends Component {
 
             <Modal.Footer>
               <div className="feed-btn-wrapper">
-                <Form.Label htmlFor="postImage">Attach Image:</Form.Label>
+                <Form.Label htmlFor="postImage">
+                  <AttachFileIcon />
+                </Form.Label>
                 <Form.Control
                   type="file"
+                  className="visually-hidden"
                   id="postImage"
                   accept="image/*"
                   onChange={(e) => this.setState({ image: e.target.files[0] })}
