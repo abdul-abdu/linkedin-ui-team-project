@@ -143,6 +143,7 @@
 }
 
 .feedPost .commentArea p {
+  word-break: break-all;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
 }

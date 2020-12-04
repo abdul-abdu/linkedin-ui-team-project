@@ -38,7 +38,7 @@ const ContactInfo = ({ userInfo, otherPeople }) => {
           <div className='inner-body'>
             <div className='d-flex align-items-center'>
               <AiFillLinkedin />
-              <b> Your Profile</b>
+              <b> {!otherPeople ? <>Your</> : <>LinkedIn</>} Profile</b>
             </div>
             <div className='info'>
               <Link>linkedin.com/in/{userInfo.name + '-' + userInfo.surname + '-' + userInfo._id}</Link>
