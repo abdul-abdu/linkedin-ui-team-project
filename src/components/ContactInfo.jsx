@@ -11,7 +11,7 @@ import { BiPencil } from 'react-icons/bi';
 
 
 
-const ContactInfo = ({ userInfo }) => {
+const ContactInfo = ({ userInfo, otherPeople }) => {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -29,9 +29,11 @@ const ContactInfo = ({ userInfo }) => {
         <Modal.Body>
           <div className='d-flex justify-content-between inner-body'>
             <h3>Contact Info</h3>
-            <Link className='pencil d-flex align-items-center'>
-              <BiPencil />
-            </Link>
+            {!otherPeople &&
+              <Link className='pencil d-flex align-items-center'>
+                <BiPencil />
+              </Link>
+            }
           </div>
           <div className='inner-body'>
             <div className='d-flex align-items-center'>
