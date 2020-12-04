@@ -33,18 +33,21 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-                <>
-                  <div className="dreamsDropDistance">
-                    <div className="iconMaster">
-                      <BookmarkBorderIcon />
-                    </div>
-                    <div className="megatron">
-                      <span className="is">Save</span>
-                      <span className="dumb">Save for later</span>
-                    </div>
+              <>
+                <div
+                  className="dreamsDropDistance"
+                  onClick={() => this.props.saved(this.props.postID)}
+                >
+                  <div className="iconMaster">
+                    <BookmarkBorderIcon />
                   </div>
-                </>
-              )}
+                  <div className="megatron">
+                    <span className="is">Save</span>
+                    <span className="dumb">Save for later</span>
+                  </div>
+                </div>
+              </>
+            )}
 
             <div className="dreamsDropDistance">
               <div className="iconMaster">
@@ -63,22 +66,27 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-                <div className="dreamsDropDistance">
-                  <div className="iconMaster">
-                    <CancelIcon />
-                  </div>
-                  <div className="megatron">
-                    <span className="is">
-                      Unfollow{" "}
-                      {this.props.user.name + " " + this.props.user.surname}
-                    </span>
-                    <span className="dumb">
-                      Stay connected but stop seeing posts from{" "}
-                      {this.props.user.name} in feed
-                  </span>
-                  </div>
+              <div
+                className="dreamsDropDistance"
+                onClick={() =>
+                  this.props.blackList(this.props.user._id, "profile")
+                }
+              >
+                <div className="iconMaster">
+                  <CancelIcon />
                 </div>
-              )}
+                <div className="megatron">
+                  <span className="is">
+                    Unfollow{" "}
+                    {this.props.user.name + " " + this.props.user.surname}
+                  </span>
+                  <span className="dumb">
+                    Stay connected but stop seeing posts from{" "}
+                    {this.props.user.name} in feed
+                  </span>
+                </div>
+              </div>
+            )}
             {this.props.user._id === this.props.profile._id ? (
               <div
                 className="dreamsDropDistance"
@@ -96,18 +104,21 @@ class PostDropdown extends React.Component {
                 </div>
               </div>
             ) : (
-                <div className="dreamsDropDistance">
-                  <div className="iconMaster">
-                    <VisibilityOffIcon />
-                  </div>
-                  <div className="megatron">
-                    <span className="is">I don't want to see this</span>
-                    <span className="dumb">
-                      Let us know why you don't want to see this post
-                  </span>
-                  </div>
+              <div
+                className="dreamsDropDistance"
+                onClick={() => this.props.blackList(this.props.postID, "post")}
+              >
+                <div className="iconMaster">
+                  <VisibilityOffIcon />
                 </div>
-              )}
+                <div className="megatron">
+                  <span className="is">I don't want to see this</span>
+                  <span className="dumb">
+                    Let us know why you don't want to see this post
+                  </span>
+                </div>
+              </div>
+            )}
 
             {this.props.user._id !== this.props.profile._id && (
               <div className="dreamsDropDistance">

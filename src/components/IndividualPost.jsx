@@ -58,7 +58,7 @@ class IndividualPost extends React.Component {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-        this.props.post._id,
+          this.props.post._id,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
@@ -162,14 +162,14 @@ class IndividualPost extends React.Component {
         {(this.props.post.user.name.toLowerCase().includes("sexy") ||
           this.props.post.user.surname.toLowerCase().includes("sexy") ||
           this.props.post.text.toLowerCase().includes("sexy")) && (
-            <Row className="kreyGasm">
-              <Col className="memeMachine">
-                <span className="sexyBeast">Sexy Beast</span>
-                <span className="likesThis">likes this</span>
-              </Col>
-              <hr />
-            </Row>
-          )}
+          <Row className="kreyGasm">
+            <Col className="memeMachine">
+              <span className="sexyBeast">Sexy Beast</span>
+              <span className="likesThis">likes this</span>
+            </Col>
+            <hr />
+          </Row>
+        )}
         <Row>
           <Col className="postTopRow">
             <div>
@@ -200,6 +200,8 @@ class IndividualPost extends React.Component {
               postBody={this.props.post.text}
               user={this.props.post.user}
               profile={this.props.user}
+              blackList={this.props.peepo}
+              saved={this.props.addToSaved}
               fetchPosts={this.props.fetchPosts}
               deletePost={this.deletePost}
             />
@@ -313,7 +315,7 @@ class IndividualPost extends React.Component {
         {this.state.addComments && (
           <div className="d-flex align-items-center">
             <img
-              src={this.props.post.user.image}
+              src={this.props.user.image}
               alt=""
               width="40px"
               height="40px"

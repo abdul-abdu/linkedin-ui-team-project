@@ -13,7 +13,7 @@ import WorkAlert from "./WorkAlert";
 import { Container, Dropdown, Button } from "react-bootstrap";
 import Search from './Search';
 
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, NavLink, Link} from "react-router-dom";
 
 class Navbar extends React.Component {
   state = {
@@ -57,22 +57,24 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-right">
+            <NavLink to='/feed' activeClassName="active-link" >
             <div
               className="navbar-home mx-3 text-center"
               onClick={() => this.props.history.push("/feed")}
             >
-              <AiFillHome className="icon" />
+              <AiFillHome className="icon" style={{marginTop: '0.5rem'}}/>
               <h5
                 style={{
-                  fontSize: 12,
+                  fontSize: '0.75rem',
                   letterSpacing: 1,
-                  marginTop: 4,
-                  fontWeight: 400,
+                  marginTop: 2,
+                  textDecoration: 'none'
                 }}
               >
                 Home
               </h5>
             </div>
+            </NavLink>
 
             <div className="navbar-network mx-3 text-center">
               <BsFillPeopleFill className="icon" />
@@ -148,6 +150,7 @@ class Navbar extends React.Component {
                             src={this.state.user.image}
                             alt=""
                             width="56px"
+                            height="56px"
                           />
 
                           <div className="pl-1 d-flex flex-column justify-content-center">
