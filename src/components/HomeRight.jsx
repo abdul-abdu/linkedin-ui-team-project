@@ -37,7 +37,7 @@ const HomeRight = () => {
                       marginTop: "15%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>
@@ -62,7 +62,7 @@ const HomeRight = () => {
                       marginTop: "15%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>
@@ -84,10 +84,10 @@ const HomeRight = () => {
                     style={{
                       float: "left",
                       fontSize: "0.7rem",
-                      marginTop: "15%",
+                      marginTop: "16%",
                     }}
                   />
-                  <span style={{ fontSize: "0.7rem" }}>Follow</span>
+                  <span style={{ fontSize: "0.7rem" }} className='follow-btn'>Follow</span>
                 </button>
               </Row>
             </Col>

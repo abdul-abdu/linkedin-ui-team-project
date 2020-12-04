@@ -1,5 +1,4 @@
 import React from "react";
-import EditIcon from "@material-ui/icons/Edit";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { Button, Form } from "react-bootstrap";
 
@@ -22,7 +21,7 @@ class EditPostImage extends React.Component {
       if (post) {
         let response = await fetch(
           "https://striveschool-api.herokuapp.com/api/posts/" +
-            this.props.postID,
+          this.props.postID,
           {
             method: "POST",
             body: post,

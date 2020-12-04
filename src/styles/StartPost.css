@@ -10,8 +10,7 @@
 
 .feed-btn-wrapper {
   display: flex;
-
+  justify-content: flex-end;
   width: 100%;
   position: relative;
-  left: 60%;
 }

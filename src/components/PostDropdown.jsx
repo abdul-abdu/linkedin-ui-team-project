@@ -1,12 +1,9 @@
 import React from "react";
-import { Button, Alert, Card, Container, Row } from "react-bootstrap";
 import "./styles/PostDropdown.css";
-import AddIcon from "@material-ui/icons/Add";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import CancelIcon from "@material-ui/icons/Cancel";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { BsLink45Deg, BsFillFlagFill } from "react-icons/bs";
@@ -36,18 +33,18 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-              <>
-                <div className="dreamsDropDistance">
-                  <div className="iconMaster">
-                    <BookmarkBorderIcon />
+                <>
+                  <div className="dreamsDropDistance">
+                    <div className="iconMaster">
+                      <BookmarkBorderIcon />
+                    </div>
+                    <div className="megatron">
+                      <span className="is">Save</span>
+                      <span className="dumb">Save for later</span>
+                    </div>
                   </div>
-                  <div className="megatron">
-                    <span className="is">Save</span>
-                    <span className="dumb">Save for later</span>
-                  </div>
-                </div>
-              </>
-            )}
+                </>
+              )}
 
             <div className="dreamsDropDistance">
               <div className="iconMaster">
@@ -66,22 +63,22 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-              <div className="dreamsDropDistance">
-                <div className="iconMaster">
-                  <CancelIcon />
-                </div>
-                <div className="megatron">
-                  <span className="is">
-                    Unfollow{" "}
-                    {this.props.user.name + " " + this.props.user.surname}
+                <div className="dreamsDropDistance">
+                  <div className="iconMaster">
+                    <CancelIcon />
+                  </div>
+                  <div className="megatron">
+                    <span className="is">
+                      Unfollow{" "}
+                      {this.props.user.name + " " + this.props.user.surname}
+                    </span>
+                    <span className="dumb">
+                      Stay connected but stop seeing posts from{" "}
+                      {this.props.user.name} in feed
                   </span>
-                  <span className="dumb">
-                    Stay connected but stop seeing posts from{" "}
-                    {this.props.user.name} in feed
-                  </span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             {this.props.user._id === this.props.profile._id ? (
               <div
                 className="dreamsDropDistance"
@@ -99,18 +96,18 @@ class PostDropdown extends React.Component {
                 </div>
               </div>
             ) : (
-              <div className="dreamsDropDistance">
-                <div className="iconMaster">
-                  <VisibilityOffIcon />
-                </div>
-                <div className="megatron">
-                  <span className="is">I don't want to see this</span>
-                  <span className="dumb">
-                    Let us know why you don't want to see this post
+                <div className="dreamsDropDistance">
+                  <div className="iconMaster">
+                    <VisibilityOffIcon />
+                  </div>
+                  <div className="megatron">
+                    <span className="is">I don't want to see this</span>
+                    <span className="dumb">
+                      Let us know why you don't want to see this post
                   </span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {this.props.user._id !== this.props.profile._id && (
               <div className="dreamsDropDistance">

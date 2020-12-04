@@ -10,6 +10,7 @@ class PostsColumn extends React.Component {
             user={this.props.user}
             post={singlePost}
             key={index}
+            profiles={this.props.profiles}
             fetchPosts={this.props.fetchPosts}
           />
         ))}

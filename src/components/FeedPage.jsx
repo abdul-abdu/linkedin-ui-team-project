@@ -10,10 +10,12 @@ class FeedPage extends React.Component {
   state = {
     postArray: [],
     loading: true,
+    profiles: [],
   };
 
   componentDidMount = () => {
     this.fetchPosts();
+    this.fetchProfiles();
   };
 
   fetchPosts = async () => {
@@ -34,6 +36,23 @@ class FeedPage extends React.Component {
       console.log(this.state.postArray);
     } catch (error) {
       console.log("uh oh stinky when fetching all the posts", error);
+    }
+  };
+
+  fetchProfiles = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/profile/",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          },
+        }
+      );
+      let parsedResponse = await response.json();
+      this.setState({ profiles: parsedResponse });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -59,13 +78,16 @@ class FeedPage extends React.Component {
               {this.state.loading && (
                 <Spinner animation="border" variant="primary" />
               )}
-              {this.state.postArray && !this.state.loading && (
-                <PostsColumn
-                  user={this.props.user}
-                  postArray={this.state.postArray}
-                  fetchPosts={this.fetchPosts}
-                />
-              )}
+              {this.state.postArray &&
+                this.state.profiles &&
+                !this.state.loading && (
+                  <PostsColumn
+                    user={this.props.user}
+                    postArray={this.state.postArray}
+                    profiles={this.state.profiles}
+                    fetchPosts={this.fetchPosts}
+                  />
+                )}
             </Row>
           </Col>
           <Col md={3} style={{ marginLeft: "20px" }}>

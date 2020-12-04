@@ -84,7 +84,7 @@ class HomeProfile extends React.Component {
                   }}
                 />
               </Col>
-              <Col xs={8}>
+              <Col xs={10}>
                 <h6 style={{ fontSize: "0.8rem" }}>Saved Items</h6>
               </Col>
             </Row>
