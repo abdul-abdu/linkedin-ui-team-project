@@ -11,7 +11,7 @@ class PostsColumn extends React.Component {
       error: false,
       hasMore: true,
       isLoading: false,
-      users: []
+      posts: []
     }
     window.onscroll = debounce(() => {
       const {
@@ -48,7 +48,7 @@ class PostsColumn extends React.Component {
     this.setState({
       hasMore: (this.props.postArray.length),
       isLoading: false,
-      users: [...this.state.users, ...nextPosts]
+      posts: [...this.state.posts, ...nextPosts]
     })
 
 
@@ -61,12 +61,12 @@ class PostsColumn extends React.Component {
       error,
       hasMore,
       isLoading,
-      users,
+      posts,
     } = this.state;
 
     return (
       <>
-        {users.map((singlePost, index) => (
+        {posts.map((singlePost, index) => (
           <IndividualPost
             user={this.props.user}
             post={singlePost}

@@ -51,9 +51,9 @@
   flex: 0.3;
 }
 
-.Linkedin-icon {
-  width: 20%;
-  height: 20%;
+.Linkedin-icon * {
+  width: 40px;
+  height: 40px;
   color: #0073b1;
 }
 
@@ -157,17 +157,17 @@
   padding: 8px 12px 0px;
   color: black;
 }
-.downshift-dropdown{
+.downshift-dropdown {
   position: absolute;
   top: 2.9rem;
   margin-left: -3rem;
   width: 24rem;
 }
-.dropdown-item{
+.dropdown-item {
   position: relative;
   top: 0px;
 }
-.search-btn{
+.search-btn {
   min-width: 200px !important;
   position: absolute;
   top: 0.6rem;
@@ -175,14 +175,39 @@
   background-color: #84bddb31;
   /* background-color: transparent; */
   padding: 5px 10px;
-  border: 1px solid #6c757d;
+  border: 1px solid #deddda;
   border-radius: 4px;
 }
-.search-btn:active{
+.search-btn:active {
   border: 1px solid #6c757d !important;
   outline: none !important;
 }
-.search-btn:active{
+.search-btn:active {
   border: 1px solid #6c757d !important;
   outline: none !important;
+}
+.active-link{
+  color: #1b1b1b !important;
+  text-decoration: none;
+  position: relative;
+}
+.active-link::after{
+  content: "";
+  position: absolute;
+  top: 97%;
+  height: 2px;
+  width: 90%;
+  left: 5%;
+  background-color: #1b1b1b;
+  z-index: 10;
+}
+.active-link:hover{
+  text-decoration: none;
+}
+.menu-link-text{
+  color: #4b4b4b;
+}
+.navbar-right a{
+  color: #4b4b4b;
+  text-decoration: none;
 }
