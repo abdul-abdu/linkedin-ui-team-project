@@ -34,8 +34,15 @@ class FeedPage extends React.Component {
       let parsedResponse = await response.json();
       console.log(parsedResponse);
       this.setState({ postArray: parsedResponse.reverse() });
-      if (this.state.filteredArray.length === 0) {
-        this.setState({ filteredArray: this.state.postArray });
+      if (this.state.blacklist.length > 0) {
+        let postArray = [...this.state.postArray];
+        await this.state.postArray.map((post) => {
+          if (this.state.blacklist.includes(post._id)) {
+            postArray.splice(postArray.indexOf(post), 1);
+          }
+        });
+    console.log(postArray, "after map in enforce blacklist");
+    await this.setState({ postArray: postArray });
       }
       this.setState({ loading: false });
       console.log(this.state.postArray);
@@ -72,14 +79,14 @@ class FeedPage extends React.Component {
   };
 
   enforeBlacklist = async (blacklist) => {
-    let filteredArray = [...this.state.postArray];
+    let postArray = [...this.state.postArray];
     await this.state.postArray.map((post) => {
       if (blacklist.includes(post._id)) {
-        filteredArray.splice(filteredArray.indexOf(post), 1);
+        postArray.splice(postArray.indexOf(post), 1);
       }
     });
-    console.log(filteredArray);
-    await this.setState({ filteredArray: filteredArray });
+    console.log(postArray, "after map in enforce blacklist");
+    await this.setState({ postArray: postArray });
     this.fetchPosts();
   };
 
@@ -110,7 +117,7 @@ class FeedPage extends React.Component {
                 !this.state.loading && (
                   <PostsColumn
                     user={this.props.user}
-                    postArray={this.state.filteredArray}
+                    postArray={this.state.postArray}
                     profiles={this.state.profiles}
                     addToBlacklist={this.addToBlacklist}
                     fetchPosts={this.fetchPosts}

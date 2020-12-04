@@ -1,25 +1,31 @@
 import React from "react";
 import IndividualPost from "./IndividualPost";
-import debounce from "lodash.debounce";
-import { Button, Spinner, Alert } from "react-bootstrap";
+import debounce from 'lodash.debounce'
+import { Button, Spinner, Alert } from 'react-bootstrap'
 
 class PostsColumn extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       error: false,
       hasMore: true,
       isLoading: false,
-      users: [],
-    };
+      users: []
+    }
     window.onscroll = debounce(() => {
       const {
         loadPosts,
-        state: { error, isLoading, hasMore },
-      } = this;
+        state: {
+          error,
+          isLoading,
+          hasMore
+        }
+      } = this
 
       if (error || isLoading || !hasMore) return;
+
+
 
       if (
         window.innerHeight + document.documentElement.scrollTop ===
@@ -27,26 +33,36 @@ class PostsColumn extends React.Component {
       ) {
         loadPosts();
       }
-    }, 500);
+    }, 500)
   }
 
+
   componentWillMount() {
-    this.loadPosts();
+    this.loadPosts()
   }
 
   loadPosts = () => {
-    this.setState({ isLoading: true });
-    const nextPosts = this.props.postArray.splice(0, 5);
+    this.setState({ isLoading: true })
+    const nextPosts = this.props.postArray.splice(0, 5)
 
     this.setState({
-      hasMore: this.props.postArray.length,
+      hasMore: (this.props.postArray.length),
       isLoading: false,
-      users: [...this.state.users, ...nextPosts],
-    });
-  };
+      users: [...this.state.users, ...nextPosts]
+    })
+
+
+  }
+
+
 
   render() {
-    const { error, hasMore, isLoading, users } = this.state;
+    const {
+      error,
+      hasMore,
+      isLoading,
+      users,
+    } = this.state;
 
     return (
       <>
@@ -60,7 +76,7 @@ class PostsColumn extends React.Component {
             fetchPosts={this.props.fetchPosts}
           />
         ))}
-        {isLoading && (
+        {isLoading &&
           <Button variant="primary" disabled>
             <Spinner
               as="span"
@@ -69,13 +85,19 @@ class PostsColumn extends React.Component {
               role="status"
               aria-hidden="true"
             />
-            Loading...
-          </Button>
-        )}
-        {!hasMore && (
-          <Alert variant="success">You have seen all of the posts</Alert>
-        )}
-        {error && <Alert variant="danger">{error}</Alert>}
+              Loading...
+            </Button>
+        }
+        {!hasMore &&
+          <Alert variant='success'>
+            You have seen all of the posts
+          </Alert>
+        }
+        {error &&
+          <Alert variant='danger'>
+            {error}
+          </Alert>
+        }
       </>
     );
   }
