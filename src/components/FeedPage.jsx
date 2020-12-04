@@ -9,8 +9,10 @@ import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
     postArray: [],
+    filteredArray: [],
     loading: true,
     profiles: [],
+    blacklist: [],
   };
 
   componentDidMount = () => {
@@ -32,6 +34,9 @@ class FeedPage extends React.Component {
       let parsedResponse = await response.json();
       console.log(parsedResponse);
       this.setState({ postArray: parsedResponse.reverse() });
+      if (this.state.filteredArray.length === 0) {
+        this.setState({ filteredArray: this.state.postArray });
+      }
       this.setState({ loading: false });
       console.log(this.state.postArray);
     } catch (error) {
@@ -54,6 +59,28 @@ class FeedPage extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  addToBlacklist = async (id) => {
+    let newblacklist = [...this.state.blacklist];
+    console.log(newblacklist, "before push");
+    newblacklist.push(id);
+    console.log(newblacklist, "after push");
+    await this.setState({ blacklist: newblacklist });
+    console.log(this.state.blacklist);
+    this.enforeBlacklist(newblacklist);
+  };
+
+  enforeBlacklist = async (blacklist) => {
+    let filteredArray = [...this.state.postArray];
+    await this.state.postArray.map((post) => {
+      if (blacklist.includes(post._id)) {
+        filteredArray.splice(filteredArray.indexOf(post), 1);
+      }
+    });
+    console.log(filteredArray);
+    await this.setState({ filteredArray: filteredArray });
+    this.fetchPosts();
   };
 
   render() {
@@ -83,8 +110,9 @@ class FeedPage extends React.Component {
                 !this.state.loading && (
                   <PostsColumn
                     user={this.props.user}
-                    postArray={this.state.postArray}
+                    postArray={this.state.filteredArray}
                     profiles={this.state.profiles}
+                    addToBlacklist={this.addToBlacklist}
                     fetchPosts={this.fetchPosts}
                   />
                 )}
