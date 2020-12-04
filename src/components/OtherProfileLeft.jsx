@@ -113,7 +113,7 @@ class OtherProfileLeft extends React.Component {
               {this.state.user !== "" ? (
                 <p style={{ lineHeight: "0.01rem" }}>
                   {this.state.user.area} •{" "}
-                  <ContactInfo userInfo={this.state.user} />
+                  <ContactInfo userInfo={this.state.user} otherPeople={true} />
                 </p>
               ) : (
                   <p style={{ lineHeight: "0.01rem" }}>
