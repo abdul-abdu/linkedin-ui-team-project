@@ -9,7 +9,6 @@ class IndividualPost extends React.Component {
   state = {
     addComments: false,
     showComments: false,
-    profiles: [],
     commentArray: [],
     comment: {
       comment: "",
@@ -19,7 +18,6 @@ class IndividualPost extends React.Component {
   };
 
   componentDidMount = () => {
-    this.fetchProfiles();
     this.fetchComments();
   };
 
@@ -56,28 +54,11 @@ class IndividualPost extends React.Component {
     }
   };
 
-  fetchProfiles = async () => {
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-      let parsedResponse = await response.json();
-      this.setState({ profiles: parsedResponse });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   fetchComments = async () => {
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.post._id,
+        this.props.post._id,
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_COMMENT_CODE}`,
@@ -140,8 +121,8 @@ class IndividualPost extends React.Component {
   };
 
   checkBothArray = (commentEmail) => {
-    if (this.state.profiles) {
-      const commenter = this.state.profiles.find(
+    if (this.props.profiles) {
+      const commenter = this.props.profiles.find(
         (profile) => profile.email === commentEmail
       );
 
@@ -157,20 +138,38 @@ class IndividualPost extends React.Component {
     }
   };
 
+  checkBothArrayImage = (commentEmail) => {
+    if (this.props.profiles) {
+      const commenter = this.props.profiles.find(
+        (profile) => profile.email === commentEmail
+      );
+
+      console.log(commentEmail);
+      console.log(commenter + " commenter**********");
+      if (commenter) {
+        return commenter.image;
+      } else {
+        return this.props.post.user.image;
+      }
+    } else {
+      return this.props.post.user.imagel + " no profiles";
+    }
+  };
+
   render() {
     return (
       <Container className="feedPost">
         {(this.props.post.user.name.toLowerCase().includes("sexy") ||
           this.props.post.user.surname.toLowerCase().includes("sexy") ||
           this.props.post.text.toLowerCase().includes("sexy")) && (
-          <Row className="kreyGasm">
-            <Col className="memeMachine">
-              <span className="sexyBeast">Sexy Beast</span>
-              <span className="likesThis">likes this</span>
-            </Col>
-            <hr />
-          </Row>
-        )}
+            <Row className="kreyGasm">
+              <Col className="memeMachine">
+                <span className="sexyBeast">Sexy Beast</span>
+                <span className="likesThis">likes this</span>
+              </Col>
+              <hr />
+            </Row>
+          )}
         <Row>
           <Col className="postTopRow">
             <div>
@@ -215,9 +214,10 @@ class IndividualPost extends React.Component {
           <Row className="postMiddleRow">
             <Col className="d-flex justify-content-center">
               <img
+                className="img-fluid"
                 src={this.props.post.image}
-                alt="image"
-                style={{ maxWidth: "500px", objectFit: "cover" }}
+                alt="imag"
+                style={{ maxWidth: "450px", objectFit: "cover" }}
               />
             </Col>
           </Row>
@@ -339,12 +339,11 @@ class IndividualPost extends React.Component {
           </div>
         )}
         {this.state.showComments &&
-          this.state.profiles &&
           this.state.commentArray &&
           this.state.commentArray.map((com, index) => (
             <div className="d-flex mt-2" key={index}>
               <img
-                src={this.props.post.user.image}
+                src={this.checkBothArrayImage(com.author)}
                 alt=""
                 width="40px"
                 height="40px"

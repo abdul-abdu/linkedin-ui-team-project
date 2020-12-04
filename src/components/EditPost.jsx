@@ -4,6 +4,8 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
 import EditIcon from "@material-ui/icons/Edit";
+import { Button } from "react-bootstrap";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 import "../styles/StartPost.css";
 
@@ -13,7 +15,7 @@ const { Modal, Form } = require("react-bootstrap");
 class EditPost extends Component {
   state = {
     show: false,
-    fetching: false,
+    image: null,
     post: { text: this.props.postBody },
     errMessage: "",
   };
@@ -38,8 +40,6 @@ class EditPost extends Component {
 
   submitPost = async (e) => {
     e.preventDefault();
-    this.setState({ fetching: true });
-
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/posts/" + this.props.postID,
@@ -53,11 +53,15 @@ class EditPost extends Component {
         }
       );
 
-      if (response.ok) {
+      if (response.ok && this.state.image) {
+        let hope = await response.json();
+        await this.postImage(hope._id);
+      } else if (response.ok) {
+        alert("Post sent !");
         this.setState({
           post: { text: "" },
+          image: null,
           errMessage: "",
-          fetching: false,
         });
         this.props.fetchPosts();
         this.handleClose();
@@ -66,7 +70,6 @@ class EditPost extends Component {
         let error = await response.json();
         this.setState({
           errMessage: error.message,
-          fetching: false,
         });
       }
     } catch (e) {
@@ -75,6 +78,38 @@ class EditPost extends Component {
         errMessage: e.message,
         loading: false,
       });
+    }
+  };
+
+  postImage = async (postId) => {
+    try {
+      let post = new FormData();
+      await post.append("post", this.state.image);
+      if (post) {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+          {
+            method: "POST",
+            body: post,
+            headers: new Headers({
+              Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+              Accept: "application/json",
+            }),
+          }
+        );
+        if (response.ok) {
+          alert("Post sent with image !");
+          this.setState({
+            post: { text: "" },
+            image: null,
+            errMessage: "",
+          });
+          this.props.fetchPosts();
+          this.handleClose();
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -115,6 +150,17 @@ class EditPost extends Component {
                 />
                 <br />
               </Form.Group>
+              {this.state.image && (
+                <div className="imagePreview">
+                  <img
+                    src={URL.createObjectURL(
+                      document.querySelector("#postImage").files[0]
+                    )}
+                    alt="preview"
+                  />
+                  <br />
+                </div>
+              )}
               <div>
                 <Link to="#ss">Add hashtag </Link>
                 <span> Help the right people see your post</span>
@@ -136,6 +182,27 @@ class EditPost extends Component {
                 </div>
               </div>
             </Modal.Body>
+            <Modal.Footer>
+              <div className="feed-btn-wrapper">
+                <Form.Label htmlFor="postImage">
+                  <AttachFileIcon />
+                </Form.Label>
+                <Form.Control
+                  type="file"
+                  className="visually-hidden"
+                  id="postImage"
+                  accept="image/*"
+                  onChange={(e) => this.setState({ image: e.target.files[0] })}
+                />
+                <Button
+                  type="submit"
+                  variant="outline-dark"
+                  className="feed-btn"
+                >
+                  POST
+                </Button>
+              </div>
+            </Modal.Footer>
           </Form>
         </Modal>
       </>

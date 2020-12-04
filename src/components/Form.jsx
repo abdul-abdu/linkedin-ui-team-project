@@ -1,38 +1,42 @@
 import React from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
 import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
 
 class FormModal extends React.Component {
-  state = {
-    show: false,
-    experience:
-      this.props.method === "PUT"
-        ? this.props.experience
-        : {
-            role: "",
-            company: "",
-            startDate: "",
-            endDate: "",
-            description: "",
-            area: "",
-          },
-  };
-
-  // componentDidMount = () => {
-  //   this.cheekyFetch();
-  // };
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      selectedFile: null,
+      experience:
+        this.props.method === "PUT"
+          ? this.props.experience
+          : {
+              role: "",
+              company: "",
+              startDate: "",
+              endDate: "",
+              description: "",
+              area: "",
+            },
+    };
+    this.fileRef = React.createRef();
+  }
 
   sendData = async (e) => {
     e.preventDefault();
     if (this.props.method === "POST") {
       await this.postExperience();
+      await this.fetchExpImg(this.state.experience._id);
       // await this.cheekyFetch();
     } else {
       await this.editExperience();
+      await this.fetchExpImg(this.props.expId);
       // await this.cheekyFetch();
     }
+    this.props.fetchExperience();
   };
 
   postExperience = async () => {
@@ -48,20 +52,22 @@ class FormModal extends React.Component {
           },
         }
       );
-      let message = await response.json();
-      this.setState({
-        role: "",
-        company: "",
-        startDate: "",
-        endDate: "",
-        description: "",
-        area: "",
-      });
+
       if (response.ok) {
+        let message = await response.json();
+        this.setState({
+          role: "",
+          company: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+          area: "",
+        });
+
+        this.setState({ experience: message, loading: false });
         this.handleClose();
         this.props.fetchExperience();
       }
-      console.log(message);
     } catch (error) {
       console.log(error);
     }
@@ -81,15 +87,14 @@ class FormModal extends React.Component {
         }
       );
       let message = await response.json();
-      console.log(message);
       if (response.ok) {
         this.handleClose();
-        this.props.fetchExperience();
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   handleShow = () => {
     this.setState({ show: true });
   };
@@ -97,24 +102,6 @@ class FormModal extends React.Component {
   handleClose = () => {
     this.setState({ show: false });
   };
-
-  // cheekyFetch = async () => {
-  //   try {
-  //     let response = await fetch(
-  //       `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-  //         },
-  //       }
-  //     );
-  //     let paresedResponse = await response.json();
-
-  //     console.log(paresedResponse);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   updateFormField = (e) => {
     this.setState({
@@ -144,6 +131,41 @@ class FormModal extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  onFileChange = (event) => {
+    this.setState({ selectedFile: event.target.files[0] });
+  };
+
+  fetchExpImg = async (expID) => {
+    const formData = new FormData();
+    formData.append("experience", this.state.selectedFile);
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${expID}/picture`,
+
+        {
+          body: formData,
+          method: "POST",
+          headers: new Headers({
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+          }),
+        }
+      );
+      if (response.ok) {
+        const content = await response.json();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    this.setState({
+      role: "",
+      company: "",
+      startDate: "",
+      endDate: "",
+      description: "",
+      area: "",
+    });
   };
 
   render() {
@@ -206,7 +228,7 @@ class FormModal extends React.Component {
                   type="date"
                   id="startDate"
                   onChange={this.updateFormField}
-                  value={this.state.experience.startDate}
+                  value={this.state.experience.startDate.split("T")[0]}
                   required
                 />
               </Form.Group>
@@ -240,9 +262,20 @@ class FormModal extends React.Component {
                   placeholder="Es: Milano"
                 />
               </Form.Group>
+              <input
+                name="image"
+                type="file"
+                id="expImage"
+                accept="image/*"
+                ref={(fileInput) => (this.fileRef = fileInput)}
+                onChange={this.onFileChange}
+                hidden
+              />
             </Form>
             <div className="button-modal-wrapper">
-              <Button id="upload-btn">Upload</Button>
+              <Button id="upload-btn" onClick={() => this.fileRef.click()}>
+                Upload
+              </Button>
               <Button id="link-btn">Link</Button>
             </div>
           </Modal.Body>

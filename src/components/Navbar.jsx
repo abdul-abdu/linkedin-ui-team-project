@@ -6,7 +6,6 @@ import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
 import { GrSchedulePlay } from "react-icons/gr";
-import { AiOutlineSearch } from "react-icons/ai";
 import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +13,7 @@ import WorkAlert from "./WorkAlert";
 import { Container, Dropdown, Button } from "react-bootstrap";
 import Search from './Search';
 
-import { withRouter, NavLink} from "react-router-dom";
+import { withRouter, NavLink, Link} from "react-router-dom";
 
 class Navbar extends React.Component {
   state = {
@@ -47,8 +46,10 @@ class Navbar extends React.Component {
       <Container fluid className="main-container">
         <div className="header container-lg">
           <div className="navbar-left">
-            <AiFillLinkedin className="Linkedin-icon" />
-            
+            <Link to='/' className="Linkedin-icon">
+              <AiFillLinkedin />
+            </Link>
+
             <div className="search-input"><Search />
               {/*<AiOutlineSearch />
                <input type="text" placeholder="search" />*/}
@@ -163,12 +164,12 @@ class Navbar extends React.Component {
                       </Dropdown.Item>
                     </>
                   ) : (
-                    <>
-                      <Dropdown.Item eventKey="1">Image</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
-                      <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
-                    </>
-                  )}
+                      <>
+                        <Dropdown.Item eventKey="1">Image</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
+                      </>
+                    )}
 
                   <Dropdown.Item eventKey="4">
                     <Button

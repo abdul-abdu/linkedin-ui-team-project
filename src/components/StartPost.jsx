@@ -4,6 +4,7 @@ import { CgMathPlus } from "react-icons/cg";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
+import AttachFileIcon from "@material-ui/icons/AttachFile";
 
 import "../styles/StartPost.css";
 
@@ -13,8 +14,8 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
-    fetching: false,
     post: { text: "" },
+    image: null,
     errMessage: "",
   };
 
@@ -34,8 +35,7 @@ class StartPost extends Component {
 
   submitPost = async (e) => {
     e.preventDefault();
-    this.setState({ fetching: true });
-
+    console.log(this.state.image);
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/posts",
@@ -49,12 +49,15 @@ class StartPost extends Component {
         }
       );
 
-      if (response.ok) {
+      if (response.ok && this.state.image) {
+        let hope = await response.json();
+        await this.postImage(hope._id);
+      } else if (response.ok) {
         alert("Post sent !");
         this.setState({
           post: { text: "" },
+          image: null,
           errMessage: "",
-          fetching: false,
         });
         this.props.fetchPosts();
         this.handleClose();
@@ -63,7 +66,6 @@ class StartPost extends Component {
         let error = await response.json();
         this.setState({
           errMessage: error.message,
-          fetching: false,
         });
       }
     } catch (e) {
@@ -72,6 +74,38 @@ class StartPost extends Component {
         errMessage: e.message,
         loading: false,
       });
+    }
+  };
+
+  postImage = async (postId) => {
+    try {
+      let post = new FormData();
+      await post.append("post", this.state.image);
+      if (post) {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+          {
+            method: "POST",
+            body: post,
+            headers: new Headers({
+              Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+              Accept: "application/json",
+            }),
+          }
+        );
+        if (response.ok) {
+          alert("Post sent with image !");
+          this.setState({
+            post: { text: "" },
+            image: null,
+            errMessage: "",
+          });
+          this.props.fetchPosts();
+          this.handleClose();
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -96,7 +130,7 @@ class StartPost extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Create Post</Modal.Title>
           </Modal.Header>
-          <Form onSubmit={this.submitPost}>
+          <Form onSubmit={(e) => this.submitPost(e)}>
             <Modal.Body>
               <Form.Group>
                 <Form.Control
@@ -110,6 +144,17 @@ class StartPost extends Component {
                 />
                 <br />
               </Form.Group>
+              {this.state.image && (
+                <div className="imagePreview">
+                  <img
+                    src={URL.createObjectURL(
+                      document.querySelector("#postImage").files[0]
+                    )}
+                    alt="img-preview"
+                  />
+                  <br />
+                </div>
+              )}
               <div>
                 <Link to="#ss">Add hashtag </Link>
                 <span> Help the right people see your post</span>
@@ -134,18 +179,21 @@ class StartPost extends Component {
 
             <Modal.Footer>
               <div className="feed-btn-wrapper">
-                <Button
-                  onClick={this.handleClose}
-                  variant="outline-primary"
-                  className="feed-btn"
-                >
-                  Close
-                </Button>
-
+                <Form.Label htmlFor="postImage">
+                  <AttachFileIcon />
+                </Form.Label>
+                <Form.Control
+                  type="file"
+                  className="visually-hidden"
+                  id="postImage"
+                  accept="image/*"
+                  onChange={(e) => this.setState({ image: e.target.files[0] })}
+                />
                 <Button
                   type="submit"
-                  variant="outline-light"
+                  variant="outline-dark"
                   className="feed-btn"
+                  onClick={(e) => this.submitPost(e)}
                 >
                   POST
                 </Button>
