@@ -150,6 +150,7 @@ class Navbar extends React.Component {
                             src={this.state.user.image}
                             alt=""
                             width="56px"
+                            height="56px"
                           />
 
                           <div className="pl-1 d-flex flex-column justify-content-center">
