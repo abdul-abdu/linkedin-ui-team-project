@@ -80,12 +80,7 @@ class Search extends Component {
           getLabelProps
         }) => (
           <div>
-           {/* <label
-              style={{ marginTop: "1rem", display: "block" }}
-              {...getLabelProps()}
-            >
-              Search for users
-        </label>{" "}*/}
+           
             <br />
             <input class='search-btn'
               {...getInputProps({

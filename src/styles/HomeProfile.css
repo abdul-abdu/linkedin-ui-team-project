@@ -6,7 +6,7 @@ body {
   margin-right: -2.8rem;
 }
 .profile-wrapper {
-  border: 1px solid #b1b1b1;
+  border: 1px solid #deddda;
   border-radius: 8px;
   height: auto;
   width: 100%;
@@ -44,7 +44,7 @@ body {
   line-height: 5px;
 }
 hr {
-  color: #4b4b4b;
+  color: #deddda;
   width: 100%;
   position: relative;
   top: -5px;
@@ -72,7 +72,7 @@ hr {
   margin-top: -22px;
 }
 .groups-wrapper {
-  border: 1px solid #b1b1b1;
+  border: 1px solid #deddda;
   border-radius: 8px;
   height: auto;
   width: 100%;
