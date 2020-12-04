@@ -33,7 +33,7 @@ class PostsColumn extends React.Component {
       ) {
         loadPosts();
       }
-    }, 100)
+    }, 500)
   }
 
 
