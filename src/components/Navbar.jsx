@@ -13,7 +13,7 @@ import WorkAlert from "./WorkAlert";
 import { Container, Dropdown, Button } from "react-bootstrap";
 import Search from './Search';
 
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 class Navbar extends React.Component {
   state = {
@@ -46,7 +46,9 @@ class Navbar extends React.Component {
       <Container fluid className="main-container">
         <div className="header container-lg">
           <div className="navbar-left">
-            <AiFillLinkedin className="Linkedin-icon" />
+            <Link to='/' className="Linkedin-icon">
+              <AiFillLinkedin />
+            </Link>
 
             <div className="search-input"><Search />
               {/*<AiOutlineSearch />
