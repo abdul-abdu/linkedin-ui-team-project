@@ -16,10 +16,7 @@ class LinkedinLearning extends React.Component {
         </Row>
         <Row className="RecomendItem">
           <Col xs={4}>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C4E0DAQHJWEtCkZY69A/learning-public-crop_60_100/0/1567118675734?e=1606820400&v=beta&t=DvE0sVL2nMnpaatlovoGK7FOR3tDNlQPiygQisJJDvk"
-              alt=""
-            />
+            <img src="/assets/images/learning1.gif" alt="" />
             <div className="playButton">
               <PlayCircleOutlineTwoToneIcon fontSize="large" />
             </div>
@@ -35,10 +32,7 @@ class LinkedinLearning extends React.Component {
         <hr />
         <Row className="RecomendItem">
           <Col xs={4}>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C4E0DAQHPNM2fQMo90g/learning-public-crop_60_100/0?e=1606820400&v=beta&t=SSa3q01TC1dOqAlamyvG4krDC4njj_IYfPi7W7NsZyM"
-              alt=""
-            />
+            <img src="/assets/images/learning2.gif" alt="" />
             <div className="playButton">
               <PlayCircleOutlineTwoToneIcon fontSize="large" />
             </div>
@@ -54,10 +48,7 @@ class LinkedinLearning extends React.Component {
         <hr />
         <Row className="RecomendItem lastItem">
           <Col xs={4}>
-            <img
-              src="https://media-exp1.licdn.com/dms/image/C4E0DAQFing13WinZFA/learning-public-crop_60_100/0?e=1606820400&v=beta&t=1ohd3Yqq7bak3ogD8aTXPiOeFVJDT_chTQzNe5cvH-o"
-              alt=""
-            />
+            <img src="/assets/images/learning3.gif" alt="" />
             <div className="playButton">
               <PlayCircleOutlineTwoToneIcon fontSize="large" />
             </div>

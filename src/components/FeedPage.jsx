@@ -119,8 +119,8 @@ class FeedPage extends React.Component {
           <Col md={2}>
             <HomeProfile />
           </Col>
-          <Col md={6} style={{ marginLeft: "2rem" }}>
-            <Row style={{ width: "111%", marginLeft: "-4%" }}>
+          <Col md={6} id="feedMiddleColumn">
+            <Row id="posterBit" style={{ width: "111%", marginLeft: "-4%" }}>
               <CreateFeed fetchPosts={this.fetchPosts} />
             </Row>
             <hr
@@ -147,7 +147,7 @@ class FeedPage extends React.Component {
                 )}
             </Row>
           </Col>
-          <Col md={3} style={{ marginLeft: "20px" }}>
+          <Col md={3} id="feedRightColumn">
             <HomeRight />
           </Col>
         </Row>

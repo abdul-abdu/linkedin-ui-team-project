@@ -210,12 +210,17 @@ class OtherProfileLeft extends React.Component {
             <Col className="mb-2 pl-3">
               <h4>Education: </h4>
             </Col>
+            <Col style={{ float: "right" }}></Col>
           </Row>
           <Row>
             <Col xs={1}>
               <img src="https://placehold.it/60x60" alt="placeholder" />
             </Col>
-            <Col xs={10} className="pl-4">
+            <Col
+              xs={{ span: 7, offset: 2 }}
+              md={{ span: 10, offset: 0 }}
+              className="pl-4"
+            >
               <h6>University of Something</h6>
               <p style={{ fontSize: "0.9rem" }}>
                 Bachelor of Computer Science, Computer Software Engineering
@@ -224,7 +229,11 @@ class OtherProfileLeft extends React.Component {
                 2015-2019
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}></Col>
+            <Col
+              xs={{ span: 1, offset: 1 }}
+              md={{ span: 1, offset: 0 }}
+              style={{ float: "right" }}
+            ></Col>
           </Row>
           <hr />
           <Row>
@@ -241,14 +250,22 @@ class OtherProfileLeft extends React.Component {
                 alt="logo"
               />
             </Col>
-            <Col xs={10} className="pl-4">
+            <Col
+              xs={{ span: 7, offset: 2 }}
+              md={{ span: 10, offset: 0 }}
+              className="pl-4"
+            >
               <h6>Learning ECMAScript 6+ (ES6+)</h6>
               <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
               <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
                 Issued Novermber 2020 • No expiration date
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}></Col>
+            <Col
+              xs={{ span: 1, offset: 1 }}
+              md={{ span: 1, offset: 0 }}
+              style={{ float: "right" }}
+            ></Col>
           </Row>
           <Row>
             <Col xs={1}>
@@ -258,14 +275,22 @@ class OtherProfileLeft extends React.Component {
                 alt="logo"
               />
             </Col>
-            <Col xs={10} className="pl-4">
+            <Col
+              xs={{ span: 7, offset: 2 }}
+              md={{ span: 10, offset: 0 }}
+              className="pl-4"
+            >
               <h6>CSS: Selectors</h6>
               <p style={{ fontSize: "0.9rem" }}>LinkedIn</p>
               <p style={{ fontSize: "0.7rem", marginTop: "-15px" }}>
                 Issued Novermber 2020 • No expiration date
               </p>
             </Col>
-            <Col xs={1} style={{ float: "right" }}></Col>
+            <Col
+              xs={{ span: 1, offset: 1 }}
+              md={{ span: 1, offset: 0 }}
+              style={{ float: "right" }}
+            ></Col>
           </Row>
         </div>
       </div>
