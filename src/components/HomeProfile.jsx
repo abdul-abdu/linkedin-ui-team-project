@@ -64,23 +64,26 @@ class HomeProfile extends React.Component {
                 width="16"
                 height="16"
                 focusable="false"
-                style={{marginTop: '5px'}}
+                style={{ marginTop: "5px" }}
               >
                 <path d="M9 4a3 3 0 11-3-3 3 3 0 013 3zM6.75 8h-1.5A2.25 2.25 0 003 10.25V15h6v-4.75A2.25 2.25 0 006.75 8zM13 8V6h-1v2h-2v1h2v2h1V9h2V8z"></path>
               </svg>
             </Col>
           </Row>
           <hr />
-          <div class="profile-saved-items">
+          <div
+            class="profile-saved-items"
+            onClick={() => this.props.toggleSaved()}
+          >
             <Row>
               <Col xs={1}>
                 <BsFillBookmarkFill
                   style={{
                     fontSize: "1rem",
                     marginTop: "0px",
-                    position: 'relative',
-                    left: '15px',
-                    float: 'right'
+                    position: "relative",
+                    left: "15px",
+                    float: "right",
                   }}
                 />
               </Col>
