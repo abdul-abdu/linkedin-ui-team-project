@@ -201,6 +201,7 @@ class IndividualPost extends React.Component {
               user={this.props.post.user}
               profile={this.props.user}
               blackList={this.props.peepo}
+              saved={this.props.addToSaved}
               fetchPosts={this.props.fetchPosts}
               deletePost={this.deletePost}
             />
@@ -314,7 +315,7 @@ class IndividualPost extends React.Component {
         {this.state.addComments && (
           <div className="d-flex align-items-center">
             <img
-              src={this.props.post.user.image}
+              src={this.props.user.image}
               alt=""
               width="40px"
               height="40px"

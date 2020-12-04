@@ -34,7 +34,10 @@ class PostDropdown extends React.Component {
               </>
             ) : (
               <>
-                <div className="dreamsDropDistance">
+                <div
+                  className="dreamsDropDistance"
+                  onClick={() => this.props.saved(this.props.postID)}
+                >
                   <div className="iconMaster">
                     <BookmarkBorderIcon />
                   </div>

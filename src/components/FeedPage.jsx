@@ -4,16 +4,21 @@ import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
 import PostsColumn from "./PostsColumn";
+import SavedPosts from "./SavedPosts";
 import "./styles/FeedPage.css";
 
 class FeedPage extends React.Component {
   state = {
     postArray: [],
+    whyisitlikethisArray: [],
     filteredArray: [],
     loading: true,
     profiles: [],
     blacklist: [],
     blacklistProfiles: [],
+    savedArray: [],
+    savedPosts: [],
+    displaySaved: false,
   };
 
   componentDidMount = () => {
@@ -35,6 +40,7 @@ class FeedPage extends React.Component {
       let parsedResponse = await response.json();
       console.log(parsedResponse);
       this.setState({ postArray: parsedResponse.reverse() });
+      this.setState({ whyisitlikethisArray: parsedResponse });
       if (this.state.blacklistProfiles.length > 0) {
         let postArray = [...this.state.postArray];
         await this.state.postArray.map((post) => {
@@ -112,15 +118,39 @@ class FeedPage extends React.Component {
     this.fetchPosts();
   };
 
+  addToSaved = async (id) => {
+    let saved = [...this.state.savedArray];
+    saved.push(id);
+    console.log(saved);
+    await this.setState({ savedArray: saved });
+    console.log(this.state.savedArray);
+    let savedPosts = [];
+    await this.state.whyisitlikethisArray.map((post) => {
+      if (this.state.savedArray.includes(post._id)) {
+        console.log("saved found!");
+      }
+    });
+    await this.setState({ savedPosts: savedPosts });
+    console.log(this.state.savedPosts);
+  };
+
+  toggleSaved = () => {
+    if (this.state.displaySaved === false) {
+      this.setState({ displaySaved: true });
+    } else {
+      this.setState({ displaySaved: false });
+    }
+  };
+
   render() {
     return (
       <Container style={{ marginTop: "2rem" }}>
         <Row>
           <Col md={2}>
-            <HomeProfile />
+            <HomeProfile toggleSaved={this.toggleSaved} />
           </Col>
           <Col md={6} id="feedMiddleColumn">
-            <Row id="posterBit" style={{ width: "111%", marginLeft: "-4%" }}>
+            <Row id="posterBit" style={{ width: "112%", marginLeft: "-5%" }}>
               <CreateFeed fetchPosts={this.fetchPosts} />
             </Row>
             <hr
@@ -135,6 +165,7 @@ class FeedPage extends React.Component {
                 <Spinner animation="border" variant="primary" />
               )}
               {this.state.postArray &&
+                !this.state.displaySaved &&
                 this.state.profiles &&
                 !this.state.loading && (
                   <PostsColumn
@@ -142,6 +173,21 @@ class FeedPage extends React.Component {
                     postArray={this.state.postArray}
                     profiles={this.state.profiles}
                     addToBlacklist={this.addToBlacklist}
+                    addToSaved={this.addToSaved}
+                    fetchPosts={this.fetchPosts}
+                  />
+                )}
+              {this.state.postArray &&
+                this.state.displaySaved &&
+                this.state.profiles &&
+                !this.state.loading && (
+                  <SavedPosts
+                    user={this.props.user}
+                    postArray={this.state.postArray}
+                    profiles={this.state.profiles}
+                    savedPosts={this.state.savedArray}
+                    addToBlacklist={this.addToBlacklist}
+                    addToSaved={this.addToSaved}
                     fetchPosts={this.fetchPosts}
                   />
                 )}
