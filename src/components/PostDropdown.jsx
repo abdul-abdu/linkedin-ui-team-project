@@ -63,7 +63,12 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-              <div className="dreamsDropDistance">
+              <div
+                className="dreamsDropDistance"
+                onClick={() =>
+                  this.props.blackList(this.props.user._id, "profile")
+                }
+              >
                 <div className="iconMaster">
                   <CancelIcon />
                 </div>
@@ -98,7 +103,7 @@ class PostDropdown extends React.Component {
             ) : (
               <div
                 className="dreamsDropDistance"
-                onClick={() => this.props.blackList(this.props.postID)}
+                onClick={() => this.props.blackList(this.props.postID, "post")}
               >
                 <div className="iconMaster">
                   <VisibilityOffIcon />

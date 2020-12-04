@@ -13,6 +13,7 @@ class FeedPage extends React.Component {
     loading: true,
     profiles: [],
     blacklist: [],
+    blacklistProfiles: [],
   };
 
   componentDidMount = () => {
@@ -34,6 +35,16 @@ class FeedPage extends React.Component {
       let parsedResponse = await response.json();
       console.log(parsedResponse);
       this.setState({ postArray: parsedResponse.reverse() });
+      if (this.state.blacklistProfiles.length > 0) {
+        let postArray = [...this.state.postArray];
+        await this.state.postArray.map((post) => {
+          if (this.state.blacklistProfiles.includes(post.user._id)) {
+            postArray.splice(postArray.indexOf(post), 1);
+          }
+        });
+        console.log(postArray, "after map in enforce blacklist PROFILES");
+        await this.setState({ postArray: postArray });
+      }
       if (this.state.blacklist.length > 0) {
         let postArray = [...this.state.postArray];
         await this.state.postArray.map((post) => {
@@ -41,8 +52,8 @@ class FeedPage extends React.Component {
             postArray.splice(postArray.indexOf(post), 1);
           }
         });
-    console.log(postArray, "after map in enforce blacklist");
-    await this.setState({ postArray: postArray });
+        console.log(postArray, "after map in enforce blacklist POSTS");
+        await this.setState({ postArray: postArray });
       }
       this.setState({ loading: false });
       console.log(this.state.postArray);
@@ -68,24 +79,35 @@ class FeedPage extends React.Component {
     }
   };
 
-  addToBlacklist = async (id) => {
-    let newblacklist = [...this.state.blacklist];
-    console.log(newblacklist, "before push");
-    newblacklist.push(id);
-    console.log(newblacklist, "after push");
-    await this.setState({ blacklist: newblacklist });
-    console.log(this.state.blacklist);
-    this.enforeBlacklist(newblacklist);
+  addToBlacklist = async (id, identifier) => {
+    if (identifier === "post") {
+      let newblacklist = [...this.state.blacklist];
+      newblacklist.push(id);
+      await this.setState({ blacklist: newblacklist });
+      this.enforeBlacklist(newblacklist, identifier);
+    } else if (identifier === "profile") {
+      let newblacklist = [...this.state.blacklistProfiles];
+      newblacklist.push(id);
+      await this.setState({ blacklistProfiles: newblacklist });
+      this.enforeBlacklist(newblacklist, identifier);
+    }
   };
 
-  enforeBlacklist = async (blacklist) => {
+  enforeBlacklist = async (blacklist, identifier) => {
     let postArray = [...this.state.postArray];
-    await this.state.postArray.map((post) => {
-      if (blacklist.includes(post._id)) {
-        postArray.splice(postArray.indexOf(post), 1);
-      }
-    });
-    console.log(postArray, "after map in enforce blacklist");
+    if (identifier === "post") {
+      await this.state.postArray.map((post) => {
+        if (blacklist.includes(post._id)) {
+          postArray.splice(postArray.indexOf(post), 1);
+        }
+      });
+    } else if (identifier === "profile") {
+      await this.state.postArray.map((post) => {
+        if (blacklist.includes(post.user._id)) {
+          postArray.splice(postArray.indexOf(post), 1);
+        }
+      });
+    }
     await this.setState({ postArray: postArray });
     this.fetchPosts();
   };
