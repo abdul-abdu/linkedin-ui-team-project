@@ -14,6 +14,7 @@ class OtherProfileLeft extends React.Component {
   handleShow = () => this.setState({ modalShow: true });
 
   componentDidMount = () => {
+    this.fetchExperience();
     this.fetchProfile();
   };
 
