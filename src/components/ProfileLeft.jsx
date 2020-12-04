@@ -246,18 +246,27 @@ class ProfileLeft extends React.Component {
                     src={experience.image}
                     alt="pic"
                     style={{
-                      height: "60px",
+                      margin: "5px 0",
+                      height: "80px",
                       width: "80px",
                       objectFit: "cover",
                     }}
                   />
                 </Col>
               )}
-              <Col xs={8} md={9} className="pl-4">
-                <h6>{experience.role}</h6>
-                <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
+              <Col xs={6} md={9} className="pl-4">
+                <div className="d-flex align-items-center">
+                  <h6>{experience.role}</h6>
+
+                  <h6 className="mx-1">at</h6>
+
+                  <h6>{experience.company}</h6>
+                </div>
+                <p style={{ fontSize: "0.9rem", marginTop: "-5px" }}>
+                  {experience.description}
+                </p>
                 <p
-                  style={{ fontSize: "0.7rem", marginTop: "-15px" }}
+                  style={{ fontSize: "0.7rem", marginTop: "-13px" }}
                   title={experience.startDate}
                 >
                   {new Intl.DateTimeFormat("en-GB", {

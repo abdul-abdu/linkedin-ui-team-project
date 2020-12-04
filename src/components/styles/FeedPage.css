@@ -4,8 +4,22 @@
   width: 100%;
 }
 
+#hopesAndDreams {
+  position: relative;
+}
+
 #feedRightColumn {
   margin-right: 20px;
+  position: absolute;
+  width: 285px;
+  top: 0;
+  right: 20px;
+}
+
+#wrapper {
+  position: absolute;
+  width: 182px;
+  z-index: 5;
 }
 
 @media (max-width: 768px) {
@@ -13,5 +27,17 @@
     position: sticky;
     top: 10px;
     z-index: 10;
+  }
+  #feedRightColumn {
+    margin-right: 0px;
+    position: static;
+    width: 100%;
+    top: 0px;
+    right: 0px;
+  }
+
+  #wrapper {
+    position: static;
+    width: 100%;
   }
 }

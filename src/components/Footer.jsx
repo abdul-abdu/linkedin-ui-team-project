@@ -18,9 +18,9 @@ const LinkedIn = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-4">
+    <footer className="py-4" style={{ zIndex: "0" }}>
       <Container>
-        <Row className='mt-2'>
+        <Row className="mt-2">
           <Col md={{ span: 10, offset: 1 }}>
             <Row>
               <Col>
@@ -47,7 +47,9 @@ const Footer = () => {
                 <div>
                   <a href="#ffffffff">Safety Center</a>
                 </div>
-                <div><small>LinkedIn Corporation © 2020</small></div>
+                <div>
+                  <small>LinkedIn Corporation © 2020</small>
+                </div>
               </Col>
               <Col>
                 <div>
@@ -79,15 +81,27 @@ const Footer = () => {
               </Col>
               <Col>
                 <div>
-
-                  <a href="#Questions?"><span style={{ fontSize: '24px' }}><AiFillQuestionCircle /></span> Questions?</a>
-                  <div><small className='m-0 p-0'>Visit our Help Center.</small></div>
+                  <a href="#Questions?">
+                    <span style={{ fontSize: "24px" }}>
+                      <AiFillQuestionCircle />
+                    </span>{" "}
+                    Questions?
+                  </a>
+                  <div>
+                    <small className="m-0 p-0">Visit our Help Center.</small>
+                  </div>
                 </div>
                 <div>
-
-                  <a href="#privacy"> <span style={{ fontSize: '24px' }}><AiOutlineSetting /></span>
-                    Manage your account and privacy</a>
-                  <div><small>Go to your Settings</small></div>
+                  <a href="#privacy">
+                    {" "}
+                    <span style={{ fontSize: "24px" }}>
+                      <AiOutlineSetting />
+                    </span>
+                    Manage your account and privacy
+                  </a>
+                  <div>
+                    <small>Go to your Settings</small>
+                  </div>
                 </div>
                 <div>
                   <a href="#fffffffffff">Contact Us</a>
@@ -95,7 +109,9 @@ const Footer = () => {
               </Col>
               <Col>
                 <div>
-                  <label htmlFor="cars"><small>Select Language</small></label>
+                  <label htmlFor="cars">
+                    <small>Select Language</small>
+                  </label>
                   <select id="cars" name="cars">
                     <option value="volvo">English (English)</option>
                   </select>
@@ -105,7 +121,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-    </footer >
+    </footer>
   );
 };
 
