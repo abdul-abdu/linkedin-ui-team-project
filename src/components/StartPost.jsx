@@ -13,8 +13,8 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
-    fetching: false,
     post: { text: "" },
+    image: {},
     errMessage: "",
   };
 
@@ -34,8 +34,7 @@ class StartPost extends Component {
 
   submitPost = async (e) => {
     e.preventDefault();
-    this.setState({ fetching: true });
-
+    console.log(this.state.image);
     try {
       const response = await fetch(
         "https://striveschool-api.herokuapp.com/api/posts",
@@ -49,21 +48,23 @@ class StartPost extends Component {
         }
       );
 
-      if (response.ok) {
+      if (response.ok && Object.keys(this.state.image).length === 0) {
         alert("Post sent !");
         this.setState({
           post: { text: "" },
+          image: {},
           errMessage: "",
-          fetching: false,
         });
         this.props.fetchPosts();
         this.handleClose();
+      } else if (response.ok && this.state.image) {
+        let hope = await response.json();
+        await this.postImage(hope._id);
       } else {
         console.log("an error occurred");
         let error = await response.json();
         this.setState({
           errMessage: error.message,
-          fetching: false,
         });
       }
     } catch (e) {
@@ -72,6 +73,38 @@ class StartPost extends Component {
         errMessage: e.message,
         loading: false,
       });
+    }
+  };
+
+  postImage = async (postId) => {
+    try {
+      let post = new FormData();
+      await post.append("post", this.state.image);
+      if (post) {
+        let response = await fetch(
+          "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+          {
+            method: "POST",
+            body: post,
+            headers: new Headers({
+              Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+              Accept: "application/json",
+            }),
+          }
+        );
+        if (response.ok) {
+          alert("Post sent with image !");
+          this.setState({
+            post: { text: "" },
+            image: {},
+            errMessage: "",
+          });
+          this.props.fetchPosts();
+          this.handleClose();
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -96,7 +129,7 @@ class StartPost extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Create Post</Modal.Title>
           </Modal.Header>
-          <Form onSubmit={this.submitPost}>
+          <Form onSubmit={(e) => this.submitPost(e)}>
             <Modal.Body>
               <Form.Group>
                 <Form.Control
@@ -134,10 +167,18 @@ class StartPost extends Component {
 
             <Modal.Footer>
               <div className="feed-btn-wrapper">
+                <Form.Label htmlFor="postImage">Attach Image:</Form.Label>
+                <Form.Control
+                  type="file"
+                  id="postImage"
+                  accept="image/*"
+                  onChange={(e) => this.setState({ image: e.target.files[0] })}
+                />
                 <Button
                   type="submit"
                   variant="outline-dark"
                   className="feed-btn"
+                  onClick={(e) => this.submitPost(e)}
                 >
                   POST
                 </Button>
