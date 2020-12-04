@@ -156,7 +156,7 @@ class EditPost extends Component {
                     src={URL.createObjectURL(
                       document.querySelector("#postImage").files[0]
                     )}
-                    alt="image preview"
+                    alt="preview"
                   />
                   <br />
                 </div>

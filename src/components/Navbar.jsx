@@ -6,7 +6,6 @@ import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
 import { GrSchedulePlay } from "react-icons/gr";
-import { AiOutlineSearch } from "react-icons/ai";
 import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -48,7 +47,7 @@ class Navbar extends React.Component {
         <div className="header container-lg">
           <div className="navbar-left">
             <AiFillLinkedin className="Linkedin-icon" />
-            
+
             <div className="search-input"><Search />
               {/*<AiOutlineSearch />
                <input type="text" placeholder="search" />*/}
@@ -161,12 +160,12 @@ class Navbar extends React.Component {
                       </Dropdown.Item>
                     </>
                   ) : (
-                    <>
-                      <Dropdown.Item eventKey="1">Image</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
-                      <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
-                    </>
-                  )}
+                      <>
+                        <Dropdown.Item eventKey="1">Image</Dropdown.Item>
+                        <Dropdown.Item eventKey="2">Full Name</Dropdown.Item>
+                        <Dropdown.Item eventKey="3">Job Title</Dropdown.Item>
+                      </>
+                    )}
 
                   <Dropdown.Item eventKey="4">
                     <Button

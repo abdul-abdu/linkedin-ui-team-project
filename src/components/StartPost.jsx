@@ -150,7 +150,7 @@ class StartPost extends Component {
                     src={URL.createObjectURL(
                       document.querySelector("#postImage").files[0]
                     )}
-                    alt="image preview"
+                    alt="img-preview"
                   />
                   <br />
                 </div>
