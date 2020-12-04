@@ -8,6 +8,8 @@ import {
   Col,
   ProgressBar,
   Table,
+  Spinner,
+  Alert,
 } from "react-bootstrap";
 
 import { BiPencil } from "react-icons/bi";
@@ -23,20 +25,27 @@ class ProfileLeft extends React.Component {
   state = {
     user: "",
     experiences: [],
+    loading: true,
+    showAlert: false,
   };
 
   componentDidMount = () => {
     this.fetchProfile();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentDidUpdate = (prevState) => {
     if (prevState.user !== this.state.user) {
       this.fetchExperience();
     }
   };
 
+  toggleAlert() {
+    this.setState((state) => ({
+      showAlert: !state.showAlert,
+    }));
+  }
+
   fetchProfile = async () => {
-    alert("ok");
     try {
       let response = await fetch(
         "https://striveschool-api.herokuapp.com/api/profile/me",
@@ -48,7 +57,7 @@ class ProfileLeft extends React.Component {
       );
       let parsedResponse = await response.json();
 
-      this.setState({ user: parsedResponse });
+      this.setState({ user: parsedResponse, loading: false });
     } catch (error) {
       console.log(error);
     }
@@ -66,8 +75,7 @@ class ProfileLeft extends React.Component {
       );
 
       const parsedResponse = await response.json();
-      console.log(parsedResponse);
-      this.setState({ experiences: parsedResponse });
+      this.setState({ experiences: parsedResponse, loading: false });
     } catch (error) {
       console.log("Error at experiences:", error);
     }
@@ -227,15 +235,20 @@ class ProfileLeft extends React.Component {
               </span>
             </Col>
           </Row>
+
           {this.state.experiences.map((experience, idx) => (
             <Row key={idx} className="d-flex justify-content-between">
-              <Col xs={1}>
-                <img
-                  src={experience.image}
-                  alt="pic"
-                  style={{ height: "60px", borderRadius: "50%" }}
-                />
-              </Col>
+              {this.state.loading ? (
+                <Spinner animation="border" />
+              ) : (
+                <Col xs={1}>
+                  <img
+                    src={experience.image}
+                    alt="pic"
+                    style={{ height: "60px", width: "80px" }}
+                  />
+                </Col>
+              )}
               <Col xs={9} className="pl-4">
                 <h6>{experience.role}</h6>
                 <p style={{ fontSize: "0.9rem" }}>{experience.company}</p>
