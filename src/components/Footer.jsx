@@ -18,7 +18,7 @@ const LinkedIn = () => {
 
 const Footer = () => {
   return (
-    <footer className="py-4" style={{ zIndex: "0" }}>
+    <footer className="py-4">
       <Container>
         <Row className="mt-2">
           <Col md={{ span: 10, offset: 1 }}>

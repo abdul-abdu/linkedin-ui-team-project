@@ -1,7 +1,7 @@
 import React from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
-import { GrAdd } from "react-icons/gr";
+import { Button, Form, Modal } from "react-bootstrap";
 import { BiPencil } from "react-icons/bi";
+import { GrAdd } from "react-icons/gr";
 import "./styles/Form.css";
 
 class FormModal extends React.Component {

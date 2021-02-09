@@ -85,7 +85,7 @@ class Search extends Component {
           <div>
             <br />
             <input
-              class="search-btn"
+              className="search-btn"
               {...getInputProps({
                 placeholder: "Search users",
                 onChange: this.inputOnChange,

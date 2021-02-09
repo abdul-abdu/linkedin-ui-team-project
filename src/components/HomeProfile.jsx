@@ -36,10 +36,18 @@ class HomeProfile extends React.Component {
     return (
       <div id="wrapper">
         <div className="profile-wrapper">
-          <img src="/assets/images/cover.jpg" alt="cover" class="cover-img" />
-          <img src={this.state.user.image} alt="profile" class="profile-img" />
+          <img
+            src="/assets/images/cover.jpg"
+            alt="cover"
+            className="cover-img"
+          />
+          <img
+            src={this.state.user.image}
+            alt="profile"
+            className="profile-img"
+          />
           <div
-            class="profile-info"
+            className="profile-info"
             onClick={() => this.props.history.push("/")}
             style={{ cursor: "pointer" }}
           >
@@ -72,7 +80,7 @@ class HomeProfile extends React.Component {
           </Row>
           <hr />
           <div
-            class="profile-saved-items"
+            className="profile-saved-items"
             onClick={() => this.props.toggleSaved()}
           >
             <Row>
