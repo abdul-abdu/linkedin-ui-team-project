@@ -32,6 +32,8 @@ const Chat = () => {
 
     socket.on("connect", () => console.log("connected to socket"));
 
+    getMessages();
+
     return () => socket.removeAllListeners();
   }, []);
 
@@ -51,7 +53,6 @@ const Chat = () => {
       });
 
       setmyMessage(""); //resets the message text
-      getMessages();
     }
   };
 
@@ -108,9 +109,6 @@ const Chat = () => {
         containerPadding={20}
       >
         <Popover id="popover-contained">
-          <Popover.Title as="h3">
-            <input type="text" placeholder="Search messages" />
-          </Popover.Title>
           <Popover.Content>
             {currentUsers &&
               currentUsers.map((user, idx) => (
@@ -126,6 +124,9 @@ const Chat = () => {
                 </div>
               ))}
           </Popover.Content>
+          <Popover.Title as="h3">
+            <input type="text" placeholder="Search messages" />
+          </Popover.Title>
           <OverlayTrigger
             trigger="click"
             placement={"left"}
@@ -134,10 +135,16 @@ const Chat = () => {
                 <Popover.Title as="h3">{`Send Message To ${messageTo}`}</Popover.Title>
                 <Popover.Content>
                   {messageTo ? <h4>Message</h4> : <h2>Select a User</h2>}
-                  {messages.length > 0 &&
-                    messages.map((msg) => JSON.stringify(msg))}
+                  {messages.map((msg, idx) => (
+                    <div key={idx}>
+                      <small>{msg.createdAt}</small>
+                      <li>{msg.text}</li>
+                    </div>
+                  ))}
+
                   <form id="chat" onSubmit={sendMessage}>
                     <input
+                      value={myMessage}
                       autoComplete="off"
                       className="bg-warning"
                       onChange={(e) => setmyMessage(e.currentTarget.value)}
